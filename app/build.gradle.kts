@@ -52,11 +52,21 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.icons.extended)
 
     // Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
+
+    // Lifecycle Management
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.savedstate)
+    implementation(libs.androidx.lifecycle.viewModelCompose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+
+    // Navigation Component
+    implementation(libs.androidx.navigation.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
