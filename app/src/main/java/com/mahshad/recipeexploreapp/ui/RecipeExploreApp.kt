@@ -15,6 +15,7 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import com.mahshad.recipeexploreapp.ui.components.DrawerContent
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -25,7 +26,9 @@ fun RecipeExploreApp() {
 
     ModalNavigationDrawer(
         drawerState = drawerState,
-        drawerContent = {}
+        drawerContent = {
+            DrawerContent()
+        }
     ) {
         Scaffold(topBar = {
             TopAppBar(
