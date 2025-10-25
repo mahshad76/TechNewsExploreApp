@@ -1,5 +1,6 @@
 package com.mahshad.recipeexploreapp.navigation
 
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import com.mahshad.recipeexploreapp.navigation.RecipeExploreDestinations.HOME_ROUTE
 import com.mahshad.recipeexploreapp.navigation.RecipeExploreDestinations.PROFILE_ROUTE
@@ -12,7 +13,27 @@ object RecipeExploreDestinations {
 }
 
 class RecipeExploreNavigationActions(private val navController: NavHostController) {
-    fun navigateToHome() = navController.navigate(HOME_ROUTE)
-    fun navigateToProfile() = navController.navigate(PROFILE_ROUTE)
-    fun navigateToSetting() = navController.navigate(SETTING_ROUTE)
+    fun navigateToHome() = navController.navigate(HOME_ROUTE) {
+        popUpTo(navController.graph.findStartDestination().id) {
+            saveState = true
+        }
+        launchSingleTop = true
+        restoreState = true
+    }
+
+    fun navigateToProfile() = navController.navigate(PROFILE_ROUTE) {
+        popUpTo(navController.graph.findStartDestination().id) {
+            saveState = true
+        }
+        launchSingleTop = true
+        restoreState = true
+    }
+
+    fun navigateToSetting() = navController.navigate(SETTING_ROUTE) {
+        popUpTo(navController.graph.findStartDestination().id) {
+            saveState = true
+        }
+        launchSingleTop = true
+        restoreState = true
+    }
 }
