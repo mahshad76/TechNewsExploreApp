@@ -4,7 +4,6 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
@@ -18,11 +17,10 @@ import androidx.compose.ui.unit.dp
 import com.mahshad.recipeexploreapp.R
 
 @Composable
-fun Logo(title: String, @DrawableRes icon: Int) {
+fun Logo(title: String, @DrawableRes icon: Int, modifier: Modifier) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(10.dp),
+        modifier = modifier
+            .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
@@ -41,5 +39,5 @@ fun Preview(
     title: String = "hello",
     @DrawableRes icon: Int = R.drawable.meal_application_tracking_organic_food_analysis_healthcare_nutrition_svgrepo_com
 ) {
-    Logo(title, icon)
+    Logo(title, icon, Modifier)
 }
