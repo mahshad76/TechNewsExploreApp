@@ -11,10 +11,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.mahshad.recipeexploreapp.R
 
 @Composable
 fun DrawerContent() {
     ModalDrawerSheet() {
+        Logo(
+            "RecipeExplore",
+            R.drawable.meal_application_tracking_organic_food_analysis_healthcare_nutrition_svgrepo_com
+        )
         NavigationDrawerItem(
             label = { Text("Profile") },
             icon = {
