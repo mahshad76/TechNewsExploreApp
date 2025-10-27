@@ -22,3 +22,6 @@ dependencyResolutionManagement {
 rootProject.name = "TechNewsExploreApp"
 include(":app")
 include(":feature:home")
+include(":core:network")
+include(":core:aa")
+include(":core:model")

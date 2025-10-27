@@ -1,6 +1,6 @@
-package com.mahshad.home.datasource.remote.model
+package com.mahshad.model
 
-data class ArticleX(
+data class Article(
     val author: String,
     val content: String,
     val description: String,

@@ -1,4 +1,4 @@
-package com.mahshad.home.datasource.remote.model
+package com.mahshad.model
 
 data class Source(
     val id: String,
