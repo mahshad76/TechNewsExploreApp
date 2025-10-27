@@ -1,5 +1,6 @@
 package com.mahshad.network.model
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
@@ -8,6 +9,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class NetworkSource(
-    val id: String,
-    val name: String
+    @SerialName("id")
+    val id: String?,
+    @SerialName("name")
+    val name: String?
 )
