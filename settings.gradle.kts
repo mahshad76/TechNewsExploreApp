@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "RecipeExploreApp"
+rootProject.name = "TechNewsExploreApp"
 include(":app")
- 
+include(":feature:home")

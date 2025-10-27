@@ -7,13 +7,13 @@ plugins {
 }
 
 android {
-    namespace = "com.mahshad.recipeexploreapp"
+    namespace = "com.mahshad.technewsexploreapp"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "com.mahshad.recipeexploreapp"
+        applicationId = "com.mahshad.technewsexploreapp"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

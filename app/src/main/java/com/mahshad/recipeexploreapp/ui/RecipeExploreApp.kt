@@ -54,7 +54,7 @@ fun RecipeExploreApp() {
                 currentRoute,
                 navigateToProfile = { navigationActions.navigateToProfile() },
                 navigateToSetting = { navigationActions.navigateToSetting() },
-                navigateToHome = { navigationActions.navigateToProfile() },
+                navigateToHome = { navigationActions.navigateToHome() },
                 closeDrawer = { closeDrawer() },
             )
         }
