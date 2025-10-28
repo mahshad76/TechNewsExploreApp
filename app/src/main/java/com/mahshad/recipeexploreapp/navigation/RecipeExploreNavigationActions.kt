@@ -2,11 +2,11 @@ package com.mahshad.recipeexploreapp.navigation
 
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
-import com.mahshad.recipeexploreapp.navigation.RecipeExploreDestinations.HOME_ROUTE
-import com.mahshad.recipeexploreapp.navigation.RecipeExploreDestinations.PROFILE_ROUTE
-import com.mahshad.recipeexploreapp.navigation.RecipeExploreDestinations.SETTING_ROUTE
+import com.mahshad.recipeexploreapp.navigation.TechNewsExploreDestinations.HOME_ROUTE
+import com.mahshad.recipeexploreapp.navigation.TechNewsExploreDestinations.PROFILE_ROUTE
+import com.mahshad.recipeexploreapp.navigation.TechNewsExploreDestinations.SETTING_ROUTE
 
-object RecipeExploreDestinations {
+object TechNewsExploreDestinations {
     const val HOME_ROUTE = "home"
     const val PROFILE_ROUTE = "profile"
     const val SETTING_ROUTE = "setting"

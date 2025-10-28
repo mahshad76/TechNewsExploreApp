@@ -14,8 +14,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mahshad.recipeexploreapp.R
-import com.mahshad.recipeexploreapp.navigation.RecipeExploreDestinations
+import com.mahshad.recipeexploreapp.navigation.TechNewsExploreDestinations
+import com.mahshad.technewsexploreapp.R
 
 @Composable
 fun DrawerContent(
@@ -40,7 +40,7 @@ fun DrawerContent(
                     modifier = Modifier.size(24.dp),
                 )
             },
-            selected = currentRoute == RecipeExploreDestinations.HOME_ROUTE,
+            selected = currentRoute == TechNewsExploreDestinations.HOME_ROUTE,
             onClick = {
                 navigateToHome()
                 closeDrawer()
@@ -56,7 +56,7 @@ fun DrawerContent(
                     modifier = Modifier.size(24.dp),
                 )
             },
-            selected = currentRoute == RecipeExploreDestinations.PROFILE_ROUTE,
+            selected = currentRoute == TechNewsExploreDestinations.PROFILE_ROUTE,
             onClick = {
                 navigateToProfile()
                 closeDrawer()
@@ -72,7 +72,7 @@ fun DrawerContent(
                     modifier = Modifier.size(24.dp),
                 )
             },
-            selected = currentRoute == RecipeExploreDestinations.SETTING_ROUTE,
+            selected = currentRoute == TechNewsExploreDestinations.SETTING_ROUTE,
             onClick = {
                 navigateToSetting()
                 closeDrawer()

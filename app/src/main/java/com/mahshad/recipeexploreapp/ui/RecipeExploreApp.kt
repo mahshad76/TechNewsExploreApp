@@ -21,10 +21,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.mahshad.recipeexploreapp.navigation.RecipeExploreDestinations
-import com.mahshad.recipeexploreapp.navigation.RecipeExploreDestinations.HOME_ROUTE
-import com.mahshad.recipeexploreapp.navigation.RecipeExploreDestinations.PROFILE_ROUTE
-import com.mahshad.recipeexploreapp.navigation.RecipeExploreDestinations.SETTING_ROUTE
+import com.mahshad.recipeexploreapp.navigation.TechNewsExploreDestinations
+import com.mahshad.recipeexploreapp.navigation.TechNewsExploreDestinations.HOME_ROUTE
+import com.mahshad.recipeexploreapp.navigation.TechNewsExploreDestinations.PROFILE_ROUTE
+import com.mahshad.recipeexploreapp.navigation.TechNewsExploreDestinations.SETTING_ROUTE
 import com.mahshad.recipeexploreapp.navigation.RecipeExploreNavigationActions
 import com.mahshad.recipeexploreapp.ui.components.DrawerContent
 import kotlinx.coroutines.launch
@@ -37,7 +37,7 @@ fun RecipeExploreApp() {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute =
-        navBackStackEntry?.destination?.route ?: RecipeExploreDestinations.HOME_ROUTE
+        navBackStackEntry?.destination?.route ?: TechNewsExploreDestinations.HOME_ROUTE
     val navigationActions = remember(navController) {
         RecipeExploreNavigationActions(navController)
     }
