@@ -11,6 +11,8 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import javax.inject.Singleton
 
+private const val Key = BuildConfig.API_KEY
+
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
@@ -23,14 +25,29 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun okHttpCallFactory(): Call.Factory = OkHttpClient.Builder()
-        .addInterceptor(
-            HttpLoggingInterceptor()
-                .apply {
-                    if (BuildConfig.DEBUG) {
-                        setLevel(HttpLoggingInterceptor.Level.BODY)
+    fun provideOkHttpCallFactory(
+    ): Call.Factory {
+        return OkHttpClient.Builder()
+            .addInterceptor(
+                HttpLoggingInterceptor().apply {
+                    level = if (BuildConfig.DEBUG) {
+                        HttpLoggingInterceptor.Level.BODY
+                    } else {
+                        HttpLoggingInterceptor.Level.NONE
                     }
-                },
-        )
-        .build()
+                }
+            )
+            .addInterceptor { chain ->
+                val originalRequest = chain.request()
+                val originalHttpUrl = originalRequest.url
+                val url = originalHttpUrl.newBuilder()
+                    .addQueryParameter("apiKey", Key)
+                    .build()
+                val newRequest = originalRequest.newBuilder()
+                    .url(url)
+                    .build()
+                chain.proceed(newRequest)
+            }
+            .build()
+    }
 }
