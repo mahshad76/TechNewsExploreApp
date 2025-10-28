@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -14,6 +17,13 @@ android {
 
     defaultConfig {
         minSdk = 24
+
+        val localPropertiesFile = rootProject.file("local.properties")
+        val localProperties = Properties()
+        localProperties.load(FileInputStream(localPropertiesFile))
+
+        buildConfigField("String", "API_KEY", "\"${localProperties.getProperty("API_KEY")}\"")
+        buildConfigField("String", "BASE_URL", "\"https://newsapi.org/v2/\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -62,10 +72,6 @@ dependencies {
     implementation(platform(libs.okhttp.bom))
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
-
-    // Coil
-    implementation(libs.coil.compose)
-    implementation(libs.coil.network.okhttp)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
