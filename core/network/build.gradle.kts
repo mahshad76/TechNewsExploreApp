@@ -55,12 +55,17 @@ dependencies {
 
     // Hilt
     implementation(libs.hilt.android)
+    implementation(libs.volley)
     ksp(libs.hilt.android.compiler)
 
     // Okhttp
     implementation(platform(libs.okhttp.bom))
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
+
+    // Coil
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
