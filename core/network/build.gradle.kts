@@ -62,6 +62,7 @@ dependencies {
 
     // Retrofit
     implementation(libs.retrofit)
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
 
     // Hilt
     implementation(libs.hilt.android)
