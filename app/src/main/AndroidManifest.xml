@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:name=".RecipeExploreApplication"
+        android:name="com.mahshad.recipeexploreapp.TechNewsExploreApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,9 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RecipeExploreApp">
         <activity
-            android:name=".MainActivity"
+            android:name="com.mahshad.recipeexploreapp.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.RecipeExploreApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
