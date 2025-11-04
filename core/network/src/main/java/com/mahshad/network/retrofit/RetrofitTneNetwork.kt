@@ -1,9 +1,11 @@
 package com.mahshad.network.retrofit
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.mahshad.model.Article
 import com.mahshad.network.BuildConfig
 import com.mahshad.network.TneNetworkDataSource
 import com.mahshad.network.model.NetworkArticle
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import okhttp3.Call
 import okhttp3.MediaType.Companion.toMediaType
@@ -30,7 +32,8 @@ private const val TneBaseUrl = BuildConfig.BASE_URL
 @Singleton
 class RetrofitTneNetwork @Inject constructor(
     private val networkJson: Json,
-    private val okhttpCallFactory: Call.Factory
+    private val okhttpCallFactory: Call.Factory,
+
 ) : TneNetworkDataSource {
     private val networkApi = Retrofit.Builder()
         .baseUrl(TneBaseUrl)
@@ -41,5 +44,14 @@ class RetrofitTneNetwork @Inject constructor(
         .build()
         .create(ApiService::class.java)
 
-    override suspend fun getNews(): Response<List<NetworkArticle>> = networkApi.getNews()
+    override suspend fun getNews(): Result<List<Article>> {
+        TODO("Not yet implemented")
+        try {
+            withContext()
+            networkApi.getNews()
+
+        } catch (e: Exception) {
+
+        }
+    }
 }
