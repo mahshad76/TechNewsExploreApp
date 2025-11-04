@@ -5,6 +5,9 @@ import com.mahshad.model.Article
 import com.mahshad.network.BuildConfig
 import com.mahshad.network.TneNetworkDataSource
 import com.mahshad.network.model.NetworkArticle
+import com.mahshad.network.model.toArticle
+import com.mahshad.threading.common.IoDispatcher
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import okhttp3.Call
@@ -33,7 +36,7 @@ private const val TneBaseUrl = BuildConfig.BASE_URL
 class RetrofitTneNetwork @Inject constructor(
     private val networkJson: Json,
     private val okhttpCallFactory: Call.Factory,
-
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : TneNetworkDataSource {
     private val networkApi = Retrofit.Builder()
         .baseUrl(TneBaseUrl)
@@ -44,14 +47,20 @@ class RetrofitTneNetwork @Inject constructor(
         .build()
         .create(ApiService::class.java)
 
-    override suspend fun getNews(): Result<List<Article>> {
-        TODO("Not yet implemented")
-        try {
-            withContext()
-            networkApi.getNews()
+    override suspend fun getNews(): Result<List<Article>> = runCatching {
+        withContext(ioDispatcher) {
+            val response = networkApi.getNews()
+            val body = response.body()
+            when (response.isSuccessful) {
+                true -> {
+                    body?.map { networkArticle ->
+                        networkArticle.toArticle().getOrThrow()
+                    } ?: throw IllegalArgumentException("Response body is null")
+                }
 
-        } catch (e: Exception) {
-
+                false -> throw IllegalArgumentException(response.errorBody().toString())
+            }
         }
     }
 }
+
