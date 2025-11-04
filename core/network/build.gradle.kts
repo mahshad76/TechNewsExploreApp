@@ -52,6 +52,7 @@ android {
 
 dependencies {
     implementation(project(":core:model"))
+    implementation(project(":core:threading"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
