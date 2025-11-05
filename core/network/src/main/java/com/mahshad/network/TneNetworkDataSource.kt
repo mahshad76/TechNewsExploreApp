@@ -1,7 +1,7 @@
 package com.mahshad.network
 
-import com.mahshad.model.Article
+import com.mahshad.network.model.NetworkArticle
 
 interface TneNetworkDataSource {
-    suspend fun getNews(): Result<List<Article>>
+    suspend fun getNews(): Result<List<NetworkArticle>>
 }

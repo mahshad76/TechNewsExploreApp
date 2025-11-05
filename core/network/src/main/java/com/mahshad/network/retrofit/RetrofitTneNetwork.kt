@@ -1,11 +1,9 @@
 package com.mahshad.network.retrofit
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import com.mahshad.model.Article
 import com.mahshad.network.BuildConfig
 import com.mahshad.network.TneNetworkDataSource
 import com.mahshad.network.model.NetworkArticle
-import com.mahshad.network.model.toArticle
 import com.mahshad.threading.common.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -47,20 +45,14 @@ class RetrofitTneNetwork @Inject constructor(
         .build()
         .create(ApiService::class.java)
 
-    override suspend fun getNews(): Result<List<Article>> = runCatching {
+    override suspend fun getNews(): Result<List<NetworkArticle>> = runCatching {
         withContext(ioDispatcher) {
             val response = networkApi.getNews()
             val body = response.body()
             when (response.isSuccessful) {
-                true -> {
-                    body?.map { networkArticle ->
-                        networkArticle.toArticle().getOrThrow()
-                    } ?: throw IllegalArgumentException("Response body is null")
-                }
-
+                true -> body ?: throw IllegalArgumentException("Response body is null")
                 false -> throw IllegalArgumentException(response.errorBody().toString())
             }
         }
     }
 }
-
