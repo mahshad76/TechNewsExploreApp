@@ -1,7 +1,8 @@
 package com.mahshad.data.repository
 
 import com.mahshad.model.Article
+import kotlinx.coroutines.flow.Flow
 
 interface ArticleRepository {
-    suspend fun getNews(): Result<List<Article>>
+    fun getNews(): Flow<Result<List<Article>>>
 }
