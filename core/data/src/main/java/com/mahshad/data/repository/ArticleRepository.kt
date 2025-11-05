@@ -1,10 +1,7 @@
 package com.mahshad.data.repository
 
-import com.mahshad.network.TneNetworkDataSource
-import javax.inject.Inject
-import javax.inject.Singleton
+import com.mahshad.model.Article
 
-@Singleton
-class ArticleRepository @Inject constructor(private val tneNetworkDataSource: TneNetworkDataSource) {
-
+interface ArticleRepository {
+    suspend fun getNews(): Result<List<Article>>
 }
