@@ -45,11 +45,11 @@ class RetrofitTneNetwork @Inject constructor(
         .build()
         .create(ApiService::class.java)
 
-    override suspend fun getNews(): Result<List<NetworkArticle>> = runCatching {
-        withContext(ioDispatcher) {
+    override suspend fun getNews(): List<NetworkArticle> {
+        return withContext(ioDispatcher) {
             val response = networkApi.getNews()
             val body = response.body()
-            when (response.isSuccessful) {
+            return@withContext when (response.isSuccessful) {
                 true -> body ?: throw IllegalArgumentException("Response body is null")
                 false -> throw IllegalArgumentException(response.errorBody().toString())
             }

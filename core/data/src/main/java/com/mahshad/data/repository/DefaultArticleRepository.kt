@@ -10,7 +10,7 @@ class DefaultArticleRepository @Inject constructor(
     TneNetworkDataSource
 ) : ArticleRepository {
     override suspend fun getNews(): Result<List<Article>> = runCatching {
-        val result = tneNetworkDataSource.getNews().getOrThrow()
+        val result = tneNetworkDataSource.getNews()
         result.map { networkArticle ->
             networkArticle.toArticle().getOrThrow()
         }
