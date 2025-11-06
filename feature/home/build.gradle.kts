@@ -39,6 +39,7 @@ android {
 dependencies {
     implementation(project(":core:data"))
     implementation(project(":core:model"))
+    implementation(project(":core:ui"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -48,6 +49,9 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.volley)
     ksp(libs.hilt.android.compiler)
+
+    // Viewmodel lifecycle
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

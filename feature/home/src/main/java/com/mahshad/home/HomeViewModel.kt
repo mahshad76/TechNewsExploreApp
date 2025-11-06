@@ -1,24 +1,30 @@
 package com.mahshad.home
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.mahshad.data.repository.ArticleRepository
-import com.mahshad.model.Article
+import com.mahshad.ui.NewsFeed
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val articleRepository: ArticleRepository) :
     ViewModel() {
-    private val _articleStateFlow: MutableStateFlow<ArticleState<List<Article>>> =
-        MutableStateFlow(ArticleState.Loading)
-    val articleStateFlow = _articleStateFlow.asStateFlow()
-
-}
-
-sealed interface ArticleState<out T> {
-    data class Success(val data: List<Article>) : ArticleState<List<Article>>
-    data class Error(val error: Exception) : ArticleState<Nothing>
-    object Loading : ArticleState<Nothing>
+    val feedState: StateFlow<NewsFeed> = articleRepository
+        .getNews()
+        .map { result ->
+            result.fold(
+                onSuccess = { NewsFeed.Successful(it) },
+                onFailure = { NewsFeed.Error(it) }
+            )
+        }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = NewsFeed.Loading
+        )
 }
