@@ -1,12 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.ksp)
 }
 
 android {
-    namespace = "com.mahshad.home"
+    namespace = "com.mahshad.ui"
     compileSdk {
         version = release(36)
     }
@@ -37,18 +35,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:data"))
     implementation(project(":core:model"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-
-    // Hilt
-    implementation(libs.hilt.android)
-    implementation(libs.volley)
-    ksp(libs.hilt.android.compiler)
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
