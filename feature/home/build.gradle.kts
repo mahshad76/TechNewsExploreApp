@@ -53,6 +53,11 @@ dependencies {
     // Viewmodel lifecycle
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
+    // Compose
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.material3)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
