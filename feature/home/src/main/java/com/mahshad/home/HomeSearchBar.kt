@@ -1,6 +1,5 @@
 package com.mahshad.home
 
-import android.content.Context
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -11,8 +10,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.Key
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -23,25 +20,26 @@ import com.mahshad.ui.modifiers.interceptKey
 
 @Composable
 fun HomeSearchBar(
-    text: String,
+    searchQuery: String,
     onInputChanged: (String) -> Unit,
     onSearchInputChanged: (text: String) -> Unit
 ) {
-    val context = LocalContext.current
-    val focusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
-
+    val onSearchExplicitlyTriggered = {
+        keyboardController?.hide()
+        onSearchInputChanged(searchQuery)
+    }
     OutlinedTextField(
-        value = text,
-        onValueChange = { text: String ->
-            onInputChanged.invoke(text)
+        value = searchQuery,
+        onValueChange = {
+            if (!it.contains("\n")) {
+                onInputChanged(it)
+            }
         },
         modifier = Modifier
             .fillMaxWidth()
             .interceptKey(Key.Enter) {
-                submitSearch(onSearchInputChanged, context)
-                keyboardController?.hide()
-                focusManager.clearFocus(force = true)
+                onSearchExplicitlyTriggered()
             },
         shape = RoundedCornerShape(18.dp),
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
@@ -56,16 +54,12 @@ fun HomeSearchBar(
         singleLine = true,
         keyboardActions = KeyboardActions(
             onSearch = {
-                submitSearch(onSearchInputChanged, context)
-                keyboardController?.hide()
+                onSearchExplicitlyTriggered()
             },
         ),
     )
 }
 
-private fun submitSearch(onSearchInputChanged: (String) -> Unit, context: Context) {
-
-}
 
 @Composable
 @Preview
