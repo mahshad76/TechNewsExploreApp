@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val articleRepository: ArticleRepository) :
+class HomeScreenViewModel @Inject constructor(private val articleRepository: ArticleRepository) :
     ViewModel() {
     val feedState: StateFlow<NewsFeed> = articleRepository
         .getNews()

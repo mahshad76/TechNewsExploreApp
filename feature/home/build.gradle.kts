@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.volley)
     ksp(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
 
     // Viewmodel lifecycle
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
