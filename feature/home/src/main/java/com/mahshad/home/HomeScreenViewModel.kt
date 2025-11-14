@@ -1,5 +1,6 @@
 package com.mahshad.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahshad.data.repository.ArticleRepository
@@ -18,8 +19,14 @@ class HomeScreenViewModel @Inject constructor(private val articleRepository: Art
         .getNews()
         .map { result ->
             result.fold(
-                onSuccess = { NewsFeed.Successful(it) },
-                onFailure = { NewsFeed.Error(it) }
+                onSuccess = {
+                    Log.d("TAG", "network call")
+                    NewsFeed.Successful(it)
+                },
+                onFailure = {
+                    Log.d("TAG", "network call")
+                    NewsFeed.Error(it)
+                }
             )
         }
         .stateIn(

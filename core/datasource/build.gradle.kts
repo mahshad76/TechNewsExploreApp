@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.mahshad.data"
+    namespace = "com.mahshad.datasource"
     compileSdk {
         version = release(36)
     }
@@ -37,21 +37,21 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:datasource"))
+    implementation(project(":core:network"))
     implementation(project(":core:model"))
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-
-    // Retrofit
-    implementation(libs.retrofit)
+    implementation(project(":core:threading"))
 
     // Hilt
     implementation(libs.hilt.android)
     implementation(libs.volley)
     ksp(libs.hilt.android.compiler)
 
+    // Retrofit
+    implementation(libs.retrofit)
+
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -1,4 +1,4 @@
-package com.mahshad.network.model
+package com.mahshad.Dto
 
 import com.mahshad.model.Source
 import kotlinx.serialization.SerialName
@@ -14,7 +14,14 @@ data class NetworkSource(
     val id: String?,
     @SerialName("name")
     val name: String?
-)
+) {
+    companion object {
+        val DEFAULT = NetworkSource(
+            "Default",
+            "Default"
+        )
+    }
+}
 
 fun NetworkSource.toSource(): Result<Source> {
     return runCatching {

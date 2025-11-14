@@ -21,11 +21,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.mahshad.home.HomeScreen
+import com.mahshad.recipeexploreapp.navigation.RecipeExploreNavigationActions
 import com.mahshad.recipeexploreapp.navigation.TechNewsExploreDestinations
 import com.mahshad.recipeexploreapp.navigation.TechNewsExploreDestinations.HOME_ROUTE
 import com.mahshad.recipeexploreapp.navigation.TechNewsExploreDestinations.PROFILE_ROUTE
 import com.mahshad.recipeexploreapp.navigation.TechNewsExploreDestinations.SETTING_ROUTE
-import com.mahshad.recipeexploreapp.navigation.RecipeExploreNavigationActions
 import com.mahshad.recipeexploreapp.ui.components.DrawerContent
 import kotlinx.coroutines.launch
 
@@ -79,7 +80,7 @@ fun RecipeExploreApp() {
                     Text("profile")
                 }
                 composable(HOME_ROUTE) {
-                    Text("home")
+                    HomeScreen()
                 }
                 composable(SETTING_ROUTE) {
                     Text("setting")

@@ -52,7 +52,6 @@ android {
 
 dependencies {
     implementation(project(":core:model"))
-    implementation(project(":core:threading"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -64,6 +63,7 @@ dependencies {
     // Retrofit
     implementation(libs.retrofit)
     implementation(libs.retrofit2.kotlinx.serialization.converter)
+    implementation(libs.converter.gson)
 
     // Hilt
     implementation(libs.hilt.android)

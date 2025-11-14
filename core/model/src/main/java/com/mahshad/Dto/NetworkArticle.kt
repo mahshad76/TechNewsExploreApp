@@ -1,8 +1,9 @@
-package com.mahshad.network.model
+package com.mahshad.Dto
 
 import com.mahshad.model.Article
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.Result.Companion.success
 
 /**
  * Network representation of [Article]
@@ -17,7 +18,7 @@ data class NetworkArticle(
     val description: String?,
     @SerialName("publishedAt")
     val publishedAt: String?,
-    @SerialName("networkSource")
+    @SerialName("source")
     val networkSource: NetworkSource?,
     @SerialName("title")
     val title: String?,
@@ -33,10 +34,11 @@ fun NetworkArticle.toArticle(): Result<Article> {
             "The title is required for " +
                     "each article and it is null for this item"
         )
-        val requiredSource = this.networkSource?.toSource() ?: throw IllegalArgumentException(
-            "The networkSource is required for " +
-                    "each article and it is null for this item"
-        )
+        val requiredSource =
+            this.networkSource?.toSource() ?: success(
+                NetworkSource.DEFAULT.toSource()
+                    .getOrThrow()
+            )
         val source = requiredSource.getOrThrow()
         Article(
             author = this.author ?: "unKnown",
