@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.mahshad.data.repository.ArticleRepository
 import com.mahshad.ui.NewsFeed
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
@@ -15,6 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeScreenViewModel @Inject constructor(private val articleRepository: ArticleRepository) :
     ViewModel() {
+        private val searchResult = MutableStateFlow()
     val feedState: StateFlow<NewsFeed> = articleRepository
         .getNews()
         .map { result ->
