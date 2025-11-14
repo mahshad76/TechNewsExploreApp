@@ -16,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeScreenViewModel @Inject constructor(private val articleRepository: ArticleRepository) :
     ViewModel() {
-        private val searchResult = MutableStateFlow()
+    private val searchFlow: MutableStateFlow<String> =
+        MutableStateFlow("")
     val feedState: StateFlow<NewsFeed> = articleRepository
         .getNews()
         .map { result ->
@@ -36,4 +37,9 @@ class HomeScreenViewModel @Inject constructor(private val articleRepository: Art
             started = SharingStarted.WhileSubscribed(5_000),
             initialValue = NewsFeed.Loading
         )
+
+    suspend fun updateSearchFlow(query: String) {
+        searchFlow.emit(query)
+    }
+
 }
