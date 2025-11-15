@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
@@ -18,16 +19,15 @@ import com.mahshad.ui.NewsFeed
 
 @Composable
 fun HomeScreen(homeScreenViewModel: HomeScreenViewModel = hiltViewModel()) {
-    val searchState = homeScreenViewModel._searchFlow.collectAsStateWithLifecycle()
+
+    val newsFeed = homeScreenViewModel.feedState.collectAsStateWithLifecycle()
+    val searchQuery = homeScreenViewModel._searchQueryStateFlow.collectAsStateWithLifecycle()
 
     Spacer(Modifier.windowInsetsTopHeight(WindowInsets.safeDrawing))
-//    HomeSearchBar()
-    val newsFeed = homeScreenViewModel.feedState.collectAsStateWithLifecycle()
-    when (searchState.value) {
-        is SearchState.Success -> TODO()
-        is SearchState.Empty -> TODO()
-        is SearchState.Loading -> TODO()
-    }
+    HomeSearchBar(
+        searchQuery.value,
+        { homeScreenViewModel.updateSearchQueryFlow(it) },
+        {})
     when (newsFeed.value) {
         is NewsFeed.Successful -> {
             Log.d("TAG", "HomeScreen success")
@@ -47,4 +47,5 @@ fun HomeScreen(homeScreenViewModel: HomeScreenViewModel = hiltViewModel()) {
             )
         }
     }
+    Spacer(Modifier.windowInsetsBottomHeight(WindowInsets.safeDrawing))
 }

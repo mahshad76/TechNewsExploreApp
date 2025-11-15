@@ -22,12 +22,12 @@ import com.mahshad.ui.modifiers.interceptKey
 fun HomeSearchBar(
     searchQuery: String,
     onInputChanged: (String) -> Unit,
-    onSearchInputChanged: (text: String) -> Unit
+    onSearchSubmit: (String) -> Unit
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     val onSearchExplicitlyTriggered = {
         keyboardController?.hide()
-        onSearchInputChanged(searchQuery)
+        onSearchSubmit(searchQuery)
     }
     OutlinedTextField(
         value = searchQuery,
@@ -64,5 +64,5 @@ fun HomeSearchBar(
 @Composable
 @Preview
 fun Preview() {
-    HomeSearchBar("type here", {}) { }
+    HomeSearchBar("type here", {}) {}
 }
