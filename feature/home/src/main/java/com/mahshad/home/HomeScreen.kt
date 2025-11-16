@@ -1,51 +1,63 @@
 package com.mahshad.home
 
-import android.graphics.Color
 import android.util.Log
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.layout.windowInsetsTopHeight
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.mahshad.ui.NewsFeed
 
 @Composable
 fun HomeScreen(homeScreenViewModel: HomeScreenViewModel = hiltViewModel()) {
 
     val newsFeed = homeScreenViewModel.feedState.collectAsStateWithLifecycle()
     val searchQuery = homeScreenViewModel._searchQueryStateFlow.collectAsStateWithLifecycle()
+    val suggestion = homeScreenViewModel.searchSuggestions.collectAsStateWithLifecycle()
 
-    Spacer(Modifier.windowInsetsTopHeight(WindowInsets.safeDrawing))
-    HomeSearchBar(
-        searchQuery.value,
-        { homeScreenViewModel.updateSearchQueryFlow(it) },
-        {})
-    when (newsFeed.value) {
-        is NewsFeed.Successful -> {
-            Log.d("TAG", "HomeScreen success")
-            Text((newsFeed.value as NewsFeed.Successful).news[0].content)
-        }
-
-        is NewsFeed.Error -> {
-            Log.d("TAG", "Error:${(newsFeed.value as NewsFeed.Error).e.toString()}")
-        }
-
-        is NewsFeed.Loading -> {
-            Log.d("TAG", "HomeScreen: loading")
-            CircularProgressIndicator(
-                modifier = Modifier.size(64.dp),
-                color = androidx.compose.ui.graphics.Color(Color.BLACK),
-                strokeWidth = 6.dp
-            )
-        }
+    Column(modifier = Modifier.padding(10.dp)) {
+        Spacer(Modifier.windowInsetsTopHeight(WindowInsets.safeDrawing))
+        HomeSearchBar(
+            modifier = Modifier,
+            searchQuery.value,
+            { homeScreenViewModel.updateSearchQueryFlow(it) },
+            {})
+        Text(suggestion.value.toString())
+        Log.d("TAG", "HomeScreen: ${suggestion.value}")
+        // if the search query is not empty and nothing is selected yet show the suggestions
+//    when (newsFeed.value) {
+//        is NewsFeed.Successful -> {
+//            Log.d("TAG", "HomeScreen success")
+//            Text((newsFeed.value as NewsFeed.Successful).news[0].content)
+//        }
+//
+//        is NewsFeed.Error -> {
+//            Log.d("TAG", "Error:${(newsFeed.value as NewsFeed.Error).e.toString()}")
+//        }
+//
+//        is NewsFeed.Loading -> {
+//            Log.d("TAG", "HomeScreen: loading")
+//            CircularProgressIndicator(
+//                modifier = Modifier.size(64.dp),
+//                color = androidx.compose.ui.graphics.Color(Color.BLACK),
+//                strokeWidth = 6.dp
+//            )
+//        }
+//    }
+        Spacer(Modifier.windowInsetsBottomHeight(WindowInsets.safeDrawing))
     }
-    Spacer(Modifier.windowInsetsBottomHeight(WindowInsets.safeDrawing))
+}
+
+@Composable
+@Preview
+fun Previeww() {
+    HomeScreen()
 }

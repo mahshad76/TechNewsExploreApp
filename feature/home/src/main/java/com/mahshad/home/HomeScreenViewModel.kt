@@ -10,6 +10,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -26,6 +29,8 @@ class HomeScreenViewModel @Inject constructor(
         ""
     )
     val _searchQueryStateFlow = searchQueryStateFlow.asStateFlow()
+
+
     val feedState: StateFlow<NewsFeed> = articleRepository
         .getNews()
         .map { result ->
@@ -46,20 +51,25 @@ class HomeScreenViewModel @Inject constructor(
             initialValue = NewsFeed.Loading
         )
 
+    val searchSuggestions: StateFlow<List<String>> =
+        feedState.combine(_searchQueryStateFlow) { newsFeed, query ->
+            if (newsFeed is NewsFeed.Successful) {
+                return@combine newsFeed.news
+                    .filter { query in it.content }
+                    .map { it.title }
+            } else {
+                return@combine emptyList()
+            }
+        }
+            .debounce(300L)
+            .distinctUntilChanged()
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5_000),
+                initialValue = emptyList()
+            )
+
     fun updateSearchQueryFlow(query: String) {
         searchQueryStateFlow.update { query }
     }
-
-//    suspend fun updateSearchResults(): StateFlow<NewsFeed> {
-//        return feedState.combine(_searchQueryStateFlow) { newsFeed, query ->
-//
-//        }
-//            .debounce(300L)
-//            .distinctUntilChanged()
-//            .stateIn(
-//                scope = viewModelScope,
-//                //started = NewsFeed.Loading,
-//                //initialValue = SearchState.Empty()
-//            )
-//    }
 }
