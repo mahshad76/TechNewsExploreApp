@@ -1,6 +1,5 @@
 package com.mahshad.home
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -8,7 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.layout.windowInsetsTopHeight
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,7 +19,7 @@ fun HomeScreen(homeScreenViewModel: HomeScreenViewModel = hiltViewModel()) {
 
     val newsFeed = homeScreenViewModel.feedState.collectAsStateWithLifecycle()
     val searchQuery = homeScreenViewModel._searchQueryStateFlow.collectAsStateWithLifecycle()
-    val suggestion = homeScreenViewModel.searchSuggestions.collectAsStateWithLifecycle()
+    val searchSuggestion = homeScreenViewModel.searchSuggestions.collectAsStateWithLifecycle()
 
     Column(modifier = Modifier.padding(10.dp)) {
         Spacer(Modifier.windowInsetsTopHeight(WindowInsets.safeDrawing))
@@ -30,8 +28,9 @@ fun HomeScreen(homeScreenViewModel: HomeScreenViewModel = hiltViewModel()) {
             searchQuery.value,
             { homeScreenViewModel.updateSearchQueryFlow(it) },
             {})
-        Text(suggestion.value.toString())
-        Log.d("TAG", "HomeScreen: ${suggestion.value}")
+        if (!searchSuggestion.value.isEmpty()) {
+            SearchSuggestionsBox(searchSuggestion.value.map { it.title }) {}
+        }
         // if the search query is not empty and nothing is selected yet show the suggestions
 //    when (newsFeed.value) {
 //        is NewsFeed.Successful -> {

@@ -5,6 +5,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahshad.data.repository.ArticleRepository
+import com.mahshad.model.Article
 import com.mahshad.ui.NewsFeed
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
@@ -51,12 +52,11 @@ class HomeScreenViewModel @Inject constructor(
             initialValue = NewsFeed.Loading
         )
 
-    val searchSuggestions: StateFlow<List<String>> =
+    val searchSuggestions: StateFlow<List<Article>> =
         feedState.combine(_searchQueryStateFlow) { newsFeed, query ->
             if (newsFeed is NewsFeed.Successful) {
                 return@combine newsFeed.news
                     .filter { query in it.content }
-                    .map { it.title }
             } else {
                 return@combine emptyList()
             }
