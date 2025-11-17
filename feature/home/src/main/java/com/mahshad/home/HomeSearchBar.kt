@@ -31,7 +31,7 @@ fun HomeSearchBar(
         onSearchSubmit(searchQuery)
     }
     OutlinedTextField(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
             .interceptKey(Key.Enter) {
                 onSearchExplicitlyTriggered()
@@ -49,7 +49,7 @@ fun HomeSearchBar(
             Icon(
                 painter = painterResource(R.drawable.ic_search),
                 contentDescription = stringResource(R.string.search_icon),
-                modifier.size(24.dp)
+                Modifier.size(24.dp)
             )
 
         },

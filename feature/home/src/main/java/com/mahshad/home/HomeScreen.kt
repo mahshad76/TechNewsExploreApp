@@ -24,12 +24,16 @@ fun HomeScreen(homeScreenViewModel: HomeScreenViewModel = hiltViewModel()) {
     Column(modifier = Modifier.padding(10.dp)) {
         Spacer(Modifier.windowInsetsTopHeight(WindowInsets.safeDrawing))
         HomeSearchBar(
-            modifier = Modifier,
+            modifier = Modifier.padding(bottom = 4.dp),
             searchQuery.value,
             { homeScreenViewModel.updateSearchQueryFlow(it) },
             {})
         if (!searchQuery.value.isEmpty()) {
-            SearchSuggestionsBox(searchSuggestion.value.map { it.title }) {}
+            SearchSuggestionsBox(searchSuggestion.value.map { it.title }) {
+                homeScreenViewModel.updateSearchQueryFlow(
+                    it
+                )
+            }
         }
         // if the search query is not empty and nothing is selected yet show the suggestions
 //    when (newsFeed.value) {

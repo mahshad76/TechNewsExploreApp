@@ -27,8 +27,8 @@ fun DrawerContent(
 ) {
     ModalDrawerSheet() {
         Logo(
-            "RecipeExplore",
-            R.drawable.meal_application_tracking_organic_food_analysis_healthcare_nutrition_svgrepo_com,
+            "Tech News",
+            R.drawable.rocket_svgrepo_com,
             modifier = Modifier.padding(horizontal = 28.dp, vertical = 24.dp)
         )
         NavigationDrawerItem(
