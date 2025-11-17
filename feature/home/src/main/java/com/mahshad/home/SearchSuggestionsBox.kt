@@ -1,9 +1,15 @@
 package com.mahshad.home
 
-import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,25 +21,36 @@ fun SearchSuggestionsBox(
     onSuggestionClick: (String) -> Unit
 ) {
     if (suggestions.isNotEmpty()) {
-        Surface(
-            shape = MaterialTheme.shapes.medium,
-            shadowElevation = 4.dp
-        ) {
-            LazyColumn(
-                modifier = Modifier
-                    .widthIn(min = 280.dp)
-            ) {
-                items(suggestions.size) {index->
-                    // Now you can call any Composable function (like Text) here.
-                    Text(text = suggestions[index])
-
-                    // Or your reusable item:
-                    // SuggestionItem(
-                    //     text = suggestion,
-                    //     onClick = { onSuggestionClick(suggestion) }
-                    // )
-                }
+        LazyColumn(modifier = Modifier.fillMaxSize()) {
+            items(suggestions.size) { index ->
+                val article = suggestions[index]
+                ArticleCard(
+                    title = article,
+                    onClick = { onSuggestionClick(article) }
+                )
             }
         }
+    }
+}
+
+@Composable
+fun ArticleCard(
+    title: String,
+    onClick: () -> Unit
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(100.dp)
+            .padding(vertical = 4.dp, horizontal = 8.dp)
+            .clickable(onClick = onClick),
+        shape = RoundedCornerShape(8.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+    ) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier.padding(top = 12.dp, start = 12.dp, end = 12.dp)
+        )
     }
 }
