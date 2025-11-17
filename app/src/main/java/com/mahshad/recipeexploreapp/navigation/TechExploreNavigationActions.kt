@@ -12,7 +12,7 @@ object TechNewsExploreDestinations {
     const val SETTING_ROUTE = "setting"
 }
 
-class RecipeExploreNavigationActions(private val navController: NavHostController) {
+class TechExploreNavigationActions(private val navController: NavHostController) {
     fun navigateToHome() = navController.navigate(HOME_ROUTE) {
         popUpTo(navController.graph.findStartDestination().id) {
             saveState = true
