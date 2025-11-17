@@ -28,7 +28,7 @@ fun HomeScreen(homeScreenViewModel: HomeScreenViewModel = hiltViewModel()) {
             searchQuery.value,
             { homeScreenViewModel.updateSearchQueryFlow(it) },
             {})
-        if (!searchSuggestion.value.isEmpty()) {
+        if (!searchQuery.value.isEmpty()) {
             SearchSuggestionsBox(searchSuggestion.value.map { it.title }) {}
         }
         // if the search query is not empty and nothing is selected yet show the suggestions
