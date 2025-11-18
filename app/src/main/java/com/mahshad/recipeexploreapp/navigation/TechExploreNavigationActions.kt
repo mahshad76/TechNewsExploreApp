@@ -2,7 +2,7 @@ package com.mahshad.recipeexploreapp.navigation
 
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
-import com.mahshad.recipeexploreapp.navigation.TechNewsExploreDestinations.HOME_ROUTE
+import com.mahshad.home.navigation.HomeGraphRoute
 import com.mahshad.recipeexploreapp.navigation.TechNewsExploreDestinations.PROFILE_ROUTE
 import com.mahshad.recipeexploreapp.navigation.TechNewsExploreDestinations.SETTING_ROUTE
 
@@ -13,7 +13,7 @@ object TechNewsExploreDestinations {
 }
 
 class TechExploreNavigationActions(private val navController: NavHostController) {
-    fun navigateToHome() = navController.navigate(HOME_ROUTE) {
+    fun navigateToHome() = navController.navigate(HomeGraphRoute) {
         popUpTo(navController.graph.findStartDestination().id) {
             saveState = true
         }
