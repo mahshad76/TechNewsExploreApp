@@ -14,12 +14,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mahshad.recipeexploreapp.navigation.TechNewsExploreDestinations
+import com.mahshad.home.navigation.HomeGraphRoute
+import com.mahshad.profile.navigation.ProfileNavigationGraphRoute
+import com.mahshad.setting.navigation.SettingNavigationGraphRoute
 import com.mahshad.technewsexploreapp.R
+import kotlin.reflect.KClass
 
 @Composable
 fun DrawerContent(
-    currentRoute: String,
+    currentRoute: KClass<*>,
     navigateToHome: () -> Unit,
     navigateToProfile: () -> Unit,
     navigateToSetting: () -> Unit,
@@ -40,7 +43,7 @@ fun DrawerContent(
                     modifier = Modifier.size(24.dp),
                 )
             },
-            selected = currentRoute == TechNewsExploreDestinations.HOME_ROUTE,
+            selected = currentRoute == HomeGraphRoute,
             onClick = {
                 navigateToHome()
                 closeDrawer()
@@ -56,7 +59,7 @@ fun DrawerContent(
                     modifier = Modifier.size(24.dp),
                 )
             },
-            selected = currentRoute == TechNewsExploreDestinations.PROFILE_ROUTE,
+            selected = currentRoute == ProfileNavigationGraphRoute,
             onClick = {
                 navigateToProfile()
                 closeDrawer()
@@ -72,7 +75,7 @@ fun DrawerContent(
                     modifier = Modifier.size(24.dp),
                 )
             },
-            selected = currentRoute == TechNewsExploreDestinations.SETTING_ROUTE,
+            selected = currentRoute == SettingNavigationGraphRoute,
             onClick = {
                 navigateToSetting()
                 closeDrawer()

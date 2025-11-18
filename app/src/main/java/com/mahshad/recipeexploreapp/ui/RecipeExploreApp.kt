@@ -18,16 +18,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.mahshad.home.HomeScreen
+import com.mahshad.home.navigation.HomeGraphRoute
+import com.mahshad.home.navigation.homeNavigationGraph
+import com.mahshad.profile.navigation.profileNavigationGraph
 import com.mahshad.recipeexploreapp.navigation.TechExploreNavigationActions
-import com.mahshad.recipeexploreapp.navigation.TechNewsExploreDestinations
-import com.mahshad.recipeexploreapp.navigation.TechNewsExploreDestinations.HOME_ROUTE
-import com.mahshad.recipeexploreapp.navigation.TechNewsExploreDestinations.PROFILE_ROUTE
-import com.mahshad.recipeexploreapp.navigation.TechNewsExploreDestinations.SETTING_ROUTE
 import com.mahshad.recipeexploreapp.ui.components.DrawerContent
+import com.mahshad.setting.navigation.settingNavigationGraph
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -37,8 +35,7 @@ fun RecipeExploreApp() {
     val coroutineScope = rememberCoroutineScope()
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute =
-        navBackStackEntry?.destination?.route ?: TechNewsExploreDestinations.HOME_ROUTE
+    val currentRoute = HomeGraphRoute::class
     val navigationActions = remember(navController) {
         TechExploreNavigationActions(navController)
     }
@@ -76,15 +73,9 @@ fun RecipeExploreApp() {
                 startDestination = currentRoute,
                 modifier = Modifier.padding(innerPadding)
             ) {
-                composable(PROFILE_ROUTE) {
-                    Text("profile")
-                }
-                composable(HOME_ROUTE) {
-                    HomeScreen()
-                }
-                composable(SETTING_ROUTE) {
-                    Text("setting")
-                }
+                settingNavigationGraph(navController)
+                homeNavigationGraph(navController)
+                profileNavigationGraph(navController)
             }
         }
     }

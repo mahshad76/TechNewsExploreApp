@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.mahshad.home"
+    namespace = "com.mahshad.setting"
     compileSdk {
         version = release(36)
     }
@@ -39,10 +39,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:data"))
-    implementation(project(":core:model"))
-    implementation(project(":core:ui"))
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
