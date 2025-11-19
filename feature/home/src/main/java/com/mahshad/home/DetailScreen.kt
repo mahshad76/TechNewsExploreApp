@@ -1,8 +1,22 @@
 package com.mahshad.home
 
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells.Adaptive
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mahshad.model.Article
 import kotlinx.serialization.Serializable
@@ -14,14 +28,51 @@ data class DetailScreenRoute(val subject: String)
 fun DetailScreen(subject: String, viewModel: HomeScreenViewModel) {
     val matchedArticles = viewModel.searchSuggestions.collectAsStateWithLifecycle()
     val articles = matchedArticles.value
-    List(articles)
+    LazyVerticalGrid(
+        columns = Adaptive(300.dp),
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        items(articles.size) {
+            DetailCard(articles[it])
+        }
+    }
 }
 
 @Composable
-fun List(articles: List<Article>) {
-    LazyColumn {
-        items(articles.size) {
-            Text(articles[it].toString())
-        }
+fun DetailCard(article: Article) {
+    Column(
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+//        val iconTint = LocalTintTheme.current.iconTint
+//        Image(
+//            modifier = Modifier.fillMaxWidth(),
+//            painter = painterResource(id = R.drawable.img_empty_bookmarks),
+//            colorFilter = if (iconTint != null) ColorFilter.tint(iconTint) else null,
+//            contentDescription = null,
+//        )
+
+        Spacer(modifier = Modifier.height(48.dp))
+
+        Text(
+            text = article.title,
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.Bold,
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Text(
+            text = article.content,
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.bodyMedium,
+        )
     }
 }
