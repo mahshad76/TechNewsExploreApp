@@ -34,7 +34,7 @@ fun HomeScreen(
             modifier = Modifier.padding(bottom = 4.dp),
             searchQuery.value,
             { homeScreenViewModel.updateSearchQueryFlow(it) },
-            {})
+            { navigateFromHomeToDetail(searchQuery.value) })
         if (!searchQuery.value.isEmpty()) {
             SearchSuggestionsBox(searchSuggestion.value.map { it.title }) {
                 homeScreenViewModel.updateSearchQueryFlow(
@@ -42,26 +42,6 @@ fun HomeScreen(
                 )
             }
         }
-        // if the search query is not empty and nothing is selected yet show the suggestions
-//    when (newsFeed.value) {
-//        is NewsFeed.Successful -> {
-//            Log.d("TAG", "HomeScreen success")
-//            Text((newsFeed.value as NewsFeed.Successful).news[0].content)
-//        }
-//
-//        is NewsFeed.Error -> {
-//            Log.d("TAG", "Error:${(newsFeed.value as NewsFeed.Error).e.toString()}")
-//        }
-//
-//        is NewsFeed.Loading -> {
-//            Log.d("TAG", "HomeScreen: loading")
-//            CircularProgressIndicator(
-//                modifier = Modifier.size(64.dp),
-//                color = androidx.compose.ui.graphics.Color(Color.BLACK),
-//                strokeWidth = 6.dp
-//            )
-//        }
-//    }
         Spacer(Modifier.windowInsetsBottomHeight(WindowInsets.safeDrawing))
     }
 }
