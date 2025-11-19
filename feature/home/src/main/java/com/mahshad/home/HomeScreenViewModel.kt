@@ -56,7 +56,7 @@ class HomeScreenViewModel @Inject constructor(
         feedState.combine(_searchQueryStateFlow) { newsFeed, query ->
             if (newsFeed is NewsFeed.Successful) {
                 return@combine newsFeed.news
-                    .filter { query in it.content }
+                    .filter { query in it.content || query in it.title }
             } else {
                 return@combine emptyList()
             }
