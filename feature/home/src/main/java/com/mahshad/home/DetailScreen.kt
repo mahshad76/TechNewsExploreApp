@@ -4,8 +4,9 @@ import androidx.compose.runtime.Composable
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object DetailScreenRoute
+data class DetailScreenRoute(val subject: String)
 
 @Composable
-fun DetailScreen() {
+fun DetailScreen(subject: String) {
+
 }

@@ -19,7 +19,10 @@ import kotlinx.serialization.Serializable
 data object HomeScreenRoute
 
 @Composable
-fun HomeScreen(homeScreenViewModel: HomeScreenViewModel = hiltViewModel()) {
+fun HomeScreen(
+    navigateFromHomeToDetail: (String) -> Unit,
+    homeScreenViewModel: HomeScreenViewModel = hiltViewModel()
+) {
 
     val newsFeed = homeScreenViewModel.feedState.collectAsStateWithLifecycle()
     val searchQuery = homeScreenViewModel._searchQueryStateFlow.collectAsStateWithLifecycle()
@@ -66,5 +69,5 @@ fun HomeScreen(homeScreenViewModel: HomeScreenViewModel = hiltViewModel()) {
 @Composable
 @Preview
 fun Previeww() {
-    HomeScreen()
+    HomeScreen({})
 }
