@@ -18,7 +18,7 @@ fun NavGraphBuilder.homeNavigationGraph(navController: NavController) {
     navigation<HomeGraphRoute>(startDestination = HomeScreenRoute::class) {
         composable<HomeScreenRoute> {
             HomeScreen({ subject: String ->
-                navController.navigate(DetailScreenRoute(subject = subject))
+                navController.navigateFromHomeToDetail(subject = subject)
             })
         }
         composable<DetailScreenRoute> { backStackEntry ->
