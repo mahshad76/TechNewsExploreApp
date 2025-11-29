@@ -1,5 +1,7 @@
 package com.mahshad.datasource.di
 
+import com.mahshad.datasource.localdatasource.ArticleDataSource
+import com.mahshad.datasource.localdatasource.DefaultArticleDataSource
 import com.mahshad.datasource.remotedatasource.DefaultTneNetworkDataSource
 import com.mahshad.datasource.remotedatasource.TneNetworkDataSource
 import dagger.Binds
@@ -15,4 +17,9 @@ abstract class DataSourceModule {
     @Singleton
     abstract fun bindTneNetworkDataSource(defaultTneNetworkDataSource: DefaultTneNetworkDataSource):
             TneNetworkDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindArticleDataSource(defaultArticleDataSource: DefaultArticleDataSource):
+            ArticleDataSource
 }
