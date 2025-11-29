@@ -1,5 +1,7 @@
 package com.mahshad.model
 
+import com.mahshad.database.FavoriteArticleEntity
+
 data class Article(
     val author: String,
     val content: String,
@@ -25,3 +27,9 @@ data class Article(
         )
     }
 }
+
+fun Article.toEntity() = FavoriteArticleEntity(
+    author = this.author,
+    publishedAt = this.publishedAt,
+    title = this.title
+)
