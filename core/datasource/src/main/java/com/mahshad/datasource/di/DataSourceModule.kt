@@ -28,7 +28,7 @@ abstract class DataSourceModule {
             Room.databaseBuilder(
                 context,
                 TneDataBase::class.java,
-                "tne_db"
+                TneDataBase.DATABASE_NAME
             ).build()
 
         @Provides

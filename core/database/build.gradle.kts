@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.mahshad.datasource"
+    namespace = "com.mahshad.database"
     compileSdk {
         version = release(36)
     }
@@ -37,17 +37,15 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:network"))
-    implementation(project(":core:model"))
-    implementation(project(":core:threading"))
+    // Room
+    implementation(libs.room.runtime)
+    implementation(libs.room.coroutine)
+    ksp(libs.room.compiler)
 
     // Hilt
     implementation(libs.hilt.android)
     implementation(libs.volley)
     ksp(libs.hilt.android.compiler)
-
-    // Retrofit
-    implementation(libs.retrofit)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

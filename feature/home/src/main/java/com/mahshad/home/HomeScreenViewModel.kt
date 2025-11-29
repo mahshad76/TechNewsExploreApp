@@ -31,6 +31,8 @@ class HomeScreenViewModel @Inject constructor(
     )
     val _searchQueryStateFlow = searchQueryStateFlow.asStateFlow()
 
+//    private val _favoriteArticlesStateFlow =
+
 
     val feedState: StateFlow<NewsFeed> = articleRepository
         .getNews()
@@ -71,5 +73,9 @@ class HomeScreenViewModel @Inject constructor(
 
     fun updateSearchQueryFlow(query: String) {
         searchQueryStateFlow.update { query }
+    }
+
+    fun checkFavoriteStatus(){
+
     }
 }
