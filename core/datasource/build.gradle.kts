@@ -39,6 +39,7 @@ android {
 dependencies {
     implementation(project(":core:network"))
     implementation(project(":core:model"))
+    implementation(project(":core:database"))
     implementation(project(":core:threading"))
 
     // Hilt

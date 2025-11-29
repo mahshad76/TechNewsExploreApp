@@ -3,6 +3,7 @@ package com.mahshad.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.mahshad.model.FavoriteArticle
 
 @Entity(tableName = "favorite_articles")
 data class FavoriteArticleEntity(
@@ -15,4 +16,10 @@ data class FavoriteArticleEntity(
     val publishedAt: String,
     @ColumnInfo(name = "title")
     val title: String,
+)
+
+fun FavoriteArticleEntity.toFavoriteArticle() = FavoriteArticle(
+    author = this.author,
+    publishedAt = this.publishedAt,
+    title = this.title
 )
