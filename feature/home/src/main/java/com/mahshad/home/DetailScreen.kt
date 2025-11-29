@@ -3,7 +3,9 @@ package com.mahshad.home
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -18,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mahshad.model.Article
@@ -51,30 +54,46 @@ fun DetailCard(article: Article) {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
 //        val iconTint = LocalTintTheme.current.iconTint
-        Image(
-            modifier = Modifier.fillMaxWidth(),
-            painter = painterResource(id = R.drawable.bookmark_svgrepo_com),
-            //colorFilter = if (iconTint != null) ColorFilter.tint(iconTint) else null,
-            contentDescription = null,
-        )
-
-        Spacer(modifier = Modifier.height(48.dp))
-
-        Text(
-            text = article.title,
-            modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold,
-        )
-
+        Row(
+            modifier = Modifier.fillMaxHeight(0.2F),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Image(
+                modifier = Modifier
+                    .weight(0.2F)
+                    .fillMaxHeight(1.0F),
+                painter = painterResource(id = R.drawable.bookmark_svgrepo_com),
+                //colorFilter = if (iconTint != null) ColorFilter.tint(iconTint) else null,
+                contentDescription = null,
+            )
+            Text(
+                modifier = Modifier
+                    .weight(0.8F)
+                    .fillMaxHeight(1.0F),
+                text = article.title,
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+            )
+        }
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.8F),
             text = article.content,
-            modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodyMedium,
         )
     }
+}
+
+@Composable
+@Preview
+fun Previeww() {
+    DetailCard(
+        article = Article.DEFAULT
+    )
 }

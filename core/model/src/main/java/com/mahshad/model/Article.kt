@@ -10,4 +10,18 @@ data class Article(
     val url: String,
     val urlToImage: String,
     val isLiked: Boolean = false
-)
+) {
+    companion object {
+        val DEFAULT = Article(
+            author = "unknown",
+            content = "unknown",
+            description = "unknown",
+            publishedAt = "unknown",
+            source = Source.DEFAULT,
+            title = "unknown",
+            url = "unknown",
+            urlToImage = "unknown",
+            isLiked = false
+        )
+    }
+}
