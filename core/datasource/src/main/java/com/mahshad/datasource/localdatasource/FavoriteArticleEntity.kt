@@ -4,14 +4,13 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "FavoriteArticles")
 data class FavoriteArticleEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int,
-    @ColumnInfo("favorite_author")
+    @ColumnInfo(name = "favorite_author")
     val author: String,
-    @ColumnInfo("favorite_published_at")
+    @ColumnInfo(name = "favorite_published_at")
     val publishedAt: String,
-    @ColumnInfo("favorite_title")
+    @PrimaryKey
+    @ColumnInfo(name = "favorite_title")
     val title: String,
 )
