@@ -10,7 +10,10 @@ import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.test.runTest
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import retrofit2.Response
@@ -40,4 +43,23 @@ class DefaultArticleRepositoryTest {
             cancelAndIgnoreRemainingEvents()
         }
     }
+
+    @Test
+    fun `getNews_whenResponseIsFailure_emittingUnSuccessResult`() = runTest {
+        // Given
+        coEvery { tneNetworkDataSource.getNews() } returns retrofit2.Response.error(
+            404,
+            "{\"error\":\"Internal Server Error\"}".toResponseBody(
+                "application/json".toMediaTypeOrNull()
+            )
+        )
+        // When
+        val news = articleRepository.getNews()
+        // Then
+        news.test {
+            assertTrue(awaitItem().isFailure)
+            cancelAndIgnoreRemainingEvents()
+        }
+    }
+
 }
