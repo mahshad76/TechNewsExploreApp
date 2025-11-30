@@ -50,6 +50,15 @@ dependencies {
     // Retrofit
     implementation(libs.retrofit)
 
+    // Mockk
+    testImplementation(libs.mockk)
+
+    // runTest
+    testImplementation(libs.kotlinx.coroutines.test)
+
+    // Turbine
+    testImplementation(libs.turbine)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
