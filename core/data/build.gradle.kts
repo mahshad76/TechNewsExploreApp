@@ -52,6 +52,15 @@ dependencies {
     implementation(libs.volley)
     ksp(libs.hilt.android.compiler)
 
+    // Mockk
+    testImplementation(libs.mockk)
+
+    // runTest
+    testImplementation(libs.kotlinx.coroutines.test)
+
+    // Turbine
+    testImplementation(libs.turbine)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -26,7 +26,20 @@ data class NetworkArticle(
     val url: String?,
     @SerialName("urlToImage")
     val urlToImage: String?
-)
+) {
+    companion object {
+        val DEFAULT = NetworkArticle(
+            author = "unknown",
+            content = "unknown",
+            description = "unknown",
+            publishedAt = "unknown",
+            title = "unknown",
+            url = "unknown",
+            urlToImage = "unknown",
+            networkSource = NetworkSource.DEFAULT
+        )
+    }
+}
 
 fun NetworkArticle.toArticle(): Result<Article> {
     return runCatching {

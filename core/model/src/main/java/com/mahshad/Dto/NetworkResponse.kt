@@ -16,7 +16,7 @@ data class NewsApiResponse(
         val DEFAULT = NewsApiResponse(
             "unknown",
             1,
-            emptyList()
+            listOf(NetworkArticle.DEFAULT)
         )
     }
 }

@@ -17,8 +17,8 @@ data class NetworkSource(
 ) {
     companion object {
         val DEFAULT = NetworkSource(
-            "Default",
-            "Default"
+            "unknown",
+            "unknown"
         )
     }
 }
