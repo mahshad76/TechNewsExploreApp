@@ -1,6 +1,7 @@
 package com.mahshad.home
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,6 +18,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -39,13 +42,15 @@ fun DetailScreen(subject: String, viewModel: HomeScreenViewModel) {
             .fillMaxSize()
     ) {
         items(articles.size) {
-            DetailCard(articles[it])
+            DetailCard(articles[it], { article: Article ->
+                viewModel.bookmarkClicked(article)
+            })
         }
     }
 }
 
 @Composable
-fun DetailCard(article: Article) {
+fun DetailCard(article: Article, onBookMarkClicked: (Article) -> Unit) {
     Column(
         modifier = Modifier
             .padding(16.dp)
@@ -62,9 +67,13 @@ fun DetailCard(article: Article) {
             Image(
                 modifier = Modifier
                     .weight(0.2F)
-                    .fillMaxHeight(1.0F),
+                    .fillMaxHeight(1.0F)
+                    .clickable(true, onClick = { onBookMarkClicked(article) }),
                 painter = painterResource(id = R.drawable.bookmark_svgrepo_com),
-                //colorFilter = if (iconTint != null) ColorFilter.tint(iconTint) else null,
+                colorFilter = ColorFilter.tint(
+                    color = if (article.isLiked) Color.Red
+                    else Color.Black
+                ),
                 contentDescription = null,
             )
             Text(
@@ -94,6 +103,6 @@ fun DetailCard(article: Article) {
 @Preview
 fun Previeww() {
     DetailCard(
-        article = Article.DEFAULT
+        article = Article.DEFAULT, {}
     )
 }

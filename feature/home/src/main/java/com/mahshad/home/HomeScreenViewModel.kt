@@ -19,6 +19,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -87,7 +88,14 @@ class HomeScreenViewModel @Inject constructor(
         searchQueryStateFlow.update { query }
     }
 
-    fun checkFavoriteStatus() {
-
+    fun bookmarkClicked(article: Article) {
+        viewModelScope.launch {
+            val updatedArticle = article.copy(isLiked = !article.isLiked)
+            if (updatedArticle.isLiked) {
+                favoriteArticleRepository.insert(article = article)
+            } else {
+                favoriteArticleRepository.delete(article.title, article.author)
+            }
+        }
     }
 }
