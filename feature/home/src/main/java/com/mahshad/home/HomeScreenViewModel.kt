@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.mahshad.data.repository.ArticleRepository
 import com.mahshad.data.repository.FavoriteArticleRepository
 import com.mahshad.model.Article
+import com.mahshad.model.FavoriteArticle
 import com.mahshad.ui.NewsFeed
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
@@ -33,8 +34,12 @@ class HomeScreenViewModel @Inject constructor(
     )
     val _searchQueryStateFlow = searchQueryStateFlow.asStateFlow()
 
-//    private val _favoriteArticlesStateFlow =
-
+    private val _favoriteArticlesStateFlow: StateFlow<List<FavoriteArticle>> =
+        favoriteArticleRepository.getArticles().stateIn(
+            viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            emptyList<FavoriteArticle>()
+        )
 
     val feedState: StateFlow<NewsFeed> = articleRepository
         .getNews()
@@ -57,10 +62,15 @@ class HomeScreenViewModel @Inject constructor(
         )
 
     val searchSuggestions: StateFlow<List<Article>> =
-        feedState.combine(_searchQueryStateFlow) { newsFeed, query ->
+        combine(feedState, _searchQueryStateFlow, _favoriteArticlesStateFlow)
+        { newsFeed, query, favoriteArticles ->
             if (newsFeed is NewsFeed.Successful) {
                 return@combine newsFeed.news
                     .filter { query in it.content || query in it.title }
+                    .map {
+                        if (it.title in favoriteArticles.map { it.title })
+                            it.copy(isLiked = true) else it
+                    }
             } else {
                 return@combine emptyList()
             }
