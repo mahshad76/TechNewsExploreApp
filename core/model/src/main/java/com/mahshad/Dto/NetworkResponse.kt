@@ -11,4 +11,12 @@ data class NewsApiResponse(
     val totalResults: Int,
     @SerialName("articles")
     val articles: List<NetworkArticle>
-)
+) {
+    companion object {
+        val DEFAULT = NewsApiResponse(
+            "unknown",
+            1,
+            emptyList()
+        )
+    }
+}
