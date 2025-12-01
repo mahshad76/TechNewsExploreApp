@@ -1,6 +1,7 @@
 package com.mahshad.data
 
 import app.cash.turbine.test
+import com.mahshad.Dto.NetworkArticle
 import com.mahshad.Dto.NewsApiResponse
 import com.mahshad.data.repository.ArticleRepository
 import com.mahshad.data.repository.DefaultArticleRepository
@@ -62,4 +63,25 @@ class DefaultArticleRepositoryTest {
         }
     }
 
+    @Test
+    fun `getNews_whenResponseDataIsInvalid_emitsFailureResult`() = runTest {
+        // Given
+        coEvery { tneNetworkDataSource.getNews() } returns Response.success(
+            NewsApiResponse.DEFAULT.copy(
+                articles = listOf(NetworkArticle.DEFAULT2)
+            )
+        )
+        // When
+        val result = articleRepository.getNews()
+        // Then
+        result.test {
+            val res = awaitItem()
+            assertTrue(res.isFailure)
+            assertEquals(
+                res.exceptionOrNull()?.message, "The title is required for " +
+                        "each article and it is null for this item"
+            )
+            cancelAndIgnoreRemainingEvents()
+        }
+    }
 }

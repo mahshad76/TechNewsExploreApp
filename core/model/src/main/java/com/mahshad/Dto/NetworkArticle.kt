@@ -38,6 +38,7 @@ data class NetworkArticle(
             urlToImage = "unknown",
             networkSource = NetworkSource.DEFAULT
         )
+        val DEFAULT2 = DEFAULT.copy(title = null)
     }
 }
 
