@@ -16,7 +16,15 @@ data class FavoriteArticleEntity(
     val publishedAt: String,
     @ColumnInfo(name = "title")
     val title: String,
-)
+) {
+    companion object {
+        val DEFAULT = FavoriteArticleEntity(
+            author = "unknown",
+            publishedAt = "unknown",
+            title = "unknown"
+        )
+    }
+}
 
 fun FavoriteArticleEntity.toFavoriteArticle() = FavoriteArticle(
     author = this.author,
