@@ -1,5 +1,6 @@
 package com.mahshad.recipeexploreapp.ui
 
+import LoginScreen
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
@@ -17,15 +18,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.mahshad.home.navigation.HomeGraphRoute
-import com.mahshad.home.navigation.homeNavigationGraph
-import com.mahshad.profile.navigation.profileNavigationGraph
 import com.mahshad.recipeexploreapp.navigation.TechExploreNavigationActions
 import com.mahshad.recipeexploreapp.ui.components.DrawerContent
-import com.mahshad.setting.navigation.settingNavigationGraph
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -68,15 +65,16 @@ fun RecipeExploreApp() {
                     }
                 })
         }) { innerPadding ->
-            NavHost(
-                navController = navController,
-                startDestination = currentRoute,
-                modifier = Modifier.padding(innerPadding)
-            ) {
-                settingNavigationGraph(navController)
-                homeNavigationGraph(navController)
-                profileNavigationGraph(navController)
-            }
+//            NavHost(
+//                navController = navController,
+//                startDestination = currentRoute,
+//                modifier = Modifier.padding(innerPadding)
+//            ) {
+//                settingNavigationGraph(navController)
+//                homeNavigationGraph(navController)
+//                profileNavigationGraph(navController)
+//            }
+            LoginScreen(modifier = Modifier.padding(innerPadding))
         }
     }
 }

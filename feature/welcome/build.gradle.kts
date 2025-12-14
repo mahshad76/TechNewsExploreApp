@@ -1,6 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.plugin.compose)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -35,9 +39,29 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:data"))
+    implementation(project(":core:model"))
+    implementation(project(":core:ui"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+
+    // Hilt
+    implementation(libs.hilt.android)
+    implementation(libs.volley)
+    ksp(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    // Viewmodel lifecycle
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
+    // Compose
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.material3)
+    implementation(libs.ui.tooling.preview)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
