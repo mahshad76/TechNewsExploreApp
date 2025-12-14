@@ -23,13 +23,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mahshad.ui.ModifiedTextFiled
 import com.mahshad.welcome.R
+import com.mahshad.welcome.login.LoginScreenViewModel
 
 @Composable
 fun LoginScreen(
+    viewModel: LoginScreenViewModel = hiltViewModel(),
     modifier: Modifier = Modifier
 ) {
+    val usernameState = viewModel.usernameStateFlow.collectAsStateWithLifecycle()
+    val passwordState = viewModel.passwordStateFlow.collectAsStateWithLifecycle()
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -52,8 +59,8 @@ fun LoginScreen(
                 .padding(top = 10.dp, start = 10.dp)
         )
         ModifiedTextFiled(
-            value = "",
-            onValueChanged = {},
+            value = usernameState.value,
+            onValueChanged = { viewModel.updateFlow(it, true) },
             placeHolder = { Text("Email") },
             cornerRadius = 0,
             color = TextFieldDefaults.colors(
@@ -76,8 +83,8 @@ fun LoginScreen(
         )
         Spacer(Modifier.height(36.dp))
         ModifiedTextFiled(
-            value = "",
-            onValueChanged = {},
+            value = passwordState.value,
+            onValueChanged = { viewModel.updateFlow(it, false) },
             placeHolder = { Text("Password") },
             cornerRadius = 0,
             color = TextFieldDefaults.colors(
