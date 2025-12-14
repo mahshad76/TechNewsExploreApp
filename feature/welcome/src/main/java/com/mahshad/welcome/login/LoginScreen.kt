@@ -28,9 +28,8 @@ import com.mahshad.welcome.R
 
 @Composable
 fun LoginScreen(
-    modifier: Modifier = Modifier // ACCEPT MODIFIER FOR REUSABILITY!
+    modifier: Modifier = Modifier
 ) {
-    // Defines the layout to fill the screen and center the contents
     Column(
         modifier = modifier
             .fillMaxSize()
