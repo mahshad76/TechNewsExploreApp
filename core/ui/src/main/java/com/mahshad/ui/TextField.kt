@@ -20,7 +20,6 @@ fun ModifiedTextFiled(
         value = value,
         onValueChange = { onValueChanged(it) },
         placeholder = { placeHolder() },
-        label = placeHolder,
         shape = RoundedCornerShape(cornerRadius.dp),
         modifier = modifier,
         colors = color
