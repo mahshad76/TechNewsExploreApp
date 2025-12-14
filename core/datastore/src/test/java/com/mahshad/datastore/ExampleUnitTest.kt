@@ -1,4 +1,4 @@
-package com.lyft.datastore
+package com.mahshad.datastore
 
 import org.junit.Test
 

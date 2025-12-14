@@ -1,6 +1,7 @@
 [versions]
 agp = "8.13.0"
 converterGson = "3.0.0"
+datastore = "1.2.0"
 kotlin = "2.2.21"
 coreKtx = "1.17.0"
 junit = "4.13.2"
@@ -23,6 +24,7 @@ material = "1.13.0"
 jetbrainsKotlinJvm = "2.2.21"
 mockk = "1.14.6"
 okhttpBom = "5.2.1"
+protobufKotlinLite = "4.33.2"
 retrofit = "3.0.0"
 retrofit2KotlinxSerializationConverter = "1.0.0"
 serialization = "2.2.21"
@@ -32,12 +34,16 @@ material3 = "1.3.2"
 uiToolingPreview = "1.9.0"
 plugincompose = "2.2.10"
 room_version = "2.8.4"
+protobuf = "0.9.5"
 
 [libraries]
+androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+protobuf-kotlin-lite = { module = "com.google.protobuf:protobuf-kotlin-lite", version.ref = "protobufKotlinLite" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "uiToolingPreview" }
 androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
@@ -82,3 +88,4 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serialization" }
 plugin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "plugincompose" }
+proto_datastore = { id = "com.google.protobuf", version.ref = "protobuf" }

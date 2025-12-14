@@ -1,12 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.proto.datastore)
 }
 
 android {
-    namespace = "com.mahshad.datastore"
+    namespace = "com.mahshad.welcome"
     compileSdk {
         version = release(36)
     }
@@ -40,32 +38,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-
-    // Preferences DataStore
-    implementation(libs.androidx.datastore.preferences)
-    // Typed DataStore for custom data objects
-    implementation(libs.androidx.datastore)
-    implementation(libs.protobuf.kotlin.lite)
-    // Serialization
-    implementation(libs.kotlinx.serialization.json)
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-}
-
-protobuf {
-    protoc {
-        artifact = "com.google.protobuf:protoc:4.32.1"
-    }
-    generateProtoTasks {
-        all().forEach { task ->
-            task.builtins {
-                create("java") {
-                    option("lite")
-                }
-                create("kotlin")
-            }
-        }
-    }
 }
