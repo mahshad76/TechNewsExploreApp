@@ -1,6 +1,5 @@
 package com.mahshad.recipeexploreapp.ui
 
-import LoginScreen
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
@@ -23,6 +22,7 @@ import androidx.navigation.compose.rememberNavController
 import com.mahshad.home.navigation.HomeGraphRoute
 import com.mahshad.recipeexploreapp.navigation.TechExploreNavigationActions
 import com.mahshad.recipeexploreapp.ui.components.DrawerContent
+import com.mahshad.welcome.signup.SignUpScreen
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -74,7 +74,8 @@ fun RecipeExploreApp() {
 //                homeNavigationGraph(navController)
 //                profileNavigationGraph(navController)
 //            }
-            LoginScreen(modifier = Modifier.padding(innerPadding))
+            //LoginScreen(modifier = Modifier.padding(innerPadding))
+            SignUpScreen(Modifier.padding(innerPadding))
         }
     }
 }

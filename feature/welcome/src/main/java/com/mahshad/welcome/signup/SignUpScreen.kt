@@ -1,3 +1,5 @@
+package com.mahshad.welcome.signup
+
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -30,20 +32,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mahshad.ui.ModifiedButton
 import com.mahshad.ui.ModifiedTextFiled
 import com.mahshad.welcome.R
-import com.mahshad.welcome.login.LoginScreenViewModel
 
 @Composable
-fun LoginScreen(
-    viewModel: LoginScreenViewModel = hiltViewModel(),
+fun SignUpScreen(
+    //viewModel: LoginScreenViewModel = hiltViewModel(),
     modifier: Modifier = Modifier
 ) {
-    val usernameState = viewModel.usernameStateFlow.collectAsStateWithLifecycle()
-    val passwordState = viewModel.passwordStateFlow.collectAsStateWithLifecycle()
+    //val usernameState = viewModel.usernameStateFlow.collectAsStateWithLifecycle()
+    //val passwordState = viewModel.passwordStateFlow.collectAsStateWithLifecycle()
 
     Column(
         modifier = modifier
@@ -53,14 +52,14 @@ fun LoginScreen(
         verticalArrangement = Arrangement.Top
     ) {
         Image(
-            painter = painterResource(R.drawable.mobile_login_rafiki),
-            contentDescription = "login photo",
+            painter = painterResource(R.drawable.signup_2),
+            contentDescription = "Register photo",
             modifier = Modifier
                 .size(225.dp)
                 .padding(top = 0.dp),
         )
         Text(
-            "Login", fontFamily = FontFamily(Font(R.font.poppins_bold)),
+            "Register", fontFamily = FontFamily(Font(R.font.poppins_bold)),
             fontWeight = FontWeight.Bold,
             fontSize = 32.sp,
             modifier = Modifier
@@ -69,8 +68,8 @@ fun LoginScreen(
                 .padding(top = 0.dp, start = 10.dp)
         )
         ModifiedTextFiled(
-            value = usernameState.value,
-            onValueChanged = { viewModel.updateFlow(it, true) },
+            value = "",
+            onValueChanged = {},
             placeHolder = { Text("Email") },
             cornerRadius = 0,
             color = TextFieldDefaults.colors(
@@ -91,10 +90,9 @@ fun LoginScreen(
                     )
                 }
         )
-        Spacer(Modifier.height(3.dp))
         ModifiedTextFiled(
-            value = passwordState.value,
-            onValueChanged = { viewModel.updateFlow(it, false) },
+            value = "",
+            onValueChanged = {},
             placeHolder = { Text("Password") },
             cornerRadius = 0,
             color = TextFieldDefaults.colors(
@@ -115,16 +113,32 @@ fun LoginScreen(
                     )
                 }
         )
-        Text(
-            "Forgot password?",
-            fontSize = 12.sp,
+        ModifiedTextFiled(
+            value = "",
+            onValueChanged = {},
+            placeHolder = { Text("Confirm password") },
+            cornerRadius = 0,
+            color = TextFieldDefaults.colors(
+                focusedContainerColor = Color.Transparent,
+                unfocusedContainerColor = Color.Transparent,
+                disabledContainerColor = Color.Transparent
+            ),
             modifier = Modifier
-                .padding(top = 10.dp, bottom = 5.dp)
-                .align(Alignment.End)
-                .clickable(true) {}
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(bottom = 5.dp)
+                .drawBehind {
+                    val strokeWidth = 1.dp.toPx()
+                    drawLine(
+                        color = Color.Black,
+                        start = Offset(0f, size.height),
+                        end = Offset(size.width, size.height),
+                        strokeWidth = strokeWidth
+                    )
+                }
         )
         ModifiedButton(
-            content = { Text("Login") },
+            content = { Text("Register") },
             onClick = {},
             shape = RoundedCornerShape(8.dp),
             buttonColors = ButtonDefaults.buttonColors(
@@ -138,7 +152,7 @@ fun LoginScreen(
             modifier = Modifier.fillMaxWidth()
         )
         Text(
-            "Or login with",
+            "Or register with",
             fontSize = 14.sp,
             modifier = Modifier.padding(top = 1.dp, bottom = 1.dp)
         )
@@ -169,10 +183,10 @@ fun LoginScreen(
                 .height(50.dp)
         )
         Row(Modifier.padding(top = 5.dp)) {
-            Text("New here?", fontSize = 14.sp)
+            Text("Already have an account?", fontSize = 14.sp)
             Spacer(Modifier.width(5.dp))
             Text(
-                text = "Register",
+                text = "Login",
                 fontSize = 14.sp,
                 color = colorResource(R.color.blue),
                 modifier = Modifier.clickable(true) {}
@@ -183,6 +197,6 @@ fun LoginScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun LoginScreenPreview() {
-    LoginScreen()
+fun SignUpScreenPreview() {
+    SignUpScreen()
 }
