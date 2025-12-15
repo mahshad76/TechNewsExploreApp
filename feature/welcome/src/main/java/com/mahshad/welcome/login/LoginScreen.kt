@@ -1,5 +1,6 @@
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -115,25 +117,31 @@ fun LoginScreen(
         )
         Text(
             "Forgot password?",
+            fontSize = 12.sp,
             modifier = Modifier
                 .padding(top = 10.dp, bottom = 5.dp)
                 .align(Alignment.End)
+                .clickable(true) {}
         )
         ModifiedButton(
-            content = {},
+            content = { Text("Login") },
             onClick = {},
             shape = RoundedCornerShape(8.dp),
             buttonColors = ButtonDefaults.buttonColors(
-                containerColor = Color.Transparent,
-                contentColor = Color.Black
+                containerColor = colorResource(R.color.blue),
+                contentColor = Color.White
             ),
             borderStroke = BorderStroke(
                 width = 2.dp,
-                color = Color.Gray
+                color = colorResource(R.color.blue)
             ),
-            modifier = Modifier
+            modifier = Modifier.fillMaxWidth()
         )
-        Text("Or login with", modifier = Modifier.padding(top = 10.dp, bottom = 7.dp))
+        Text(
+            "Or login with",
+            fontSize = 14.sp,
+            modifier = Modifier.padding(top = 10.dp, bottom = 1.dp)
+        )
         ModifiedButton(
             content = {
                 Row(horizontalArrangement = Arrangement.Center) {
@@ -160,9 +168,15 @@ fun LoginScreen(
                 .width(143.dp)
                 .height(50.dp)
         )
-        Row() {
-            Text("New here?")
-            Text("Register")
+        Row(Modifier.padding(top = 5.dp)) {
+            Text("New here?", fontSize = 14.sp)
+            Spacer(Modifier.width(5.dp))
+            Text(
+                text = "Register",
+                fontSize = 14.sp,
+                color = colorResource(R.color.blue),
+                modifier = Modifier.clickable(true) {}
+            )
         }
     }
 }
