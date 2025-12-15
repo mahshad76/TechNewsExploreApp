@@ -1,14 +1,18 @@
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -26,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.mahshad.ui.ModifiedButton
 import com.mahshad.ui.ModifiedTextFiled
 import com.mahshad.welcome.R
 import com.mahshad.welcome.login.LoginScreenViewModel
@@ -41,23 +46,25 @@ fun LoginScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(24.dp),
+            .padding(start = 50.dp, end = 50.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Top
     ) {
         Image(
             painter = painterResource(R.drawable.mobile_login_rafiki),
             contentDescription = "login photo",
-            modifier = Modifier.size(225.dp),
+            modifier = Modifier
+                .size(225.dp)
+                .padding(top = 0.dp),
         )
         Text(
             "Login", fontFamily = FontFamily(Font(R.font.poppins_bold)),
             fontWeight = FontWeight.Bold,
             fontSize = 32.sp,
             modifier = Modifier
-                .width(311.dp)
+                .fillMaxWidth()
                 .wrapContentHeight()
-                .padding(top = 10.dp, start = 10.dp)
+                .padding(top = 0.dp, start = 10.dp)
         )
         ModifiedTextFiled(
             value = usernameState.value,
@@ -70,7 +77,7 @@ fun LoginScreen(
                 disabledContainerColor = Color.Transparent
             ),
             modifier = Modifier
-                .width(311.dp)
+                .fillMaxWidth()
                 .height(53.dp)
                 .drawBehind {
                     val strokeWidth = 1.dp.toPx()
@@ -82,7 +89,7 @@ fun LoginScreen(
                     )
                 }
         )
-        Spacer(Modifier.height(36.dp))
+        Spacer(Modifier.height(3.dp))
         ModifiedTextFiled(
             value = passwordState.value,
             onValueChanged = { viewModel.updateFlow(it, false) },
@@ -94,7 +101,7 @@ fun LoginScreen(
                 disabledContainerColor = Color.Transparent
             ),
             modifier = Modifier
-                .width(311.dp)
+                .fillMaxWidth()
                 .height(53.dp)
                 .drawBehind {
                     val strokeWidth = 1.dp.toPx()
@@ -106,7 +113,53 @@ fun LoginScreen(
                     )
                 }
         )
-        Text("Or login with")
+        Text(
+            "Forgot password?",
+            modifier = Modifier
+                .padding(top = 10.dp, bottom = 5.dp)
+                .align(Alignment.End)
+        )
+        ModifiedButton(
+            content = {},
+            onClick = {},
+            shape = RoundedCornerShape(8.dp),
+            buttonColors = ButtonDefaults.buttonColors(
+                containerColor = Color.Transparent,
+                contentColor = Color.Black
+            ),
+            borderStroke = BorderStroke(
+                width = 2.dp,
+                color = Color.Gray
+            ),
+            modifier = Modifier
+        )
+        Text("Or login with", modifier = Modifier.padding(top = 10.dp, bottom = 7.dp))
+        ModifiedButton(
+            content = {
+                Row(horizontalArrangement = Arrangement.Center) {
+                    Image(
+                        painter = painterResource(R.drawable.google),
+                        contentDescription = "google icon",
+                        modifier = Modifier.size(25.dp),
+                    )
+                    Spacer(Modifier.width(15.dp))
+                    Text("Google")
+                }
+            },
+            onClick = {},
+            shape = RoundedCornerShape(12.dp),
+            buttonColors = ButtonDefaults.buttonColors(
+                containerColor = Color.Transparent,
+                contentColor = Color.Black
+            ),
+            borderStroke = BorderStroke(
+                width = 0.5.dp,
+                color = Color.Gray
+            ),
+            modifier = Modifier
+                .width(143.dp)
+                .height(50.dp)
+        )
         Row() {
             Text("New here?")
             Text("Register")
