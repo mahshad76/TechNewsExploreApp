@@ -35,9 +35,14 @@ import androidx.compose.ui.unit.sp
 import com.mahshad.ui.ModifiedButton
 import com.mahshad.ui.ModifiedTextFiled
 import com.mahshad.welcome.R
+import kotlinx.serialization.Serializable
+
+@Serializable
+data object SignUpScreenRoute
 
 @Composable
 fun SignUpScreen(
+    onNavigateToLogin: () -> Unit,
     //viewModel: LoginScreenViewModel = hiltViewModel(),
     modifier: Modifier = Modifier
 ) {
@@ -189,7 +194,7 @@ fun SignUpScreen(
                 text = "Login",
                 fontSize = 14.sp,
                 color = colorResource(R.color.blue),
-                modifier = Modifier.clickable(true) {}
+                modifier = Modifier.clickable(true) { onNavigateToLogin() }
             )
         }
     }
@@ -198,5 +203,5 @@ fun SignUpScreen(
 @Preview(showBackground = true)
 @Composable
 fun SignUpScreenPreview() {
-    SignUpScreen()
+    SignUpScreen({})
 }

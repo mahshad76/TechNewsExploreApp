@@ -1,0 +1,4 @@
+int drawable ic_launcher_background 0x0
+int drawable ic_launcher_foreground 0x0
+int drawable meal_application_tracking_organic_food_analysis_healthcare_nutrition_svgrepo_com 0x0
+int drawable rocket_svgrepo_com 0x0

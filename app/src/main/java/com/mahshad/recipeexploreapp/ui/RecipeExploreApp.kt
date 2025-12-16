@@ -17,12 +17,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.mahshad.home.navigation.HomeGraphRoute
+import com.mahshad.home.navigation.homeNavigationGraph
 import com.mahshad.recipeexploreapp.navigation.TechExploreNavigationActions
 import com.mahshad.recipeexploreapp.ui.components.DrawerContent
-import com.mahshad.welcome.signup.SignUpScreen
+import com.mahshad.welcome.navigation.WelcomeGraphRoute
+import com.mahshad.welcome.navigation.welcomeNavigationGraph
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -32,7 +35,7 @@ fun RecipeExploreApp() {
     val coroutineScope = rememberCoroutineScope()
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = HomeGraphRoute::class
+    val currentRoute = WelcomeGraphRoute::class
     val navigationActions = remember(navController) {
         TechExploreNavigationActions(navController)
     }
@@ -65,17 +68,18 @@ fun RecipeExploreApp() {
                     }
                 })
         }) { innerPadding ->
-//            NavHost(
-//                navController = navController,
-//                startDestination = currentRoute,
-//                modifier = Modifier.padding(innerPadding)
-//            ) {
+            NavHost(
+                navController = navController,
+                startDestination = currentRoute,
+                modifier = Modifier.padding(innerPadding)
+            ) {
 //                settingNavigationGraph(navController)
-//                homeNavigationGraph(navController)
+                welcomeNavigationGraph(navController, { navController.navigate(HomeGraphRoute) })
+                homeNavigationGraph(navController)
 //                profileNavigationGraph(navController)
-//            }
+            }
             //LoginScreen(modifier = Modifier.padding(innerPadding))
-            SignUpScreen(Modifier.padding(innerPadding))
+            //SignUpScreen(Modifier.padding(innerPadding))
         }
     }
 }

@@ -1,0 +1,5 @@
+com.mahshad.main
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+drawable meal_application_tracking_organic_food_analysis_healthcare_nutrition_svgrepo_com
+drawable rocket_svgrepo_com

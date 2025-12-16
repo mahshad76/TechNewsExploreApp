@@ -36,9 +36,15 @@ import com.mahshad.ui.ModifiedButton
 import com.mahshad.ui.ModifiedTextFiled
 import com.mahshad.welcome.R
 import com.mahshad.welcome.login.LoginScreenViewModel
+import kotlinx.serialization.Serializable
+
+@Serializable
+data object LoginScreenRoute
 
 @Composable
 fun LoginScreen(
+    onNavigateToHome: (String) -> Unit,
+    onNavigateToSignUp: () -> Unit,
     viewModel: LoginScreenViewModel = hiltViewModel(),
     modifier: Modifier = Modifier
 ) {
@@ -125,7 +131,7 @@ fun LoginScreen(
         )
         ModifiedButton(
             content = { Text("Login") },
-            onClick = {},
+            onClick = { onNavigateToHome("Sara") },
             shape = RoundedCornerShape(8.dp),
             buttonColors = ButtonDefaults.buttonColors(
                 containerColor = colorResource(R.color.blue),
@@ -175,7 +181,7 @@ fun LoginScreen(
                 text = "Register",
                 fontSize = 14.sp,
                 color = colorResource(R.color.blue),
-                modifier = Modifier.clickable(true) {}
+                modifier = Modifier.clickable(true) { onNavigateToSignUp() }
             )
         }
     }
@@ -184,5 +190,5 @@ fun LoginScreen(
 @Preview(showBackground = true)
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen()
+    LoginScreen({}, {})
 }
