@@ -36,6 +36,8 @@ fun RecipeExploreApp() {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = WelcomeGraphRoute::class
+    val currentGraphRouteString = navBackStackEntry?.destination?.parent?.route
+    val hideAppShell = currentGraphRouteString == WelcomeGraphRoute::class.qualifiedName
     val navigationActions = remember(navController) {
         TechExploreNavigationActions(navController)
     }
@@ -58,15 +60,17 @@ fun RecipeExploreApp() {
         }
     ) {
         Scaffold(topBar = {
-            TopAppBar(
-                title = { Text("") },
-                navigationIcon = {
-                    IconButton(onClick = {
-                        closeDrawer()
-                    }) {
-                        Icon(Icons.Filled.Menu, contentDescription = "Menu")
-                    }
-                })
+            if (!hideAppShell) {
+                TopAppBar(
+                    title = { Text("") },
+                    navigationIcon = {
+                        IconButton(onClick = {
+                            closeDrawer()
+                        }) {
+                            Icon(Icons.Filled.Menu, contentDescription = "Menu")
+                        }
+                    })
+            }
         }) { innerPadding ->
             NavHost(
                 navController = navController,
@@ -78,8 +82,6 @@ fun RecipeExploreApp() {
                 homeNavigationGraph(navController)
 //                profileNavigationGraph(navController)
             }
-            //LoginScreen(modifier = Modifier.padding(innerPadding))
-            //SignUpScreen(Modifier.padding(innerPadding))
         }
     }
 }
