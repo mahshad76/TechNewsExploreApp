@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -64,12 +64,12 @@ fun SignUpScreen(
             contentAlignment = Alignment.Center
         ) {
             Image(
-                painter = painterResource(R.drawable.mobile_login_rafiki),
+                painter = painterResource(R.drawable.signup_2),
                 contentDescription = "signup photo",
                 modifier = Modifier
                     .fillMaxWidth(0.8f)
-                    .fillMaxHeight(),
-                contentScale = ContentScale.Fit
+                    .aspectRatio(1F),
+                contentScale = ContentScale.Inside
             )
         }
 

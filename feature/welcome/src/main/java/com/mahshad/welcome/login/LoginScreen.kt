@@ -1,3 +1,4 @@
+
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -6,7 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -71,8 +72,8 @@ fun LoginScreen(
                 contentDescription = "login photo",
                 modifier = Modifier
                     .fillMaxWidth(0.8f)
-                    .fillMaxHeight(),
-                contentScale = ContentScale.Fit
+                    .aspectRatio(1f),
+                contentScale = ContentScale.Inside
             )
         }
 
