@@ -2,16 +2,17 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -22,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
@@ -54,110 +56,131 @@ fun LoginScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(start = 50.dp, end = 50.dp),
+            .padding(horizontal = 30.dp, vertical = 10.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Top
+        verticalArrangement = Arrangement.Center // Center content vertically
     ) {
-        Image(
-            painter = painterResource(R.drawable.mobile_login_rafiki),
-            contentDescription = "login photo",
-            modifier = Modifier
-                .size(225.dp)
-                .padding(top = 0.dp),
-        )
-        Text(
-            "Login", fontFamily = FontFamily(Font(R.font.poppins_bold)),
-            fontWeight = FontWeight.Bold,
-            fontSize = 32.sp,
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .wrapContentHeight()
-                .padding(top = 0.dp, start = 10.dp)
+                .weight(1f),
+            contentAlignment = Alignment.Center
+        ) {
+            Image(
+                painter = painterResource(R.drawable.mobile_login_rafiki),
+                contentDescription = "login photo",
+                modifier = Modifier
+                    .fillMaxWidth(0.8f)
+                    .fillMaxHeight(),
+                contentScale = ContentScale.Fit
+            )
+        }
+
+        Spacer(Modifier.height(16.dp))
+
+        Text(
+            text = "Login",
+            fontFamily = FontFamily(Font(R.font.poppins_bold)),
+            fontWeight = FontWeight.Bold,
+            fontSize = 40.sp, // Increased size to match visual prominence
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 20.dp)
         )
+
         ModifiedTextFiled(
             value = usernameState.value,
             onValueChanged = { viewModel.updateFlow(it, true) },
-            placeHolder = { Text("Email") },
+            placeHolder = { Text("Email", color = Color.Gray) },
             cornerRadius = 0,
             color = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,
                 unfocusedContainerColor = Color.Transparent,
-                disabledContainerColor = Color.Transparent
+                disabledContainerColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent
             ),
             modifier = Modifier
                 .fillMaxWidth()
-                .height(53.dp)
                 .drawBehind {
-                    val strokeWidth = 1.dp.toPx()
                     drawLine(
-                        color = Color.Black,
+                        color = Color.LightGray,
                         start = Offset(0f, size.height),
                         end = Offset(size.width, size.height),
-                        strokeWidth = strokeWidth
+                        strokeWidth = 1.dp.toPx()
                     )
                 }
         )
-        Spacer(Modifier.height(3.dp))
+
+        Spacer(Modifier.height(20.dp))
+
         ModifiedTextFiled(
             value = passwordState.value,
             onValueChanged = { viewModel.updateFlow(it, false) },
-            placeHolder = { Text("Password") },
+            placeHolder = { Text("Password", color = Color.Gray) },
             cornerRadius = 0,
             color = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,
                 unfocusedContainerColor = Color.Transparent,
-                disabledContainerColor = Color.Transparent
+                disabledContainerColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent
             ),
             modifier = Modifier
                 .fillMaxWidth()
-                .height(53.dp)
                 .drawBehind {
-                    val strokeWidth = 1.dp.toPx()
                     drawLine(
-                        color = Color.Black,
+                        color = Color.LightGray,
                         start = Offset(0f, size.height),
                         end = Offset(size.width, size.height),
-                        strokeWidth = strokeWidth
+                        strokeWidth = 1.dp.toPx()
                     )
                 }
         )
+
         Text(
             "Forgot password?",
-            fontSize = 12.sp,
+            fontSize = 14.sp,
+            color = colorResource(R.color.blue),
             modifier = Modifier
-                .padding(top = 10.dp, bottom = 5.dp)
+                .padding(vertical = 15.dp)
                 .align(Alignment.End)
-                .clickable(true) {}
+                .clickable { /* action */ }
         )
+
         ModifiedButton(
-            content = { Text("Login") },
+            content = {
+                Text("Login", fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
+            },
             onClick = { onNavigateToHome("Sara") },
-            shape = RoundedCornerShape(8.dp),
+            shape = RoundedCornerShape(10.dp),
             buttonColors = ButtonDefaults.buttonColors(
                 containerColor = colorResource(R.color.blue),
                 contentColor = Color.White
             ),
-            borderStroke = BorderStroke(
-                width = 2.dp,
-                color = colorResource(R.color.blue)
-            ),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(55.dp),
+            borderStroke = BorderStroke(0.5.dp, Color.LightGray)
         )
+
         Text(
             "Or login with",
             fontSize = 14.sp,
-            modifier = Modifier.padding(top = 1.dp, bottom = 1.dp)
+            color = Color.Gray,
+            modifier = Modifier.padding(vertical = 25.dp)
         )
+
         ModifiedButton(
             content = {
-                Row(horizontalArrangement = Arrangement.Center) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
                     Image(
                         painter = painterResource(R.drawable.google),
                         contentDescription = "google icon",
-                        modifier = Modifier.size(25.dp),
+                        modifier = Modifier.size(24.dp),
                     )
-                    Spacer(Modifier.width(15.dp))
-                    Text("Google")
+                    Spacer(Modifier.width(10.dp))
+                    Text("Google", fontWeight = FontWeight.Bold)
                 }
             },
             onClick = {},
@@ -166,22 +189,26 @@ fun LoginScreen(
                 containerColor = Color.Transparent,
                 contentColor = Color.Black
             ),
-            borderStroke = BorderStroke(
-                width = 0.5.dp,
-                color = Color.Gray
-            ),
+            borderStroke = BorderStroke(0.5.dp, Color.LightGray),
             modifier = Modifier
-                .width(143.dp)
+                .width(180.dp) // Slightly wider for better text fit
                 .height(50.dp)
         )
-        Row(Modifier.padding(top = 5.dp)) {
-            Text("New here?", fontSize = 14.sp)
+
+        Spacer(Modifier.weight(1f))
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(bottom = 20.dp)
+        ) {
+            Text("New here?", fontSize = 15.sp, color = Color.Gray)
             Spacer(Modifier.width(5.dp))
             Text(
                 text = "Register",
-                fontSize = 14.sp,
+                fontSize = 15.sp,
+                fontWeight = FontWeight.Bold,
                 color = colorResource(R.color.blue),
-                modifier = Modifier.clickable(true) { onNavigateToSignUp() }
+                modifier = Modifier.clickable { onNavigateToSignUp() }
             )
         }
     }
