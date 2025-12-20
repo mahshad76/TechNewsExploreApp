@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "647319992104",
+    "project_id": "technewsexploreapp",
+    "storage_bucket": "technewsexploreapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:647319992104:android:ddb996bdf9d2d07281421d",
+        "android_client_info": {
+          "package_name": "com.mahshad.technewsexploreapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVfrJwwtkGtDfF6uDIpVznDpEmTWStgcs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
