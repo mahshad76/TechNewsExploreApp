@@ -1,4 +1,3 @@
-
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -191,6 +190,7 @@ fun LoginScreen(
                 contentColor = Color.Black
             ),
             borderStroke = BorderStroke(0.5.dp, Color.LightGray),
+            enabled = true,
             modifier = Modifier
                 .width(180.dp) // Slightly wider for better text fit
                 .height(50.dp)

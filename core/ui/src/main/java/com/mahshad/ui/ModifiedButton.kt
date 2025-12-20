@@ -14,6 +14,7 @@ fun ModifiedButton(
     shape: Shape,
     buttonColors: ButtonColors,
     borderStroke: BorderStroke,
+    enabled: Boolean = false,
     modifier: Modifier
 ) {
     Button(
@@ -21,7 +22,8 @@ fun ModifiedButton(
         onClick = { onClick() },
         shape = shape,
         colors = buttonColors,
-        border = borderStroke
+        border = borderStroke,
+        enabled = enabled,
     ) {
         content()
     }
