@@ -1,3 +1,4 @@
+
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -58,7 +59,7 @@ fun LoginScreen(
             .fillMaxSize()
             .padding(horizontal = 30.dp, vertical = 10.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center // Center content vertically
+        verticalArrangement = Arrangement.Center
     ) {
         Box(
             modifier = Modifier
@@ -192,7 +193,7 @@ fun LoginScreen(
             borderStroke = BorderStroke(0.5.dp, Color.LightGray),
             enabled = true,
             modifier = Modifier
-                .width(180.dp) // Slightly wider for better text fit
+                .width(180.dp)
                 .height(50.dp)
         )
 
