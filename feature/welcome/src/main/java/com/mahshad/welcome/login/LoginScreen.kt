@@ -53,6 +53,7 @@ fun LoginScreen(
 ) {
     val usernameState = viewModel.usernameStateFlow.collectAsStateWithLifecycle()
     val passwordState = viewModel.passwordStateFlow.collectAsStateWithLifecycle()
+    val isEnabledState = viewModel.isEnabled.collectAsStateWithLifecycle()
 
     Column(
         modifier = modifier
@@ -159,10 +160,11 @@ fun LoginScreen(
                 containerColor = colorResource(R.color.blue),
                 contentColor = Color.White
             ),
+            borderStroke = BorderStroke(0.5.dp, Color.LightGray),
+            enabled = isEnabledState.value,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(55.dp),
-            borderStroke = BorderStroke(0.5.dp, Color.LightGray)
+                .height(55.dp)
         )
 
         Text(
