@@ -1,7 +1,9 @@
 package com.mahshad.data.di
 
 import com.mahshad.data.repository.ArticleRepository
+import com.mahshad.data.repository.AuthRepository
 import com.mahshad.data.repository.DefaultArticleRepository
+import com.mahshad.data.repository.DefaultAuthRepository
 import com.mahshad.data.repository.DefaultFavoriteArticleRepository
 import com.mahshad.data.repository.FavoriteArticleRepository
 import dagger.Binds
@@ -21,4 +23,7 @@ abstract class DataModule {
         defaultFavoriteArticleRepository:
         DefaultFavoriteArticleRepository
     ): FavoriteArticleRepository
+
+    @Binds
+    abstract fun bindAuthRepository(defaultAuthRepository: DefaultAuthRepository): AuthRepository
 }

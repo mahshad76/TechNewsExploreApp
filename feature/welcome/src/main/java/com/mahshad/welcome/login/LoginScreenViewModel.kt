@@ -12,7 +12,9 @@ import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginScreenViewModel @Inject constructor() : ViewModel() {
+class LoginScreenViewModel @Inject constructor() :
+    ViewModel() {
+
     private val _userNameStateFlow: MutableStateFlow<String> = MutableStateFlow("")
     val usernameStateFlow = _userNameStateFlow.asStateFlow()
 
@@ -22,7 +24,8 @@ class LoginScreenViewModel @Inject constructor() : ViewModel() {
     val isEnabled: StateFlow<Boolean> =
         _userNameStateFlow.combine(_passwordStateFlow) { username, password ->
             if (username.length >= 7 && password.length >= 7 && password.all { char ->
-                    char in 'a'..'z' || char in 'A'..'Z' || char in '0'..'9'
+                    char in 'a'..'z' || char in 'A'..'Z' || char in '0'..'9' ||
+                            char in listOf('@', '_')
                 }) {
                 true
             } else {
