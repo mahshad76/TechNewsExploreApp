@@ -1,4 +1,3 @@
-
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -54,6 +53,7 @@ fun LoginScreen(
     val usernameState = viewModel.usernameStateFlow.collectAsStateWithLifecycle()
     val passwordState = viewModel.passwordStateFlow.collectAsStateWithLifecycle()
     val isEnabledState = viewModel.isEnabled.collectAsStateWithLifecycle()
+    val loginStatusState = viewModel.loginStatusFlow.collectAsStateWithLifecycle()
 
     Column(
         modifier = modifier
@@ -154,7 +154,14 @@ fun LoginScreen(
             content = {
                 Text("Login", fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
             },
-            onClick = { onNavigateToHome("Sara") },
+            onClick = {
+                viewModel.login(usernameState.value, passwordState.value)
+                if (loginStatusState.value) {
+                    onNavigateToHome(usernameState.value)
+                } else {
+                    TODO()
+                }
+            },
             shape = RoundedCornerShape(10.dp),
             buttonColors = ButtonDefaults.buttonColors(
                 containerColor = colorResource(R.color.blue),

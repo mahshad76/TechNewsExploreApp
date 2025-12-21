@@ -22,6 +22,9 @@ class LoginScreenViewModel @Inject constructor(private val authRepository: AuthR
     private val _passwordStateFlow: MutableStateFlow<String> = MutableStateFlow("")
     val passwordStateFlow = _passwordStateFlow.asStateFlow()
 
+    private val _loginStatusFlow: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val loginStatusFlow = _loginStatusFlow.asStateFlow()
+
     val isEnabled: StateFlow<Boolean> =
         _userNameStateFlow.combine(_passwordStateFlow) { username, password ->
             if (username.length >= 7 && password.length >= 7 && password.all { char ->
@@ -41,5 +44,12 @@ class LoginScreenViewModel @Inject constructor(private val authRepository: AuthR
     fun updateFlow(update: String, type: Boolean) {
         if (type) _userNameStateFlow.value = update else
             _passwordStateFlow.value = update
+    }
+
+    fun login(username: String, password: String) {
+        authRepository.login(username, password, {
+            if (it) _loginStatusFlow.value = true
+            else _loginStatusFlow.value = false
+        })
     }
 }
