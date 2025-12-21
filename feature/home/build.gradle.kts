@@ -39,6 +39,7 @@ android {
 }
 
 dependencies {
+
     implementation(project(":core:data"))
     implementation(project(":core:model"))
     implementation(project(":core:ui"))
@@ -61,6 +62,9 @@ dependencies {
     implementation(libs.androidx.compose.runtime)
     implementation(libs.material3)
     implementation(libs.ui.tooling.preview)
+
+    // Firebase
+    implementation(libs.firebase.auth)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

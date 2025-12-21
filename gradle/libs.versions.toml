@@ -2,7 +2,6 @@
 agp = "8.13.0"
 converterGson = "3.0.0"
 datastore = "1.2.0"
-firebaseBom = "34.7.0"
 kotlin = "2.2.21"
 coreKtx = "1.17.0"
 junit = "4.13.2"
@@ -37,13 +36,19 @@ plugincompose = "2.2.10"
 room_version = "2.8.4"
 protobuf = "0.9.5"
 google-service = "4.4.4"
+firebase-analytics = "23.0.0"
+firebase-auth = "24.0.1"
+firebase-common = "22.0.1"
 
 [libraries]
 androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
-firebase-auth = { module = "com.google.firebase:firebase-auth" }
-firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics", version.ref = "firebase-analytics" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebase-auth" }
+firebase-common = { group = "com.google.firebase", name = "firebase-common", version.ref = "firebase-common" }
+
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
@@ -83,6 +88,7 @@ volley = { group = "com.android.volley", name = "volley", version.ref = "volley"
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room_version" }
 room-coroutine = { module = "androidx.room:room-ktx", version.ref = "room_version" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room_version" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -93,4 +99,4 @@ jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrai
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serialization" }
 plugin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "plugincompose" }
 proto_datastore = { id = "com.google.protobuf", version.ref = "protobuf" }
-google_service = { id = "com.google.gms.google-services", version.ref = "google-service" }
+google-service = { id = "com.google.gms.google-services", version.ref = "google-service" }

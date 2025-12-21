@@ -1,3 +1,4 @@
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -24,6 +25,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
@@ -54,7 +56,7 @@ fun LoginScreen(
     val passwordState = viewModel.passwordStateFlow.collectAsStateWithLifecycle()
     val isEnabledState = viewModel.isEnabled.collectAsStateWithLifecycle()
     val loginStatusState = viewModel.loginStatusFlow.collectAsStateWithLifecycle()
-
+    val context = LocalContext.current
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -159,7 +161,8 @@ fun LoginScreen(
                 if (loginStatusState.value) {
                     onNavigateToHome(usernameState.value)
                 } else {
-                    TODO()
+                    Toast.makeText(context, "Wrong username or password", Toast.LENGTH_SHORT)
+                        .show()
                 }
             },
             shape = RoundedCornerShape(10.dp),

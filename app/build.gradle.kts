@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.plugin.compose)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.google.service)
 }
 
 android {
@@ -70,6 +71,10 @@ dependencies {
 
     // Navigation Component
     implementation(libs.androidx.navigation.compose)
+
+    // Firebase
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.common)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
