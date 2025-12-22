@@ -1,5 +1,6 @@
 package com.mahshad.welcome.signup
 
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -26,6 +27,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
@@ -34,6 +36,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mahshad.ui.ModifiedButton
 import com.mahshad.ui.ModifiedTextFiled
 import com.mahshad.welcome.R
@@ -45,11 +49,17 @@ data object SignUpScreenRoute
 @Composable
 fun SignUpScreen(
     onNavigateToLogin: () -> Unit,
-    //viewModel: LoginScreenViewModel = hiltViewModel(),
+    viewModel: SignUpScreenViewModel = hiltViewModel(),
     modifier: Modifier = Modifier
 ) {
-    //val usernameState = viewModel.usernameStateFlow.collectAsStateWithLifecycle()
-    //val passwordState = viewModel.passwordStateFlow.collectAsStateWithLifecycle()
+    val usernameState = viewModel.usernameStateFlow.collectAsStateWithLifecycle()
+    val passwordState = viewModel.passwordStateFlow.collectAsStateWithLifecycle()
+    val passwordConfirmationState =
+        viewModel.passwordConfirmationStateFlow.collectAsStateWithLifecycle()
+    val isEnabled = viewModel.isEnabled.collectAsStateWithLifecycle()
+    val signUpStatus = viewModel.signUpStatusFlow.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -86,8 +96,8 @@ fun SignUpScreen(
         )
 
         ModifiedTextFiled(
-            value = "",
-            onValueChanged = {},
+            value = usernameState.value,
+            onValueChanged = { viewModel.updateFlow(it, 1) },
             placeHolder = { Text("Email", color = Color.Gray) },
             cornerRadius = 0,
             color = TextFieldDefaults.colors(
@@ -112,8 +122,8 @@ fun SignUpScreen(
         Spacer(Modifier.height(20.dp))
 
         ModifiedTextFiled(
-            value = "",
-            onValueChanged = {},
+            value = passwordState.value,
+            onValueChanged = { viewModel.updateFlow(it, 2) },
             placeHolder = { Text("Password", color = Color.Gray) },
             cornerRadius = 0,
             color = TextFieldDefaults.colors(
@@ -138,8 +148,8 @@ fun SignUpScreen(
         Spacer(Modifier.height(20.dp))
 
         ModifiedTextFiled(
-            value = "",
-            onValueChanged = {},
+            value = passwordConfirmationState.value,
+            onValueChanged = { viewModel.updateFlow(it, 3) },
             placeHolder = { Text("Confirm password", color = Color.Gray) },
             cornerRadius = 0,
             color = TextFieldDefaults.colors(
@@ -173,9 +183,19 @@ fun SignUpScreen(
 
         ModifiedButton(
             content = {
-                Text("Login", fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
+                Text("Register", fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
             },
-            onClick = {},
+            onClick = {
+                viewModel.signUp(usernameState.value, passwordState.value)
+                if (signUpStatus.value) Toast.makeText(
+                    context,
+                    "Successful registration",
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+                else Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT)
+                    .show()
+            },
             shape = RoundedCornerShape(10.dp),
             buttonColors = ButtonDefaults.buttonColors(
                 containerColor = colorResource(R.color.blue),
@@ -184,7 +204,8 @@ fun SignUpScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(55.dp),
-            borderStroke = BorderStroke(0.5.dp, Color.LightGray)
+            borderStroke = BorderStroke(0.5.dp, Color.LightGray),
+            enabled = isEnabled.value
         )
 
         Text(

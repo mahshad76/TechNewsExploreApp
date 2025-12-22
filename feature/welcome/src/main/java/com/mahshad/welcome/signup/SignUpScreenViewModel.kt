@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class SignUpViewModel @Inject constructor(private val authRepository: AuthRepository) :
+class SignUpScreenViewModel @Inject constructor(private val authRepository: AuthRepository) :
     ViewModel() {
     private val _userNameStateFlow: MutableStateFlow<String> = MutableStateFlow("")
     val usernameStateFlow = _userNameStateFlow.asStateFlow()
@@ -21,28 +21,36 @@ class SignUpViewModel @Inject constructor(private val authRepository: AuthReposi
     private val _passwordStateFlow: MutableStateFlow<String> = MutableStateFlow("")
     val passwordStateFlow = _passwordStateFlow.asStateFlow()
 
+    private val _passwordConfirmationStateFlow: MutableStateFlow<String> = MutableStateFlow("")
+    val passwordConfirmationStateFlow = _passwordConfirmationStateFlow.asStateFlow()
+
     private val _signUpStatusFlow: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val signUpStatusFlow = _signUpStatusFlow.asStateFlow()
 
     val isEnabled: StateFlow<Boolean> =
-        _userNameStateFlow.combine(_passwordStateFlow) { username, password ->
+        combine(
+            _userNameStateFlow,
+            _passwordStateFlow,
+            _passwordConfirmationStateFlow
+        ) { username, password, confirmation ->
             if (username.length >= 7 && password.length >= 7 && password.all { char ->
                     char in 'a'..'z' || char in 'A'..'Z' || char in '0'..'9' ||
                             char in listOf('@', '_')
-                }) {
-                true
-            } else {
+                } &&
+                password == confirmation) true else false
+        }
+            .stateIn(
+                viewModelScope,
+                SharingStarted.WhileSubscribed(5000),
                 false
-            }
-        }.stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(5000),
-            false
-        )
+            )
 
-    fun updateFlow(update: String, type: Boolean) {
-        if (type) _userNameStateFlow.value = update else
-            _passwordStateFlow.value = update
+    fun updateFlow(update: String, type: Int) {
+        when (type) {
+            1 -> _userNameStateFlow.value = update
+            2 -> _passwordStateFlow.value = update
+            3 -> _passwordConfirmationStateFlow.value = update
+        }
     }
 
     fun signUp(username: String, password: String) {
