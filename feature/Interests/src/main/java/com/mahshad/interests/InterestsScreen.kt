@@ -11,17 +11,28 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+
+val items = listOf<Pair<Int, String>>(
+    R.drawable.apple_logo_svgrepo_com to "Apple articles",
+    R.drawable.cnn_logo to "US headlines",
+    R.drawable.resource__ to "Tech crunch",
+    R.drawable.wsj_icon to "Wall Street Journal",
+    R.drawable.tesla_svgrepo_com to "Tesla articles"
+)
 
 @Composable
 fun InterestsScreen() {
     LazyColumn(modifier = Modifier) {
-
+        items(items.size) {
+            InterestCard(items[it].first, items[it].second)
+        }
     }
 }
 
 @Composable
-fun InterestCard(image: ImageVector, title: String, modifier: Modifier) {
+fun InterestCard(imageId: Int, title: String, modifier: Modifier = Modifier) {
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -32,11 +43,17 @@ fun InterestCard(image: ImageVector, title: String, modifier: Modifier) {
             horizontalArrangement = Arrangement.Start
         ) {
             Image(
-                image,
+                painterResource(imageId),
                 contentDescription = "title",
                 modifier = modifier
             )
             Text(title)
         }
     }
+}
+
+@Composable
+@Preview
+fun Preview(){
+    InterestsScreen()
 }

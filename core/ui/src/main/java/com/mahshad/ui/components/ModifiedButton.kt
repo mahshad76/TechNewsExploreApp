@@ -1,4 +1,4 @@
-package com.mahshad.ui
+package com.mahshad.ui.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.material3.Button

@@ -35,8 +35,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.mahshad.ui.ModifiedButton
-import com.mahshad.ui.ModifiedTextFiled
+import com.mahshad.ui.components.ModifiedButton
+import com.mahshad.ui.components.ModifiedTextFiled
 import com.mahshad.welcome.R
 import kotlinx.serialization.Serializable
 
