@@ -65,7 +65,7 @@ fun SignUpScreen(
             .fillMaxSize()
             .padding(horizontal = 30.dp, vertical = 10.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center // Center content vertically
+        verticalArrangement = Arrangement.Center
     ) {
         Box(
             modifier = Modifier
@@ -77,7 +77,7 @@ fun SignUpScreen(
                 painter = painterResource(R.drawable.signup_2),
                 contentDescription = "signup photo",
                 modifier = Modifier
-                    .fillMaxWidth(0.8f)
+                    .size(225.dp)
                     .aspectRatio(1F),
                 contentScale = ContentScale.Inside
             )

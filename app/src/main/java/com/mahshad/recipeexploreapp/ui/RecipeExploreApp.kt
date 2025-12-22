@@ -17,6 +17,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -60,17 +61,17 @@ fun RecipeExploreApp() {
         }
     ) {
         Scaffold(topBar = {
-            if (!hideAppShell) {
-                TopAppBar(
-                    title = { Text("") },
-                    navigationIcon = {
-                        IconButton(onClick = {
-                            closeDrawer()
-                        }) {
+            TopAppBar(
+                title = { Text("") },
+                modifier = Modifier.alpha(if (hideAppShell) 0f else 1f),
+                navigationIcon = {
+                    if (!hideAppShell) {
+                        IconButton(onClick = { closeDrawer() }) {
                             Icon(Icons.Filled.Menu, contentDescription = "Menu")
                         }
-                    })
-            }
+                    }
+                }
+            )
         }) { innerPadding ->
             NavHost(
                 navController = navController,
