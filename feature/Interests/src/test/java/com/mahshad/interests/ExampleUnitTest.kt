@@ -1,4 +1,4 @@
-package com.mahshad.profile
+package com.mahshad.interests
 
 import org.junit.Test
 

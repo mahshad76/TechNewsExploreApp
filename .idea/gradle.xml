@@ -21,8 +21,8 @@
             <option value="$PROJECT_DIR$/core/threading" />
             <option value="$PROJECT_DIR$/core/ui" />
             <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/Interests" />
             <option value="$PROJECT_DIR$/feature/home" />
-            <option value="$PROJECT_DIR$/feature/profile" />
             <option value="$PROJECT_DIR$/feature/setting" />
             <option value="$PROJECT_DIR$/feature/welcome" />
           </set>

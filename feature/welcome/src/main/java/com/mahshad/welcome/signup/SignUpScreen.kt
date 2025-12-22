@@ -5,11 +5,9 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -26,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -63,27 +60,25 @@ fun SignUpScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(horizontal = 30.dp, vertical = 10.dp),
+            .padding(horizontal = 30.dp, vertical = 0.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f),
-            contentAlignment = Alignment.Center
-        ) {
-            Image(
-                painter = painterResource(R.drawable.signup_2),
-                contentDescription = "signup photo",
-                modifier = Modifier
-                    .size(225.dp)
-                    .aspectRatio(1F),
-                contentScale = ContentScale.Inside
-            )
-        }
+//        Box(
+//            modifier = Modifier
+//                .size(225.dp),
+//            contentAlignment = Alignment.Center
+//        ) {
+//            Image(
+//                painter = painterResource(R.drawable.signup_2),
+//                contentDescription = "signup photo",
+//                modifier = Modifier
+//                    .fillMaxSize()
+//                    .padding(top = 0.dp)
+//            )
+//        }
 
-        Spacer(Modifier.height(16.dp))
+        //Spacer(Modifier.height(16.dp))
 
         Text(
             text = "Register",
@@ -246,10 +241,10 @@ fun SignUpScreen(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(bottom = 20.dp)
         ) {
-            Text("New here?", fontSize = 15.sp, color = Color.Gray)
+            Text("Already have an account?", fontSize = 15.sp, color = Color.Gray)
             Spacer(Modifier.width(5.dp))
             Text(
-                text = "Register",
+                text = "Login",
                 fontSize = 15.sp,
                 fontWeight = FontWeight.Bold,
                 color = colorResource(R.color.blue),

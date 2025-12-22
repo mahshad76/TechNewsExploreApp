@@ -15,7 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mahshad.home.navigation.HomeGraphRoute
-import com.mahshad.profile.navigation.ProfileNavigationGraphRoute
+import com.mahshad.interests.navigation.ProfileNavigationGraphRoute
 import com.mahshad.setting.navigation.SettingNavigationGraphRoute
 import com.mahshad.technewsexploreapp.R
 import kotlin.reflect.KClass

@@ -3,7 +3,7 @@ package com.mahshad.recipeexploreapp.navigation
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import com.mahshad.home.navigation.HomeGraphRoute
-import com.mahshad.profile.navigation.ProfileNavigationGraphRoute
+import com.mahshad.interests.navigation.ProfileNavigationGraphRoute
 import com.mahshad.setting.navigation.SettingNavigationGraphRoute
 
 class TechExploreNavigationActions(private val navController: NavHostController) {

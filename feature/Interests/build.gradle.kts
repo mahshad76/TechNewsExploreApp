@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.mahshad.profile"
+    namespace = "com.mahshad.interests"
     compileSdk {
         version = release(36)
     }

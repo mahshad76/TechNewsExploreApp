@@ -1,4 +1,4 @@
-package com.mahshad.profile
+package com.mahshad.interests
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
