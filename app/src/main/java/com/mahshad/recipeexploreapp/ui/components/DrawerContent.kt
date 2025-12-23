@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Interests
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalDrawerSheet
@@ -15,7 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mahshad.home.navigation.HomeGraphRoute
-import com.mahshad.interests.navigation.ProfileNavigationGraphRoute
+import com.mahshad.interests.InterestsScreenRoute
 import com.mahshad.setting.navigation.SettingNavigationGraphRoute
 import com.mahshad.technewsexploreapp.R
 import kotlin.reflect.KClass
@@ -24,7 +24,7 @@ import kotlin.reflect.KClass
 fun DrawerContent(
     currentRoute: KClass<*>,
     navigateToHome: () -> Unit,
-    navigateToProfile: () -> Unit,
+    navigateToInterests: () -> Unit,
     navigateToSetting: () -> Unit,
     closeDrawer: () -> Unit
 ) {
@@ -54,14 +54,14 @@ fun DrawerContent(
             label = { Text("Profile") },
             icon = {
                 Icon(
-                    Icons.Filled.Person,
-                    contentDescription = "Profile",
+                    Icons.Filled.Interests,
+                    contentDescription = "Interests",
                     modifier = Modifier.size(24.dp),
                 )
             },
-            selected = currentRoute == ProfileNavigationGraphRoute,
+            selected = currentRoute == InterestsScreenRoute,
             onClick = {
-                navigateToProfile()
+                navigateToInterests()
                 closeDrawer()
             },
             modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)

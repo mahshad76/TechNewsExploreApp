@@ -8,19 +8,19 @@ import com.mahshad.setting.navigation.SettingNavigationGraphRoute
 
 class TechExploreNavigationActions(private val navController: NavHostController) {
     fun navigateToHome() = navController.navigate(HomeGraphRoute) {
-        popUpTo(navController.graph.findStartDestination().id) {
-            saveState = true
-        }
-        launchSingleTop = true
-        restoreState = true
+//        popUpTo(navController.graph.findStartDestination().id) {
+//            saveState = true
+//        }
+//        launchSingleTop = true
+//        restoreState = true
     }
 
-    fun navigateToProfile() = navController.navigate(InterestsNavigationGraphRoute) {
-        popUpTo(navController.graph.findStartDestination().id) {
-            saveState = true
-        }
-        launchSingleTop = true
-        restoreState = true
+    fun navigateToInterests() = navController.navigate(InterestsNavigationGraphRoute) {
+//        popUpTo(navController.graph.findStartDestination().id) {
+//            saveState = true
+//        }
+//        launchSingleTop = true
+//        restoreState = true
     }
 
     fun navigateToSetting() = navController.navigate(SettingNavigationGraphRoute) {

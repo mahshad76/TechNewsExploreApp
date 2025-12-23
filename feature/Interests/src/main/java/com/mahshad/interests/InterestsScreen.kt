@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import kotlinx.serialization.Serializable
 
 val items = listOf<Pair<Int, String>>(
     R.drawable.apple_logo_svgrepo_com to "Apple articles",
@@ -21,6 +22,9 @@ val items = listOf<Pair<Int, String>>(
     R.drawable.wsj_icon to "Wall Street Journal",
     R.drawable.tesla_svgrepo_com to "Tesla articles"
 )
+
+@Serializable
+data object InterestsScreenRoute
 
 @Composable
 fun InterestsScreen() {
@@ -54,6 +58,6 @@ fun InterestCard(imageId: Int, title: String, modifier: Modifier = Modifier) {
 
 @Composable
 @Preview
-fun Preview(){
+fun Preview() {
     InterestsScreen()
 }

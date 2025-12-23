@@ -23,6 +23,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.mahshad.home.navigation.HomeGraphRoute
 import com.mahshad.home.navigation.homeNavigationGraph
+import com.mahshad.interests.navigation.interestsNavigationGraph
 import com.mahshad.recipeexploreapp.navigation.TechExploreNavigationActions
 import com.mahshad.recipeexploreapp.ui.components.DrawerContent
 import com.mahshad.welcome.navigation.WelcomeGraphRoute
@@ -53,7 +54,7 @@ fun RecipeExploreApp() {
         drawerContent = {
             DrawerContent(
                 currentRoute,
-                navigateToProfile = { navigationActions.navigateToProfile() },
+                navigateToInterests = { navigationActions.navigateToInterests() },
                 navigateToSetting = { navigationActions.navigateToSetting() },
                 navigateToHome = { navigationActions.navigateToHome() },
                 closeDrawer = { closeDrawer() },
@@ -78,10 +79,9 @@ fun RecipeExploreApp() {
                 startDestination = currentRoute,
                 modifier = Modifier.padding(innerPadding)
             ) {
-//                settingNavigationGraph(navController)
                 welcomeNavigationGraph(navController, { navController.navigate(HomeGraphRoute) })
                 homeNavigationGraph(navController)
-//                profileNavigationGraph(navController)
+                interestsNavigationGraph(navController)
             }
         }
     }
