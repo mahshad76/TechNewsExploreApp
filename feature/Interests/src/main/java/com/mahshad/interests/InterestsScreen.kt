@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,8 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.mahshad.ui.components.ModifiedToggleButton
+import com.mahshad.ui.icons.TneIcons.Add
 import com.mahshad.ui.icons.TneIcons.Apple
 import com.mahshad.ui.icons.TneIcons.CNN
+import com.mahshad.ui.icons.TneIcons.Check
 import com.mahshad.ui.icons.TneIcons.TechCrunch
 import com.mahshad.ui.icons.TneIcons.Tesla
 import com.mahshad.ui.icons.TneIcons.WSJ
@@ -62,6 +66,25 @@ fun InterestCard(imageId: Int, title: String, modifier: Modifier = Modifier) {
             )
             Spacer(modifier = Modifier.width(24.dp))
             Text(title)
+            ModifiedToggleButton(
+                icon = {
+                    Icon(
+                        Add,
+                        contentDescription = "add",
+                        modifier = modifier
+                    )
+                },
+                checkedIcon = {
+                    Icon(
+                        Check,
+                        contentDescription = "check",
+                        modifier = modifier
+                    )
+                },
+                checked = true,
+                onClick = {},
+                modifier = modifier
+            )
         }
     }
 }
