@@ -17,4 +17,9 @@ object TneIcons {
     val Settings = Icons.Filled.Settings
     val Menu = Icons.Filled.Menu
     val Rocket = R.drawable.rocket_svgrepo_com
+    val Apple = R.drawable.apple_logo_svgrepo_com
+    val CNN = R.drawable.cnn_logo
+    val TechCrunch = R.drawable.resource__
+    val WSJ = R.drawable.wsj_icon
+    val Tesla = R.drawable.tesla_svgrepo_com
 }

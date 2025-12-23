@@ -17,14 +17,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.mahshad.ui.icons.TneIcons.Apple
+import com.mahshad.ui.icons.TneIcons.CNN
+import com.mahshad.ui.icons.TneIcons.TechCrunch
+import com.mahshad.ui.icons.TneIcons.Tesla
+import com.mahshad.ui.icons.TneIcons.WSJ
 import kotlinx.serialization.Serializable
 
 val items = listOf<Pair<Int, String>>(
-    R.drawable.apple_logo_svgrepo_com to "Apple articles",
-    R.drawable.cnn_logo to "US headlines",
-    R.drawable.resource__ to "Tech crunch",
-    R.drawable.wsj_icon to "Wall Street Journal",
-    R.drawable.tesla_svgrepo_com to "Tesla articles"
+    Apple to "Apple articles",
+    CNN to "US headlines",
+    TechCrunch to "Tech crunch",
+    WSJ to "Wall Street Journal",
+    Tesla to "Tesla articles"
 )
 
 @Serializable

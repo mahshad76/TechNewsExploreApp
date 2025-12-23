@@ -50,7 +50,7 @@ fun DrawerContent(
             modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
         )
         NavigationDrawerItem(
-            label = { Text("Profile") },
+            label = { Text("Interests") },
             icon = {
                 Icon(
                     Interests,
