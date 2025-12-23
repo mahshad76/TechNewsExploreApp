@@ -3,7 +3,10 @@ package com.mahshad.interests
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Card
@@ -13,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import kotlinx.serialization.Serializable
 
 val items = listOf<Pair<Int, String>>(
@@ -49,8 +53,9 @@ fun InterestCard(imageId: Int, title: String, modifier: Modifier = Modifier) {
             Image(
                 painterResource(imageId),
                 contentDescription = "title",
-                modifier = modifier
+                modifier = modifier.size(64.dp)
             )
+            Spacer(modifier = Modifier.width(24.dp))
             Text(title)
         }
     }
