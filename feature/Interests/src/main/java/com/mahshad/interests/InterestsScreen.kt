@@ -88,7 +88,7 @@ fun InterestCard(imageId: Int, title: String, modifier: Modifier = Modifier) {
                             Add,
                             contentDescription = "add",
                             tint = Color.Black,
-                            modifier = modifier
+                            modifier = Modifier
                                 .background(Color.White)
                                 .padding(4.dp)
                         )
@@ -98,7 +98,7 @@ fun InterestCard(imageId: Int, title: String, modifier: Modifier = Modifier) {
                             Check,
                             contentDescription = "check",
                             tint = Color.Black,
-                            modifier = modifier
+                            modifier = Modifier
                                 .background(Color.White)
                                 .padding(4.dp)
                         )
