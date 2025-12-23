@@ -1,8 +1,6 @@
 package com.mahshad.recipeexploreapp.ui
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -26,6 +24,7 @@ import com.mahshad.home.navigation.homeNavigationGraph
 import com.mahshad.interests.navigation.interestsNavigationGraph
 import com.mahshad.recipeexploreapp.navigation.TechExploreNavigationActions
 import com.mahshad.recipeexploreapp.ui.components.DrawerContent
+import com.mahshad.ui.icons.TneIcons.Menu
 import com.mahshad.welcome.navigation.WelcomeGraphRoute
 import com.mahshad.welcome.navigation.welcomeNavigationGraph
 import kotlinx.coroutines.launch
@@ -68,7 +67,7 @@ fun RecipeExploreApp() {
                 navigationIcon = {
                     if (!hideAppShell) {
                         IconButton(onClick = { closeDrawer() }) {
-                            Icon(Icons.Filled.Menu, contentDescription = "Menu")
+                            Icon(Menu, contentDescription = "Menu")
                         }
                     }
                 }

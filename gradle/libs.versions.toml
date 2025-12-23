@@ -43,6 +43,7 @@ firebase-common = "22.0.1"
 [libraries]
 androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
+androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics", version.ref = "firebase-analytics" }

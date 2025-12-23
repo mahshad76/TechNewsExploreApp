@@ -2,10 +2,6 @@ package com.mahshad.recipeexploreapp.ui.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Interests
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.NavigationDrawerItem
@@ -17,7 +13,10 @@ import androidx.compose.ui.unit.dp
 import com.mahshad.home.navigation.HomeGraphRoute
 import com.mahshad.interests.InterestsScreenRoute
 import com.mahshad.setting.navigation.SettingNavigationGraphRoute
-import com.mahshad.technewsexploreapp.R
+import com.mahshad.ui.icons.TneIcons.Home
+import com.mahshad.ui.icons.TneIcons.Interests
+import com.mahshad.ui.icons.TneIcons.Rocket
+import com.mahshad.ui.icons.TneIcons.Settings
 import kotlin.reflect.KClass
 
 @Composable
@@ -31,14 +30,14 @@ fun DrawerContent(
     ModalDrawerSheet() {
         Logo(
             "Tech News",
-            R.drawable.rocket_svgrepo_com,
+            Rocket,
             modifier = Modifier.padding(horizontal = 28.dp, vertical = 24.dp)
         )
         NavigationDrawerItem(
             label = { Text("Home") },
             icon = {
                 Icon(
-                    Icons.Filled.Home,
+                    Home,
                     contentDescription = "Home",
                     modifier = Modifier.size(24.dp),
                 )
@@ -54,7 +53,7 @@ fun DrawerContent(
             label = { Text("Profile") },
             icon = {
                 Icon(
-                    Icons.Filled.Interests,
+                    Interests,
                     contentDescription = "Interests",
                     modifier = Modifier.size(24.dp),
                 )
@@ -70,7 +69,7 @@ fun DrawerContent(
             label = { Text("Setting") },
             icon = {
                 Icon(
-                    Icons.Filled.Settings,
+                    Settings,
                     contentDescription = "Setting",
                     modifier = Modifier.size(24.dp),
                 )

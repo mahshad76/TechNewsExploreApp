@@ -12,9 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.mahshad.technewsexploreapp.R
 
 @Composable
 fun Logo(title: String, @DrawableRes icon: Int, modifier: Modifier) {
@@ -33,11 +31,11 @@ fun Logo(title: String, @DrawableRes icon: Int, modifier: Modifier) {
     }
 }
 
-@Preview
-@Composable
-fun Preview(
-    title: String = "hello",
-    @DrawableRes icon: Int = R.drawable.meal_application_tracking_organic_food_analysis_healthcare_nutrition_svgrepo_com
-) {
-    Logo(title, icon, Modifier)
-}
+//@Preview
+//@Composable
+//fun Preview(
+//    title: String = "hello",
+//    @DrawableRes icon: Int = R.drawable.meal_application_tracking_organic_food_analysis_healthcare_nutrition_svgrepo_com
+//) {
+//    Logo(title, icon, Modifier)
+//}

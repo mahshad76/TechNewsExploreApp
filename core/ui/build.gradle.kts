@@ -39,11 +39,11 @@ dependencies {
     implementation(project(":core:model"))
 
     // Compose
-    // Compose
     implementation(libs.androidx.ui)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.material3)
     implementation(libs.ui.tooling.preview)
+    implementation(libs.androidx.material.icons.extended)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

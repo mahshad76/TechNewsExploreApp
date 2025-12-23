@@ -49,6 +49,7 @@ dependencies {
     implementation(project(":feature:Interests"))
     implementation(project(":feature:setting"))
     implementation(project(":feature:welcome"))
+    implementation(project(":core:ui"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -56,7 +57,6 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.material.icons.extended)
 
     // Hilt
     implementation(libs.hilt.android)
