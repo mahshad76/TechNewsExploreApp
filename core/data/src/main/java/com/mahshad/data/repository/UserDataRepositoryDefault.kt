@@ -1,19 +1,16 @@
 package com.mahshad.data.repository
 
-import com.mahshad.datastore.TnePreferencesDataSourceImpl
+import com.mahshad.datastore.TnePreferencesDataSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class UserDataRepositoryDefault @Inject constructor(
-    private val tnePreferencesDataSourceImpl:
-    TnePreferencesDataSourceImpl
+    private val tnePreferencesDataSource:
+    TnePreferencesDataSource
 ) :
     UserDataRepository {
-    override fun getUserData(): Flow<List<String>> {
-        TODO("Not yet implemented")
-    }
+    override fun getUserData(): Flow<Set<String>> = tnePreferencesDataSource.getUserData()
 
-    override suspend fun postUserData(favoriteTopics: List<String>) {
-        TODO("Not yet implemented")
-    }
+    override suspend fun postUserData(favoriteTopics: List<String>) =
+        tnePreferencesDataSource.postUserData(favoriteTopics)
 }
