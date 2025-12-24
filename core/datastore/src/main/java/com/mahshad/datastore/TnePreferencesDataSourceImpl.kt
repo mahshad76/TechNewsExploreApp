@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringSetPreferencesKey
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -14,12 +15,17 @@ class TnePreferencesDataSourceImpl @Inject constructor(
     DataStore<Preferences>
 ) :
     TnePreferencesDataSource {
-    override fun getUserData(): Flow<Set<String>> {
-        TODO("Not yet implemented")
+    companion object {
+        val RECENT_FAVORITES = stringSetPreferencesKey("recent_favorites")
     }
 
+    override fun getUserData(): Flow<Set<String>> =
+        preferenceDataStore.data
+            .map { preferences ->
+                preferences[RECENT_FAVORITES] ?: emptySet()
+            }
+
     override suspend fun postUserData(favoriteTopics: Set<String>) {
-        val RECENT_FAVORITES = stringSetPreferencesKey("recent_favorites")
         preferenceDataStore.edit { preferences ->
             preferences[RECENT_FAVORITES] = favoriteTopics
         }
