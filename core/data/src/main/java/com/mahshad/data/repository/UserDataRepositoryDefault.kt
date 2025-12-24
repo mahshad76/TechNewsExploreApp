@@ -3,7 +3,9 @@ package com.mahshad.data.repository
 import com.mahshad.datastore.TnePreferencesDataSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class UserDataRepositoryDefault @Inject constructor(
     private val tnePreferencesDataSource:
     TnePreferencesDataSource
@@ -11,6 +13,6 @@ class UserDataRepositoryDefault @Inject constructor(
     UserDataRepository {
     override fun getUserData(): Flow<Set<String>> = tnePreferencesDataSource.getUserData()
 
-    override suspend fun postUserData(favoriteTopics: List<String>) =
+    override suspend fun postUserData(favoriteTopics: Set<String>) =
         tnePreferencesDataSource.postUserData(favoriteTopics)
 }

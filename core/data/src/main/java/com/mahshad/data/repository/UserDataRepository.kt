@@ -4,5 +4,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserDataRepository {
     fun getUserData(): Flow<Set<String>>
-    suspend fun postUserData(favoriteTopics: List<String>)
+    suspend fun postUserData(favoriteTopics: Set<String>)
 }

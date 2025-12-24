@@ -6,6 +6,8 @@ import com.mahshad.data.repository.DefaultArticleRepository
 import com.mahshad.data.repository.DefaultAuthRepository
 import com.mahshad.data.repository.DefaultFavoriteArticleRepository
 import com.mahshad.data.repository.FavoriteArticleRepository
+import com.mahshad.data.repository.UserDataRepository
+import com.mahshad.data.repository.UserDataRepositoryDefault
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -26,4 +28,8 @@ abstract class DataModule {
 
     @Binds
     abstract fun bindAuthRepository(defaultAuthRepository: DefaultAuthRepository): AuthRepository
+
+    @Binds
+    abstract fun bindUserDataRepository(userDataRepositoryDefault: UserDataRepositoryDefault):
+            UserDataRepository
 }
