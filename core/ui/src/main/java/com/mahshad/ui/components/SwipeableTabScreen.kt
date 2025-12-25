@@ -1,5 +1,6 @@
 package com.mahshad.ui.components
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,12 +25,17 @@ fun SwipeableTabScreen(
     Column(modifier = modifier.fillMaxSize()) {
         TabRow(selectedTabIndex = pagerState.currentPage, modifier = Modifier.fillMaxWidth()) {
             tabs.forEachIndexed { index, title ->
+                val isSelected = pagerState.currentPage == index
                 Tab(
-                    selected = pagerState.currentPage == index,
+                    selected = isSelected,
                     onClick = {
                         scope.launch { pagerState.animateScrollToPage(index) }
                     },
-                    text = { Text(title) }
+                    text = {
+                        Box() {
+                            Text(title)
+                        }
+                    }
                 )
             }
         }

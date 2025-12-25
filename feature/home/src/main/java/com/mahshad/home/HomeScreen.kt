@@ -1,16 +1,7 @@
 package com.mahshad.home
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.windowInsetsBottomHeight
-import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.mahshad.ui.components.SwipeableTabScreen
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -22,26 +13,27 @@ fun HomeScreen(
     homeScreenViewModel: HomeScreenViewModel
 ) {
 
-    val newsFeed = homeScreenViewModel.feedState.collectAsStateWithLifecycle()
-    val searchQuery = homeScreenViewModel._searchQueryStateFlow.collectAsStateWithLifecycle()
-    val searchSuggestion = homeScreenViewModel.searchSuggestions.collectAsStateWithLifecycle()
-
-    Column(modifier = Modifier.padding(10.dp)) {
-        Spacer(Modifier.windowInsetsTopHeight(WindowInsets.safeDrawing))
-        HomeSearchBar(
-            modifier = Modifier.padding(bottom = 4.dp),
-            searchQuery.value,
-            { homeScreenViewModel.updateSearchQueryFlow(it) },
-            { navigateFromHomeToDetail(searchQuery.value) })
-        if (!searchQuery.value.isEmpty()) {
-            SearchSuggestionsBox(searchSuggestion.value.map { it.title }) {
-                homeScreenViewModel.updateSearchQueryFlow(
-                    it
-                )
-            }
-        }
-        Spacer(Modifier.windowInsetsBottomHeight(WindowInsets.safeDrawing))
-    }
+//    val newsFeed = homeScreenViewModel.feedState.collectAsStateWithLifecycle()
+//    val searchQuery = homeScreenViewModel._searchQueryStateFlow.collectAsStateWithLifecycle()
+//    val searchSuggestion = homeScreenViewModel.searchSuggestions.collectAsStateWithLifecycle()
+//
+//    Column(modifier = Modifier.padding(10.dp)) {
+//        Spacer(Modifier.windowInsetsTopHeight(WindowInsets.safeDrawing))
+//        HomeSearchBar(
+//            modifier = Modifier.padding(bottom = 4.dp),
+//            searchQuery.value,
+//            { homeScreenViewModel.updateSearchQueryFlow(it) },
+//            { navigateFromHomeToDetail(searchQuery.value) })
+//        if (!searchQuery.value.isEmpty()) {
+//            SearchSuggestionsBox(searchSuggestion.value.map { it.title }) {
+//                homeScreenViewModel.updateSearchQueryFlow(
+//                    it
+//                )
+//            }
+//        }
+//        Spacer(Modifier.windowInsetsBottomHeight(WindowInsets.safeDrawing))
+//    }
+    SwipeableTabScreen(listOf("news", "favoriteNews"), {})
 }
 
 //@Composable
