@@ -27,3 +27,9 @@ class InterestsScreenViewModel @Inject constructor(private val userDataRepositor
         }
     }
 }
+
+sealed interface UiState {
+    data class Success(val favoriteTopics: Set<String>) : UiState
+    data class Error(val error: Throwable) : UiState
+    data object Loading : UiState
+}
