@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.mahshad.ui.components.ModifiedToggleButton
 import com.mahshad.ui.icons.TneIcons.Add
 import com.mahshad.ui.icons.TneIcons.Apple
@@ -33,19 +34,11 @@ import com.mahshad.ui.icons.TneIcons.Tesla
 import com.mahshad.ui.icons.TneIcons.WSJ
 import kotlinx.serialization.Serializable
 
-val items = listOf<Pair<Int, String>>(
-    Apple to "Apple articles",
-    CNN to "US headlines",
-    TechCrunch to "Tech crunch",
-    WSJ to "Wall Street Journal",
-    Tesla to "Tesla articles"
-)
-
 @Serializable
 data object InterestsScreenRoute
 
 @Composable
-fun InterestsScreen() {
+fun InterestsScreen(viewModel: InterestsScreenViewModel = hiltViewModel()) {
     LazyColumn(modifier = Modifier) {
         items(items.size) {
             InterestCard(items[it].first, items[it].second)
@@ -111,6 +104,14 @@ fun InterestCard(imageId: Int, title: String, modifier: Modifier = Modifier) {
         }
     }
 }
+
+val items = listOf<Pair<Int, String>>(
+    Apple to "Apple articles",
+    CNN to "US headlines",
+    TechCrunch to "Tech crunch",
+    WSJ to "Wall Street Journal",
+    Tesla to "Tesla articles"
+)
 
 @Composable
 @Preview
