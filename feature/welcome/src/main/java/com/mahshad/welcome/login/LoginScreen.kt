@@ -83,7 +83,7 @@ fun LoginScreen(
             text = "Login",
             fontFamily = FontFamily(Font(R.font.poppins_bold)),
             fontWeight = FontWeight.Bold,
-            fontSize = 40.sp, // Increased size to match visual prominence
+            fontSize = 40.sp,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 20.dp)

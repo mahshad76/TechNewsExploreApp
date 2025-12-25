@@ -23,6 +23,10 @@ class InterestsScreenViewModel @Inject constructor(private val userDataRepositor
                 started = SharingStarted.WhileSubscribed(5_000),
                 UiState.Loading
             )
+
+    fun update(topic: String) {
+        TODO()
+    }
 }
 
 sealed interface UiState<out T> {

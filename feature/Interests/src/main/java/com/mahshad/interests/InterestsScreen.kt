@@ -1,5 +1,6 @@
 package com.mahshad.interests
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -20,12 +21,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mahshad.ui.components.ModifiedToggleButton
+import com.mahshad.ui.components.TneLoadingWheel
 import com.mahshad.ui.icons.TneIcons.Add
 import com.mahshad.ui.icons.TneIcons.Apple
 import com.mahshad.ui.icons.TneIcons.CNN
@@ -40,21 +43,40 @@ data object InterestsScreenRoute
 
 @Composable
 fun InterestsScreen(viewModel: InterestsScreenViewModel = hiltViewModel()) {
+    val context = LocalContext.current
     val interestingTopicsState = viewModel.interestingTopicStateFlow.collectAsStateWithLifecycle()
     when (interestingTopicsState.value) {
-        is UiState.Loading -> TODO()
-        is UiState.Error -> TODO()
-        is UiState.Success -> TODO()
+        is UiState.Loading -> TneLoadingWheel()
+        is UiState.Error -> Toast.makeText(
+            context, "Something went wrong",
+            Toast.LENGTH_SHORT
+        )
+            .show()
+
+        is UiState.Success -> {
+            val favoriteTopics = (interestingTopicsState.value as UiState.Success).favoriteTopics
+            LazyColumn(modifier = Modifier) {
+                items(items.size) {
+                    InterestCard(
+                        items[it].first,
+                        items[it].second,
+                        items[it].second !in favoriteTopics,
+                        { viewModel.update(it) }
+                    )
+                }
+            }
+        }
     }
-//    LazyColumn(modifier = Modifier) {
-//        items(items.size) {
-//            InterestCard(items[it].first, items[it].second)
-//        }
-//    }
 }
 
 @Composable
-fun InterestCard(imageId: Int, title: String, modifier: Modifier = Modifier) {
+fun InterestCard(
+    imageId: Int,
+    title: String,
+    checked: Boolean,
+    onClick: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
     Card(
         colors = CardDefaults.cardColors(
             containerColor = Color.White
@@ -103,8 +125,8 @@ fun InterestCard(imageId: Int, title: String, modifier: Modifier = Modifier) {
                                 .padding(4.dp)
                         )
                     },
-                    checked = true,
-                    onClick = {},
+                    checked = checked,
+                    onClick = { onClick(title) },
                     modifier = modifier
                 )
             }
