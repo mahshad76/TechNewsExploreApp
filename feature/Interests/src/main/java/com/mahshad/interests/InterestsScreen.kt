@@ -61,7 +61,7 @@ fun InterestsScreen(viewModel: InterestsScreenViewModel = hiltViewModel()) {
                         items[it].first,
                         items[it].second,
                         items[it].second !in favoriteTopics,
-                        { viewModel.update(it) }
+                        { topic: String -> viewModel.update(topic) }
                     )
                 }
             }

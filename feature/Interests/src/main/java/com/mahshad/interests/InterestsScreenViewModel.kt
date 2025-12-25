@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,7 +26,19 @@ class InterestsScreenViewModel @Inject constructor(private val userDataRepositor
             )
 
     fun update(topic: String) {
-        TODO()
+        if (interestingTopicStateFlow.value is UiState.Success) {
+            val favoriteTopics = (interestingTopicStateFlow.value as UiState.Success).favoriteTopics
+                .toMutableSet()
+            viewModelScope.launch {
+                if (topic in favoriteTopics) {
+                    favoriteTopics.remove(topic)
+                    userDataRepository.postUserData(favoriteTopics)
+                } else {
+                    favoriteTopics.add(topic)
+                    userDataRepository.postUserData(favoriteTopics)
+                }
+            }
+        }
     }
 }
 
