@@ -39,6 +39,7 @@ google-service = "4.4.4"
 firebase-analytics = "23.0.0"
 firebase-auth = "24.0.1"
 firebase-common = "22.0.1"
+uiGraphics = "1.10.0"
 
 [libraries]
 androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
@@ -89,6 +90,7 @@ volley = { group = "com.android.volley", name = "volley", version.ref = "volley"
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room_version" }
 room-coroutine = { module = "androidx.room:room-ktx", version.ref = "room_version" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room_version" }
+androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics", version.ref = "uiGraphics" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

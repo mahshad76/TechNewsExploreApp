@@ -6,7 +6,9 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import kotlinx.coroutines.launch
 
 @Composable
@@ -15,6 +17,8 @@ fun ModifiedTab(
     pagerState: PagerState,
     index: Int,
     title: String,
+    contentAlignment: Alignment,
+    textColor: Color,
     modifier: Modifier
 ) {
     val scope = rememberCoroutineScope()
@@ -24,8 +28,8 @@ fun ModifiedTab(
             scope.launch { pagerState.animateScrollToPage(index) }
         },
         text = {
-            Box() {
-                Text(title)
+            Box(modifier = modifier, contentAlignment = contentAlignment) {
+                Text(title, color = textColor)
             }
         }
     )
