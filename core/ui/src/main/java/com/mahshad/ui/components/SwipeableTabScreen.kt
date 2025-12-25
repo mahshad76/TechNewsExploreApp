@@ -40,6 +40,8 @@ fun SwipeableTabScreen(
                     title = title,
                     contentAlignment = Alignment.Center,
                     textColor = if (isSelected) Color.White else Color.Black,
+                    icon = TODO(),
+                    spacer = TODO(),
                     modifier = Modifier
                         .clip(RoundedCornerShape(20.dp))
                         .background(
