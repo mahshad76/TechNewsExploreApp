@@ -24,6 +24,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mahshad.ui.components.ModifiedToggleButton
 import com.mahshad.ui.icons.TneIcons.Add
 import com.mahshad.ui.icons.TneIcons.Apple
@@ -39,11 +40,17 @@ data object InterestsScreenRoute
 
 @Composable
 fun InterestsScreen(viewModel: InterestsScreenViewModel = hiltViewModel()) {
-    LazyColumn(modifier = Modifier) {
-        items(items.size) {
-            InterestCard(items[it].first, items[it].second)
-        }
+    val interestingTopicsState = viewModel.interestingTopicStateFlow.collectAsStateWithLifecycle()
+    when (interestingTopicsState.value) {
+        is UiState.Loading -> TODO()
+        is UiState.Error -> TODO()
+        is UiState.Success -> TODO()
     }
+//    LazyColumn(modifier = Modifier) {
+//        items(items.size) {
+//            InterestCard(items[it].first, items[it].second)
+//        }
+//    }
 }
 
 @Composable
