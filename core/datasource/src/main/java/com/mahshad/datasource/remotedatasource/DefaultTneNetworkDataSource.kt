@@ -15,6 +15,23 @@ class DefaultTneNetworkDataSource @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) :
     TneNetworkDataSource {
-    override suspend fun getNews(query: String): Response<NewsApiResponse> =
-        withContext(ioDispatcher) { apiService.getNews(query) }
+    override suspend fun getAppleOrTeslaNews(q: String): Response<NewsApiResponse> =
+        withContext(ioDispatcher) {
+            return@withContext apiService.getAppleOrTeslaNews(q)
+        }
+
+    override suspend fun getWorldNews(country: String): Response<NewsApiResponse> =
+        withContext(ioDispatcher) {
+            return@withContext apiService.getWorldNews(country)
+        }
+
+    override suspend fun getTechCrunchNews(source: String): Response<NewsApiResponse> =
+        withContext(ioDispatcher) {
+            return@withContext apiService.getTechCrunchNews(source)
+        }
+
+    override suspend fun getWsjNews(domains: String): Response<NewsApiResponse> =
+        withContext(ioDispatcher) {
+            return@withContext apiService.getWsjNews(domains)
+        }
 }
