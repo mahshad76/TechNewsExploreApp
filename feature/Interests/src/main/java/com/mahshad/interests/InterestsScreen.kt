@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.mahshad.ui.UserDataState
 import com.mahshad.ui.components.ModifiedToggleButton
 import com.mahshad.ui.components.TneLoadingWheel
 import com.mahshad.ui.icons.TneIcons.Add
@@ -46,15 +47,16 @@ fun InterestsScreen(viewModel: InterestsScreenViewModel = hiltViewModel()) {
     val context = LocalContext.current
     val interestingTopicsState = viewModel.interestingTopicStateFlow.collectAsStateWithLifecycle()
     when (interestingTopicsState.value) {
-        is UiState.Loading -> TneLoadingWheel()
-        is UiState.Error -> Toast.makeText(
+        is UserDataState.Loading -> TneLoadingWheel()
+        is UserDataState.Error -> Toast.makeText(
             context, "Something went wrong",
             Toast.LENGTH_SHORT
         )
             .show()
 
-        is UiState.Success -> {
-            val favoriteTopics = (interestingTopicsState.value as UiState.Success).favoriteTopics
+        is UserDataState.Success -> {
+            val favoriteTopics =
+                (interestingTopicsState.value as UserDataState.Success).favoriteTopics
             LazyColumn(modifier = Modifier) {
                 items(items.size) {
                     InterestCard(

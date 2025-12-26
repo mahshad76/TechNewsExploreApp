@@ -6,12 +6,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells.Adaptive
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -25,7 +22,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mahshad.model.Article
 import kotlinx.serialization.Serializable
 
@@ -34,19 +30,19 @@ data class DetailScreenRoute(val subject: String)
 
 @Composable
 fun DetailScreen(subject: String, viewModel: HomeScreenViewModel) {
-    val matchedArticles = viewModel.searchSuggestions.collectAsStateWithLifecycle()
-    val articles = matchedArticles.value
-    LazyVerticalGrid(
-        columns = Adaptive(300.dp),
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-        items(articles.size) {
-            DetailCard(articles[it], { article: Article ->
-                viewModel.bookmarkClicked(article)
-            })
-        }
-    }
+//    val matchedArticles = viewModel.searchSuggestions.collectAsStateWithLifecycle()
+//    val articles = matchedArticles.value
+//    LazyVerticalGrid(
+//        columns = Adaptive(300.dp),
+//        modifier = Modifier
+//            .fillMaxSize()
+//    ) {
+//        items(articles.size) {
+//            DetailCard(articles[it], { article: Article ->
+//                viewModel.bookmarkClicked(article)
+//            })
+//        }
+//    }
 }
 
 @Composable
