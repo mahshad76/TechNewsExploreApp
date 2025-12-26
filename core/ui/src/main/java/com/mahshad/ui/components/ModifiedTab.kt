@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Tab
@@ -14,7 +15,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 
@@ -26,7 +27,7 @@ fun ModifiedTab(
     title: String,
     contentAlignment: Alignment,
     textColor: Color,
-    icon: ImageVector,
+    icon: Painter,
     spacer: Int,
     modifier: Modifier
 ) {
@@ -42,7 +43,7 @@ fun ModifiedTab(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    Icon(icon, contentDescription = "tab icon")
+                    Icon(icon, contentDescription = "tab icon", modifier = Modifier.size(26.dp))
                     Spacer(modifier = Modifier.padding(horizontal = spacer.dp))
                     Text(title, color = textColor)
                 }

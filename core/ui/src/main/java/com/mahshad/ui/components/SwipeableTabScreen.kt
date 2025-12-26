@@ -15,11 +15,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun SwipeableTabScreen(
-    tabs: List<String>,
+    tabs: List<Pair<String, Painter>>,
     pageNavigator: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -31,17 +32,17 @@ fun SwipeableTabScreen(
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            tabs.forEachIndexed { index, title ->
+            tabs.forEachIndexed { index, pair ->
                 val isSelected = pagerState.currentPage == index
                 ModifiedTab(
                     isSelected = isSelected,
                     pagerState = pagerState,
                     index = index,
-                    title = title,
+                    title = pair.first,
                     contentAlignment = Alignment.Center,
                     textColor = if (isSelected) Color.White else Color.Black,
-                    icon = TODO(),
-                    spacer = TODO(),
+                    icon = pair.second,
+                    spacer = 4,
                     modifier = Modifier
                         .clip(RoundedCornerShape(20.dp))
                         .background(
