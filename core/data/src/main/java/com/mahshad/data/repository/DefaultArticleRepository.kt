@@ -11,9 +11,9 @@ class DefaultArticleRepository @Inject constructor(
     private val tneNetworkDataSource:
     TneNetworkDataSource
 ) : ArticleRepository {
-    override fun getNews(): Flow<Result<List<Article>>> = flow {
+    override fun getNews(query: String): Flow<Result<List<Article>>> = flow {
         val result = runCatching {
-            val response = tneNetworkDataSource.getNews()
+            val response = tneNetworkDataSource.getNews(query)
             val body = response.body()
             when (response.isSuccessful) {
                 true -> body?.articles?.map { it.toArticle().getOrThrow() }

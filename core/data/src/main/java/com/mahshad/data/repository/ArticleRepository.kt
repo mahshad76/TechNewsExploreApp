@@ -4,5 +4,5 @@ import com.mahshad.model.Article
 import kotlinx.coroutines.flow.Flow
 
 interface ArticleRepository {
-    fun getNews(): Flow<Result<List<Article>>>
+    fun getNews(query: String): Flow<Result<List<Article>>>
 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahshad.data.repository.ArticleRepository
 import com.mahshad.data.repository.FavoriteArticleRepository
+import com.mahshad.data.repository.UserDataRepository
 import com.mahshad.model.Article
 import com.mahshad.model.FavoriteArticle
 import com.mahshad.ui.NewsFeed
@@ -26,7 +27,8 @@ import javax.inject.Inject
 class HomeScreenViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val articleRepository: ArticleRepository,
-    private val favoriteArticleRepository: FavoriteArticleRepository
+    private val favoriteArticleRepository: FavoriteArticleRepository,
+    private val userDataRepository: UserDataRepository
 ) :
     ViewModel() {
     private val searchQueryStateFlow = savedStateHandle.getMutableStateFlow(
