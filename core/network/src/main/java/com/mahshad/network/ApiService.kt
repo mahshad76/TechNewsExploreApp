@@ -6,8 +6,20 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
+
     @GET("top-headlines")
-    suspend fun getNews(
+    suspend fun getAppleOrTeslaNews(@Query("q") q: String): Response<NewsApiResponse>
+
+    @GET("top-headlines")
+    suspend fun getWorldNews(@Query("country") country: String): Response<NewsApiResponse>
+
+    @GET("top-headlines")
+    suspend fun getTechCrunchNews(
         @Query("sources") source: String
+    ): Response<NewsApiResponse>
+
+    @GET("top-headlines")
+    suspend fun getWsjNews(
+        @Query("domains") domains: String
     ): Response<NewsApiResponse>
 }

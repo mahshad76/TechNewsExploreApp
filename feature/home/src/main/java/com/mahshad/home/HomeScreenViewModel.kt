@@ -6,18 +6,12 @@ import androidx.lifecycle.viewModelScope
 import com.mahshad.data.repository.ArticleRepository
 import com.mahshad.data.repository.FavoriteArticleRepository
 import com.mahshad.data.repository.UserDataRepository
-import com.mahshad.model.Article
-import com.mahshad.model.FavoriteArticle
 import com.mahshad.ui.UserDataState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,18 +22,7 @@ class HomeScreenViewModel @Inject constructor(
     private val userDataRepository: UserDataRepository
 ) :
     ViewModel() {
-    private val searchQueryStateFlow = savedStateHandle.getMutableStateFlow(
-        "search_query_key",
-        ""
-    )
-    val _searchQueryStateFlow = searchQueryStateFlow.asStateFlow()
 
-    private val _favoriteArticlesStateFlow: StateFlow<List<FavoriteArticle>> =
-        favoriteArticleRepository.getArticles().stateIn(
-            viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
-            emptyList<FavoriteArticle>()
-        )
 
     private val _userDataStateFlow = userDataRepository
         .getUserData()
