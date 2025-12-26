@@ -79,7 +79,7 @@ fun InterestCard(
 ) {
     Card(
         colors = CardDefaults.cardColors(
-            containerColor = Color.White
+            containerColor = Color.Transparent
         ),
         modifier = modifier
             .fillMaxWidth()
@@ -99,7 +99,7 @@ fun InterestCard(
             Text(title)
             Box(
                 modifier = modifier
-                    .background(Color.White)
+                    .background(Color.Transparent)
                     .weight(1.0F)
                     .padding(end = 3.dp),
                 contentAlignment = Alignment.CenterEnd

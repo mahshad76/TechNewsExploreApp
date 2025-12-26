@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,7 +44,11 @@ fun ModifiedTab(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    Icon(icon, contentDescription = "tab icon", modifier = Modifier.size(26.dp))
+                    Icon(
+                        icon, contentDescription = "tab icon",
+                        tint = if (isSelected) Color.DarkGray else MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(26.dp)
+                    )
                     Spacer(modifier = Modifier.padding(horizontal = spacer.dp))
                     Text(title, color = textColor)
                 }

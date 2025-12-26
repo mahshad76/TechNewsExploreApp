@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TabRow
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -21,7 +22,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SwipeableTabScreen(
     tabs: List<Pair<String, Painter>>,
-    pageNavigator: (Int) -> Unit,
+    pageNavigator: @Composable (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val pagerState = rememberPagerState(pageCount = { tabs.size })
@@ -40,14 +41,15 @@ fun SwipeableTabScreen(
                     index = index,
                     title = pair.first,
                     contentAlignment = Alignment.Center,
-                    textColor = if (isSelected) Color.White else Color.Black,
+                    textColor = if (isSelected) Color.DarkGray else MaterialTheme.colorScheme.primary,
                     icon = pair.second,
                     spacer = 4,
                     modifier = Modifier
                         .clip(RoundedCornerShape(20.dp))
                         .background(
-                            if (isSelected) Color.Gray
-                            else Color.Transparent
+//                            if (isSelected) Color.Transparent
+//                            else Color.Transparent
+                            color = Color.Transparent
                         )
                         .padding(horizontal = 16.dp, vertical = 8.dp)
                         .weight(1.0F)
