@@ -26,22 +26,14 @@ object NetworkModule {
     @Provides
     @Singleton
     fun providesNetworkJson(): Json = Json {
-        // Crucial for successful parsing: allows DTOs to ignore fields not defined in the DTO
         ignoreUnknownKeys = true
-        // Allows the parser to handle null values gracefully if you have non-nullable fields
-        // in your DTOs corresponding to nullable JSON keys.
         coerceInputValues = true
-        // If your API uses snake_case (e.g., "total_results"), but your Kotlin uses camelCase (totalResults),
-        // you should add the naming strategy or use @SerialName on every field.
-        // For simplicity, we stick to ignoreUnknownKeys/coerceInputValues for the immediate fix.
     }
 
-    // 2. Provide the Converter Factory, injecting the customized Json instance
     @Singleton
     @Provides
     fun provideConverterFactory(networkJson: Json): Converter.Factory {
         val contentType = "application/json".toMediaType()
-        // Inject the customized Json instance here
         return networkJson.asConverterFactory(contentType)
     }
 
