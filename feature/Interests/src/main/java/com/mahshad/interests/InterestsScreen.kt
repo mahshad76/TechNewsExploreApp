@@ -51,8 +51,7 @@ fun InterestsScreen(viewModel: InterestsScreenViewModel = hiltViewModel()) {
         is UserDataState.Error -> Toast.makeText(
             context, "Something went wrong",
             Toast.LENGTH_SHORT
-        )
-            .show()
+        ).show()
 
         is UserDataState.Success -> {
             val favoriteTopics =
