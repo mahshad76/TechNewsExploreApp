@@ -16,7 +16,7 @@ fun TneLoadingWheel(modifier: Modifier = Modifier) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.1f)),
+            .background(Color.Transparent),
         contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator(
