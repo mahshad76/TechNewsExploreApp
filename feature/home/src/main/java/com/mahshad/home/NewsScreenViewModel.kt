@@ -64,14 +64,16 @@ class NewsScreenViewModel @Inject constructor(
     val searchSuggestions: StateFlow<List<Article>> =
         combine(mergedFlow, _searchQueryStateFlow, _favoriteArticlesStateFlow)
         { newsFeed, query, favoriteArticles ->
+            Log.d("TAG", "okay")
             if (newsFeed is NewsFeed.Successful) {
                 return@combine newsFeed.news
-                    .filter { query in it.content || query in it.title }
+                    .filter { query in it.content || query in it.title || query.isEmpty()}
                     .map {
                         if (it.title in favoriteArticles.map { it.title })
                             it.copy(isLiked = true) else it
                     }
             } else {
+                Log.d("TAG", "problem")
                 return@combine emptyList()
             }
         }

@@ -9,10 +9,7 @@ import kotlinx.serialization.Serializable
 data object HomeScreenRoute
 
 @Composable
-fun HomeScreen(
-    navigateFromHomeToDetail: (String) -> Unit,
-    homeScreenViewModel: HomeScreenViewModel
-) {
+fun HomeScreen() {
     SwipeableTabScreen(
         listOf(
             "News" to painterResource(com.mahshad.ui.R.drawable.news_paper_svgrepo_com),

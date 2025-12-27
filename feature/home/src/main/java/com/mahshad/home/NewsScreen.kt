@@ -3,6 +3,7 @@ package com.mahshad.home
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsBottomHeight
@@ -22,7 +23,11 @@ fun NewsScreen(
     val searchQuery = newsScreenViewModel._searchQueryStateFlow.collectAsStateWithLifecycle()
     val searchSuggestion = newsScreenViewModel.searchSuggestions.collectAsStateWithLifecycle()
 
-    Column(modifier = Modifier.padding(10.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 4.dp)
+    ) {
         Spacer(Modifier.windowInsetsTopHeight(WindowInsets.safeDrawing))
         HomeSearchBar(
             modifier = Modifier.padding(bottom = 4.dp),
@@ -31,13 +36,13 @@ fun NewsScreen(
             {
                 //navigateFromHomeToDetail(searchQuery.value)
             })
-        if (!searchQuery.value.isEmpty()) {
-            SearchSuggestionsBox(searchSuggestion.value.map { it.title }) {
-                newsScreenViewModel.updateSearchQueryFlow(
-                    it
-                )
-            }
+        //if (!searchQuery.value.isEmpty()) {
+        SearchSuggestionsBox(searchSuggestion.value.map { it.title }) {
+            newsScreenViewModel.updateSearchQueryFlow(
+                it
+            )
         }
+        //}
         Spacer(Modifier.windowInsetsBottomHeight(WindowInsets.safeDrawing))
     }
 }
