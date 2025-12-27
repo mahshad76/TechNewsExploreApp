@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-    @GET("top-headlines")
+    @GET("everything")
     suspend fun getAppleOrTeslaNews(@Query("q") q: String): Response<NewsApiResponse>
 
     @GET("top-headlines")
@@ -18,7 +18,7 @@ interface ApiService {
         @Query("sources") source: String
     ): Response<NewsApiResponse>
 
-    @GET("top-headlines")
+    @GET("everything")
     suspend fun getWsjNews(
         @Query("domains") domains: String
     ): Response<NewsApiResponse>
