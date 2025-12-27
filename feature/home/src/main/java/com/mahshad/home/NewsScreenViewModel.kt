@@ -42,18 +42,21 @@ class NewsScreenViewModel @Inject constructor(
             started = SharingStarted.WhileSubscribed(5_000),
             emptyList<FavoriteArticle>()
         )
-    val appleNewsFlow: Flow<NewsFeed> = articleRepository.getAppleOrTeslaNews("apple")
+    val appleNewsFlow: Flow<NewsFeed<List<Article>>> =
+        articleRepository.getAppleOrTeslaNews("apple")
+            .mapToNewsFeed()
+    val teslaNewsFlow: Flow<NewsFeed<List<Article>>> =
+        articleRepository.getAppleOrTeslaNews("tesla")
+            .mapToNewsFeed()
+    val worldNewsFlow: Flow<NewsFeed<List<Article>>> = articleRepository.getWorldNews("us")
         .mapToNewsFeed()
-    val teslaNewsFlow: Flow<NewsFeed> = articleRepository.getAppleOrTeslaNews("tesla")
-        .mapToNewsFeed()
-    val worldNewsFlow: Flow<NewsFeed> = articleRepository.getWorldNews("us")
-        .mapToNewsFeed()
-    val techCrunchFlow: Flow<NewsFeed> = articleRepository.getTechCrunchNews("techcrunch")
-        .mapToNewsFeed()
-    val wsjFlow: Flow<NewsFeed> = articleRepository.getWsjNews("wsj.com")
+    val techCrunchFlow: Flow<NewsFeed<List<Article>>> =
+        articleRepository.getTechCrunchNews("techcrunch")
+            .mapToNewsFeed()
+    val wsjFlow: Flow<NewsFeed<List<Article>>> = articleRepository.getWsjNews("wsj.com")
         .mapToNewsFeed()
 
-    val mergedFlow: StateFlow<NewsFeed> =
+    val mergedFlow: StateFlow<NewsFeed<List<Article>>> =
         merge(appleNewsFlow, teslaNewsFlow, worldNewsFlow, techCrunchFlow, wsjFlow)
             .stateIn(
                 scope = viewModelScope,
@@ -61,20 +64,21 @@ class NewsScreenViewModel @Inject constructor(
                 initialValue = NewsFeed.Loading
             )
 
-    val searchSuggestions: StateFlow<List<Article>> =
+    val searchSuggestions: StateFlow<NewsFeed<List<Article>>> =
         combine(mergedFlow, _searchQueryStateFlow, _favoriteArticlesStateFlow)
         { newsFeed, query, favoriteArticles ->
             Log.d("TAG", "okay")
             if (newsFeed is NewsFeed.Successful) {
-                return@combine newsFeed.news
-                    .filter { query in it.content || query in it.title || query.isEmpty()}
+                val articleList = newsFeed.news
+                    .filter { query in it.content || query in it.title || query.isEmpty() }
                     .map {
                         if (it.title in favoriteArticles.map { it.title })
                             it.copy(isLiked = true) else it
                     }
+                return@combine NewsFeed.Successful(articleList)
             } else {
                 Log.d("TAG", "problem")
-                return@combine emptyList()
+                return@combine newsFeed
             }
         }
             .debounce(300L)
@@ -82,7 +86,7 @@ class NewsScreenViewModel @Inject constructor(
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000),
-                initialValue = emptyList()
+                initialValue = NewsFeed.Loading
             )
 
     fun updateSearchQueryFlow(query: String) {
