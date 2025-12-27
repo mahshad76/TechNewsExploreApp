@@ -53,12 +53,16 @@ class NewsScreenViewModel @Inject constructor(
     val wsjFlow: Flow<NewsFeed> = articleRepository.getWsjNews("wsj.com")
         .mapToNewsFeed()
 
-    val mergedFlow: Flow<NewsFeed> =
+    val mergedFlow: StateFlow<NewsFeed> =
         merge(appleNewsFlow, teslaNewsFlow, worldNewsFlow, techCrunchFlow, wsjFlow)
-
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5_000),
+                initialValue = NewsFeed.Loading
+            )
 
     val searchSuggestions: StateFlow<List<Article>> =
-        combine(feedState, _searchQueryStateFlow, _favoriteArticlesStateFlow)
+        combine(mergedFlow, _searchQueryStateFlow, _favoriteArticlesStateFlow)
         { newsFeed, query, favoriteArticles ->
             if (newsFeed is NewsFeed.Successful) {
                 return@combine newsFeed.news

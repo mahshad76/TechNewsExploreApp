@@ -76,18 +76,18 @@ class HomeScreenViewModel @Inject constructor(
 //                initialValue = emptyList()
 //            )
 
-    fun updateSearchQueryFlow(query: String) {
-        searchQueryStateFlow.update { query }
-    }
-
-    fun bookmarkClicked(article: Article) {
-        viewModelScope.launch {
-            val updatedArticle = article.copy(isLiked = !article.isLiked)
-            if (updatedArticle.isLiked) {
-                favoriteArticleRepository.insert(article = article)
-            } else {
-                favoriteArticleRepository.delete(article.title, article.author)
-            }
-        }
-    }
+//    fun updateSearchQueryFlow(query: String) {
+//        searchQueryStateFlow.update { query }
+//    }
+//
+//    fun bookmarkClicked(article: Article) {
+//        viewModelScope.launch {
+//            val updatedArticle = article.copy(isLiked = !article.isLiked)
+//            if (updatedArticle.isLiked) {
+//                favoriteArticleRepository.insert(article = article)
+//            } else {
+//                favoriteArticleRepository.delete(article.title, article.author)
+//            }
+//        }
+//    }
 }
