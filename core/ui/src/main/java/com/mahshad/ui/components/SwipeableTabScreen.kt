@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun SwipeableTabScreen(
-    tabs: List<Pair<String, Painter>>,
+    tabs: List<Pair<String, Pair<Painter, Painter>>>,
     pageNavigator: @Composable (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -42,7 +42,7 @@ fun SwipeableTabScreen(
                     title = pair.first,
                     contentAlignment = Alignment.Center,
                     textColor = if (isSelected) Color.DarkGray else MaterialTheme.colorScheme.primary,
-                    icon = pair.second,
+                    icon = if (!isSelected) pair.second.first else pair.second.second,
                     spacer = 4,
                     modifier = Modifier
                         .clip(RoundedCornerShape(20.dp))
