@@ -23,7 +23,7 @@ fun NewsScreen(
     //navigateFromHomeToDetail: (String) -> Unit,
     newsScreenViewModel: NewsScreenViewModel = hiltViewModel()
 ) {
-    val newsFeed = newsScreenViewModel.mergedFlow.collectAsStateWithLifecycle()
+//    val newsFeed = newsScreenViewModel.mergedFlow.collectAsStateWithLifecycle()
     val searchQuery = newsScreenViewModel._searchQueryStateFlow.collectAsStateWithLifecycle()
     val searchSuggestion = newsScreenViewModel.searchSuggestions.collectAsStateWithLifecycle()
     val context = LocalContext.current
@@ -31,7 +31,7 @@ fun NewsScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 4.dp)
+            .padding(horizontal = 12.dp)
     ) {
         Spacer(Modifier.windowInsetsTopHeight(WindowInsets.safeDrawing))
         HomeSearchBar(
