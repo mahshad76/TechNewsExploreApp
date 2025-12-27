@@ -2,15 +2,25 @@ package com.mahshad.home
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.mahshad.data.repository.ArticleRepository
 import com.mahshad.data.repository.FavoriteArticleRepository
 import com.mahshad.data.repository.UserDataRepository
+import com.mahshad.model.Article
+import com.mahshad.ui.NewsFeed
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,9 +30,48 @@ class FavoriteNewsScreenViewModel @Inject constructor(
     private val favoriteArticleRepository: FavoriteArticleRepository,
     private val userDataRepository: UserDataRepository
 ) : ViewModel() {
-    lateinit var b: MutableList<Flow<List<String>>>
-    val a = userDataRepository.getUserData().flatMapLatest { favoriteTopics: Set<String> ->
-        val a: Flow<String> = favoriteTopics.asFlow()
-        a.flatMapMerge { string -> flowOf(string) }
+    private val _searchQueryStateFlow: MutableStateFlow<String> = MutableStateFlow("")
+    val searchQueryStateFlow = _searchQueryStateFlow.asStateFlow()
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val searchSuggestions: StateFlow<NewsFeed<List<Article>>> =
+        userDataRepository.getUserData().flatMapLatest { favoriteTopics: Set<String> ->
+            val flowOfTopics: Flow<String> = favoriteTopics.asFlow()
+            val allFavoriteNewsFlow = flowOfTopics.flatMapMerge { topic: String ->
+                when (topic) {
+                    "Apple articles" -> articleRepository.getAppleOrTeslaNews("apple")
+                    "US headlines" -> articleRepository.getWorldNews("us")
+                    "Tech crunch" -> articleRepository.getTechCrunchNews("techcrunch")
+                    "Wall Street Journal" -> articleRepository.getWsjNews("wsj.com")
+                    "Tesla articles" -> articleRepository.getAppleOrTeslaNews("tesla")
+                    else -> flowOf(Result.success(emptyList()))
+                }
+            }
+            combine(
+                allFavoriteNewsFlow, favoriteArticleRepository.getArticles(),
+                _searchQueryStateFlow
+            ) { a, b, query ->
+                if (a.isSuccess) {
+                    val res = a.getOrNull()
+                        ?.filter { query in it.content || query in it.title || query.isEmpty() }
+                        ?.map {
+                            if (it.title in b.map { it.title }) it.copy(isLiked = true) else it
+                        }
+                    if (res != null) NewsFeed.Successful(res) else NewsFeed.Successful(emptyList())
+                } else {
+                    val exception = a.exceptionOrNull()
+                    if (exception != null) NewsFeed.Error(a.exceptionOrNull()!!) else NewsFeed.Error(
+                        Throwable("unknown error on the server side")
+                    )
+                }
+            }
+        }.stateIn(
+            viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            NewsFeed.Loading
+        )
+
+    fun updateSearchStateFlow(update: String) {
+        _searchQueryStateFlow.value = update
     }
 }
