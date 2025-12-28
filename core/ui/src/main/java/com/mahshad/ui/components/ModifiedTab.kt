@@ -46,7 +46,8 @@ fun ModifiedTab(
                 ) {
                     Icon(
                         icon, contentDescription = "tab icon",
-                        tint = if (isSelected) Color.DarkGray else MaterialTheme.colorScheme.primary,
+                        tint = if (isSelected) MaterialTheme.colorScheme.primary
+                        else Color.DarkGray,
                         modifier = Modifier.size(26.dp)
                     )
                     Spacer(modifier = Modifier.padding(horizontal = spacer.dp))

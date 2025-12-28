@@ -41,7 +41,8 @@ fun SwipeableTabScreen(
                     index = index,
                     title = pair.first,
                     contentAlignment = Alignment.Center,
-                    textColor = if (isSelected) Color.DarkGray else MaterialTheme.colorScheme.primary,
+                    textColor = if (isSelected) MaterialTheme.colorScheme.primary
+                    else Color.DarkGray,
                     icon = if (!isSelected) pair.second.first else pair.second.second,
                     spacer = 4,
                     modifier = Modifier
