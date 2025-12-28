@@ -21,7 +21,11 @@ fun SearchSuggestionsBox(
     onSuggestionClick: (String) -> Unit
 ) {
     if (suggestions.isNotEmpty()) {
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+            //.background(Color.LightGray)
+        ) {
             items(suggestions.size) { index ->
                 val article = suggestions[index]
                 ArticleCard(
@@ -41,14 +45,16 @@ fun ArticleCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(100.dp)
+            .height(50.dp)
             .padding(vertical = 4.dp, horizontal = 8.dp)
             .clickable(onClick = onClick),
         shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceBright)
     ) {
         Text(
-            text = title,
+            text = title.split(" ")
+                .take(10)
+                .joinToString(" "),
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.padding(top = 12.dp, start = 12.dp, end = 12.dp)
         )
