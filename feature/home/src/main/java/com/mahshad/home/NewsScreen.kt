@@ -45,7 +45,7 @@ fun NewsScreen(
         when (searchSuggestionValue) {
             is NewsFeed.Successful -> {
                 SearchSuggestionsBox(
-                    searchSuggestionValue.news.map { it.title }) {
+                    searchSuggestionValue.news.map { it.title to it.urlToImage }) {
                     newsScreenViewModel.updateSearchQueryFlow(
                         it
                     )

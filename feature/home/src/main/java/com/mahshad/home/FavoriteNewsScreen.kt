@@ -46,7 +46,8 @@ fun FavoriteNewsScreen(viewModel: FavoriteNewsScreenViewModel = hiltViewModel())
 
             is NewsFeed.Successful -> {
                 SearchSuggestionsBox(
-                    (searchSuggestionState.value as NewsFeed.Successful).news.map { it.title }) {
+                    (searchSuggestionState.value as NewsFeed.Successful).news
+                        .map { it.title to it.urlToImage }) {
                     viewModel.updateSearchStateFlow(it)
                 }
             }
