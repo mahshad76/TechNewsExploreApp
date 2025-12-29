@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -45,11 +46,10 @@ fun NewsScreen(
         when (searchSuggestionValue) {
             is NewsFeed.Successful -> {
                 SearchSuggestionsBox(
-                    searchSuggestionValue.news.map { it.title to it.urlToImage }) {
-                    newsScreenViewModel.updateSearchQueryFlow(
-                        it
-                    )
-                }
+                    searchSuggestionValue.news.map { it.title to it.urlToImage },
+                    { newsScreenViewModel.updateSearchQueryFlow(it) },
+                    painterResource(R.drawable.bookmark_svgrepo_com)
+                )
             }
 
             is NewsFeed.Error -> Toast.makeText(
