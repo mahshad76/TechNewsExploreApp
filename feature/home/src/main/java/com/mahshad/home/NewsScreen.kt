@@ -35,7 +35,7 @@ fun NewsScreen(
     ) {
         Spacer(Modifier.windowInsetsTopHeight(WindowInsets.safeDrawing))
         HomeSearchBar(
-            modifier = Modifier.padding(bottom = 4.dp),
+            modifier = Modifier.padding(bottom = 7.dp),
             searchQuery.value,
             { newsScreenViewModel.updateSearchQueryFlow(it) },
             {

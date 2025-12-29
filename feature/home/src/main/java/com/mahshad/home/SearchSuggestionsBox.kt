@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -55,8 +56,8 @@ fun ArticleCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(50.dp)
-            .padding(vertical = 4.dp, horizontal = 8.dp)
+            .height(60.dp)
+            .padding(bottom = 11.73.dp)
             .clickable(onClick = onClick),
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceBright)
@@ -64,7 +65,8 @@ fun ArticleCard(
         Row(modifier = Modifier.fillMaxSize()) {
             AsyncImage(
                 model = url,
-                contentDescription = "",
+                contentDescription = "news image",
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(35.19.dp)
                     .align(Alignment.CenterVertically)
@@ -76,7 +78,7 @@ fun ArticleCard(
                     .take(10)
                     .joinToString(" "),
                 style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.padding(top = 12.dp, start = 12.dp, end = 12.dp)
+                modifier = Modifier.align(Alignment.CenterVertically)
             )
         }
     }
