@@ -21,6 +21,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -73,5 +74,16 @@ class FavoriteNewsScreenViewModel @Inject constructor(
 
     fun updateSearchStateFlow(update: String) {
         _searchQueryStateFlow.value = update
+    }
+
+    fun bookmarkClicked(article: Article) {
+        viewModelScope.launch {
+            val updatedArticle = article.copy(isLiked = !article.isLiked)
+            if (updatedArticle.isLiked) {
+                favoriteArticleRepository.insert(article = article)
+            } else {
+                favoriteArticleRepository.delete(article.title, article.author)
+            }
+        }
     }
 }

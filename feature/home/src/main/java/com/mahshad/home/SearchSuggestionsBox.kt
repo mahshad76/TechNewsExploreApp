@@ -26,12 +26,14 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.mahshad.model.Article
 
 @Composable
 fun SearchSuggestionsBox(
     suggestions: List<Pair<String, String>>,
     onSuggestionClick: (String) -> Unit,
-    icon: Painter
+    icon: Painter,
+    onIconClicked: (Article) -> Unit
 ) {
     if (suggestions.isNotEmpty()) {
         LazyColumn(
@@ -45,7 +47,8 @@ fun SearchSuggestionsBox(
                         title = suggestions[index].first,
                         url = suggestions[index].second,
                         onClick = { onSuggestionClick(suggestions[index].first) },
-                        icon = icon
+                        icon = icon,
+                        onIconClicked = onIconClicked
                     )
             }
         }
@@ -57,7 +60,8 @@ fun ArticleCard(
     title: String,
     url: String,
     onClick: () -> Unit,
-    icon: Painter
+    icon: Painter,
+    onIconClicked: (Article) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -99,7 +103,7 @@ fun ArticleCard(
                     icon,
                     contentDescription = "",
                     modifier = Modifier
-                        .size(20.dp)
+                        .size(20.dp).clickable(true){}
                 )
             }
         }

@@ -50,7 +50,8 @@ fun FavoriteNewsScreen(viewModel: FavoriteNewsScreenViewModel = hiltViewModel())
                     (searchSuggestionState.value as NewsFeed.Successful).news
                         .map { it.title to it.urlToImage },
                     { viewModel.updateSearchStateFlow(it) },
-                    painterResource(R.drawable.bookmark_svgrepo_com)
+                    painterResource(R.drawable.bookmark_svgrepo_com),
+                    { viewModel.bookmarkClicked(it) }
                 )
             }
         }

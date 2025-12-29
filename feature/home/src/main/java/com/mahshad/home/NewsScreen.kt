@@ -48,7 +48,8 @@ fun NewsScreen(
                 SearchSuggestionsBox(
                     searchSuggestionValue.news.map { it.title to it.urlToImage },
                     { newsScreenViewModel.updateSearchQueryFlow(it) },
-                    painterResource(R.drawable.bookmark_svgrepo_com)
+                    painterResource(R.drawable.bookmark_svgrepo_com),
+                    { newsScreenViewModel.bookmarkClicked(it) }
                 )
             }
 
