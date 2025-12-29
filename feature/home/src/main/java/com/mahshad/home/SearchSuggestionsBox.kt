@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
@@ -30,7 +31,7 @@ import com.mahshad.model.Article
 
 @Composable
 fun SearchSuggestionsBox(
-    suggestions: List<Pair<String, String>>,
+    suggestions: List<Article>,
     onSuggestionClick: (String) -> Unit,
     icon: Painter,
     onIconClicked: (Article) -> Unit
@@ -44,9 +45,8 @@ fun SearchSuggestionsBox(
             items(suggestions.size) { index ->
                 val article =
                     ArticleCard(
-                        title = suggestions[index].first,
-                        url = suggestions[index].second,
-                        onClick = { onSuggestionClick(suggestions[index].first) },
+                        article = suggestions[index],
+                        onClick = {},
                         icon = icon,
                         onIconClicked = onIconClicked
                     )
@@ -57,8 +57,7 @@ fun SearchSuggestionsBox(
 
 @Composable
 fun ArticleCard(
-    title: String,
-    url: String,
+    article: Article,
     onClick: () -> Unit,
     icon: Painter,
     onIconClicked: (Article) -> Unit
@@ -74,7 +73,7 @@ fun ArticleCard(
     ) {
         Row(modifier = Modifier.fillMaxSize()) {
             AsyncImage(
-                model = url,
+                model = article.urlToImage,
                 contentDescription = "news image",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -84,7 +83,7 @@ fun ArticleCard(
             )
             Spacer(modifier = Modifier.width(8.53.dp))
             Text(
-                text = title.split(" ")
+                text = article.title.split(" ")
                     .take(10)
                     .joinToString(" "),
                 style = MaterialTheme.typography.titleMedium,
@@ -102,8 +101,10 @@ fun ArticleCard(
                 Icon(
                     icon,
                     contentDescription = "",
+                    tint = if (article.isLiked) Color.Red else Color.Black,
                     modifier = Modifier
-                        .size(20.dp).clickable(true){}
+                        .size(20.dp)
+                        .clickable(true) { onIconClicked(article) }
                 )
             }
         }

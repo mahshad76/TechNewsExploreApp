@@ -46,7 +46,7 @@ fun NewsScreen(
         when (searchSuggestionValue) {
             is NewsFeed.Successful -> {
                 SearchSuggestionsBox(
-                    searchSuggestionValue.news.map { it.title to it.urlToImage },
+                    searchSuggestionValue.news,
                     { newsScreenViewModel.updateSearchQueryFlow(it) },
                     painterResource(R.drawable.bookmark_svgrepo_com),
                     { newsScreenViewModel.bookmarkClicked(it) }
