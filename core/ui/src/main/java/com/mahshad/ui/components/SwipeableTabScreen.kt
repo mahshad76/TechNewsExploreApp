@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun SwipeableTabScreen(
-    tabs: List<Pair<String, Painter>>,
+    tabs: List<Triple<String, Painter, Painter>>,
     pageNavigator: @Composable (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -33,17 +33,17 @@ fun SwipeableTabScreen(
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            tabs.forEachIndexed { index, pair ->
+            tabs.forEachIndexed { index, triple ->
                 val isSelected = pagerState.currentPage == index
                 ModifiedTab(
                     isSelected = isSelected,
                     pagerState = pagerState,
                     index = index,
-                    title = pair.first,
+                    title = triple.first,
                     contentAlignment = Alignment.Center,
                     textColor = if (isSelected) MaterialTheme.colorScheme.primary
                     else Color.DarkGray,
-                    icon = pair.second,
+                    icon = if (!isSelected) triple.second else triple.third,
                     spacer = 4,
                     modifier = Modifier
                         .clip(RoundedCornerShape(20.dp))

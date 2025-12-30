@@ -23,7 +23,9 @@ object TneIcons {
     val WSJ = R.drawable.wsj_icon
     val Tesla = R.drawable.tesla_svgrepo_com
     val News = R.drawable.news_paper_svgrepo_com
+    val FilledNews = R.drawable.news_paperfilled_svgrepo_com
     val Favorite = R.drawable.favorite_svgrepo_com
+    val FilledFavorite = R.drawable.favorite_filled_svgrepo_com_
     val BookmarkFilled = R.drawable.bookmark_svgrepo_com
     val Bookmark = R.drawable.unbookmark_svgrepo_com
 }
