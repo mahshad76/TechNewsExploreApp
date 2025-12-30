@@ -37,6 +37,8 @@ import coil3.compose.AsyncImage
 import com.mahshad.model.Article
 import com.mahshad.ui.icons.TneIcons.Bookmark
 import com.mahshad.ui.icons.TneIcons.BookmarkFilled
+import com.mahshad.ui.icons.TneIcons.ClosedChavron
+import com.mahshad.ui.icons.TneIcons.OpenedChavron
 
 @Composable
 fun SearchSuggestionsBox(
@@ -131,12 +133,42 @@ fun ArticleCard(
             }
             Spacer(modifier = Modifier.height(8.dp))
             if (chavronState) {
-
+                Row(modifier = Modifier.fillMaxSize()) {
+                    Text(
+                        article.description, modifier = Modifier
+                            .align(Alignment.Top)
+                            .weight(2.0F)
+                    )
+                    Icon(
+                        painterResource(ClosedChavron),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .padding(end = 7.dp)
+                            .align(Alignment.Top)
+                            .size(20.dp)
+                            .clickable(true) { chavronState = !chavronState }
+                            .weight(1.0F)
+                    )
+                }
             } else {
-
-            }
-            Row() {
-                Text(article.description)
+                Row(modifier = Modifier.fillMaxSize()) {
+                    Text(
+                        article.description.split(" ")
+                            .take(7)
+                            .joinToString(" ") + "...",
+                        modifier = Modifier.weight(2.0F)
+                    )
+                    Icon(
+                        painterResource(OpenedChavron),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .padding(end = 7.dp)
+                            .align(Alignment.Top)
+                            .size(20.dp)
+                            .clickable(true) { chavronState = !chavronState }
+                            .weight(1.0F)
+                    )
+                }
             }
         }
     }

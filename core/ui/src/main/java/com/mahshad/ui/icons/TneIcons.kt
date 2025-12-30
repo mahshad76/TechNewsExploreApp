@@ -28,4 +28,6 @@ object TneIcons {
     val FilledFavorite = R.drawable.favorite_filled_svgrepo_com_
     val BookmarkFilled = R.drawable.bookmark_svgrepo_com
     val Bookmark = R.drawable.unbookmark_svgrepo_com
+    val OpenedChavron = R.drawable.chevron_down_svgrepo_com
+    val ClosedChavron = R.drawable.chevron_up_svgrepo_com
 }
