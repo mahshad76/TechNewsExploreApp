@@ -31,7 +31,11 @@ class FavoriteNewsScreenViewModel @Inject constructor(
     private val favoriteArticleRepository: FavoriteArticleRepository,
     private val userDataRepository: UserDataRepository
 ) : ViewModel() {
-    private val _searchQueryStateFlow: MutableStateFlow<String> = MutableStateFlow("")
+    private val _searchQueryStateFlow: MutableStateFlow<String> =
+        savedStateHandle.getMutableStateFlow(
+            "search_query_key",
+            ""
+        )
     val searchQueryStateFlow = _searchQueryStateFlow.asStateFlow()
 
     @OptIn(ExperimentalCoroutinesApi::class)
