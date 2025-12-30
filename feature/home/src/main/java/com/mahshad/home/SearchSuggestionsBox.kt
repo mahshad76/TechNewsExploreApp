@@ -102,7 +102,7 @@ fun ArticleCard(
                     icon,
                     contentDescription = "",
                     modifier = Modifier
-                        .size(20.dp)
+                        .size(40.dp)
                         .clickable(true) { onIconClicked(article) }
                 )
             }
