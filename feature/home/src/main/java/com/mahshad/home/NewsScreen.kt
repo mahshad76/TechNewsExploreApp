@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -48,7 +47,6 @@ fun NewsScreen(
                 SearchSuggestionsBox(
                     searchSuggestionValue.news,
                     { newsScreenViewModel.updateSearchQueryFlow(it) },
-                    painterResource(R.drawable.bookmark_svgrepo_com),
                     { newsScreenViewModel.bookmarkClicked(it) }
                 )
             }

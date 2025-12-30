@@ -22,18 +22,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.mahshad.model.Article
+import com.mahshad.ui.icons.TneIcons.Bookmark
+import com.mahshad.ui.icons.TneIcons.BookmarkFilled
 
 @Composable
 fun SearchSuggestionsBox(
     suggestions: List<Article>,
     onSuggestionClick: (String) -> Unit,
-    icon: Painter,
     onIconClicked: (Article) -> Unit
 ) {
     if (suggestions.isNotEmpty()) {
@@ -47,7 +47,6 @@ fun SearchSuggestionsBox(
                     ArticleCard(
                         article = suggestions[index],
                         onClick = {},
-                        icon = icon,
                         onIconClicked = onIconClicked
                     )
             }
@@ -59,7 +58,6 @@ fun SearchSuggestionsBox(
 fun ArticleCard(
     article: Article,
     onClick: () -> Unit,
-    icon: Painter,
     onIconClicked: (Article) -> Unit
 ) {
     Card(
@@ -98,10 +96,11 @@ fun ArticleCard(
                     .padding(end = 7.dp),
                 contentAlignment = Alignment.CenterEnd
             ) {
+                val icon = if (article.isLiked) painterResource(BookmarkFilled) else
+                    painterResource(Bookmark)
                 Icon(
                     icon,
                     contentDescription = "",
-                    tint = if (article.isLiked) Color.Red else Color.Black,
                     modifier = Modifier
                         .size(20.dp)
                         .clickable(true) { onIconClicked(article) }
