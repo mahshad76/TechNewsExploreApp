@@ -24,4 +24,6 @@ object TneIcons {
     val Tesla = R.drawable.tesla_svgrepo_com
     val News = R.drawable.news_paper_svgrepo_com
     val Favorite = R.drawable.favorite_svgrepo_com
+    val BookmarkOne = R.drawable.bookmark_svgrepo_com
+    val BookmarkTwo = R.drawable.bookmark_svgrepo_com
 }
