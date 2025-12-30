@@ -2,6 +2,7 @@ package com.mahshad.home
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -10,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.mahshad.model.Article
@@ -40,6 +41,7 @@ fun SearchSuggestionsBox(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(top = 11.73.dp)
             //.background(Color.LightGray)
         ) {
             items(suggestions.size) { index ->
@@ -63,49 +65,58 @@ fun ArticleCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(60.dp)
             .padding(bottom = 11.73.dp)
             .clickable(onClick = onClick),
         shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceBright)
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
     ) {
-        Row(modifier = Modifier.fillMaxSize()) {
+        Column(horizontalAlignment = Alignment.Start, modifier = Modifier.fillMaxSize()) {
             AsyncImage(
                 model = article.urlToImage,
                 contentDescription = "news image",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .size(35.19.dp)
-                    .align(Alignment.CenterVertically)
-                    .clip(RoundedCornerShape(2.67.dp))
+                    .height(136.dp)
+                    .fillMaxWidth()
+                    .clip(
+                        RoundedCornerShape(
+                            topStart = 2.67.dp,
+                            topEnd = 2.67.dp,
+                            bottomEnd = 0.dp,
+                            bottomStart = 0.dp
+                        )
+                    )
             )
-            Spacer(modifier = Modifier.width(8.53.dp))
-            Text(
-                text = article.title.split(" ")
-                    .take(10)
-                    .joinToString(" "),
-                style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier
-                    .align(Alignment.CenterVertically)
-                    .weight(3.0F)
-            )
-            Box(
-                modifier = Modifier
-                    .weight(1.0F)
-                    .fillMaxHeight()
-                    .padding(end = 7.dp),
-                contentAlignment = Alignment.CenterEnd
-            ) {
-                val icon = if (article.isLiked) painterResource(BookmarkFilled) else
-                    painterResource(Bookmark)
-                Icon(
-                    icon,
-                    contentDescription = "",
+            Row(modifier = Modifier.fillMaxSize()) {
+                Text(
+                    text = article.title.split(" ")
+                        .take(10)
+                        .joinToString(" "),
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
                     modifier = Modifier
-                        .size(40.dp)
-                        .clickable(true) { onIconClicked(article) }
+                        .weight(3.0F)
                 )
+                Box(
+                    modifier = Modifier
+                        .weight(1.0F)
+                        .fillMaxHeight()
+                        .padding(end = 7.dp),
+                    contentAlignment = Alignment.CenterEnd
+                ) {
+                    val icon = if (article.isLiked) painterResource(BookmarkFilled) else
+                        painterResource(Bookmark)
+                    Icon(
+                        icon,
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(40.dp)
+                            .clickable(true) { onIconClicked(article) }
+                    )
+                }
             }
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(article.description)
         }
     }
 }
