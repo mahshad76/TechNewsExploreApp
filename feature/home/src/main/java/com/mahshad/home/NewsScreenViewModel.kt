@@ -70,7 +70,10 @@ class NewsScreenViewModel @Inject constructor(
             Log.d("TAG", "okay")
             if (newsFeed is NewsFeed.Successful) {
                 val articleList = newsFeed.news
-                    .filter { query in it.content || query in it.title || query.isEmpty() }
+                    .filter {
+                        query.lowercase() in it.content.lowercase() ||
+                                query.lowercase() in it.title.lowercase() || query.isEmpty()
+                    }
                     .map {
                         if (it.title in favoriteArticles.map { it.title })
                             it.copy(isLiked = true) else it
