@@ -132,41 +132,29 @@ fun ArticleCard(
                 }
             }
             Spacer(modifier = Modifier.height(8.dp))
-            if (chavronState) {
-                Row(modifier = Modifier.fillMaxSize()) {
-                    Text(
-                        article.description, modifier = Modifier
-                            .align(Alignment.Top)
-                            .weight(2.0F)
-                    )
+            Row(modifier = Modifier.fillMaxSize()) {
+                val text = if (chavronState) article.description
+                else article.description.split(" ")
+                    .take(7)
+                    .joinToString(" ") + "..."
+                Text(
+                    text, modifier = Modifier
+                        .align(Alignment.Top)
+                        .weight(2.0F)
+                )
+                Box(
+                    modifier = Modifier
+                        .weight(1.0F)
+                        .padding(end = 20.dp),
+                    contentAlignment = Alignment.TopEnd
+                ) {
                     Icon(
-                        painterResource(ClosedChavron),
+                        painter = if (chavronState) painterResource(ClosedChavron)
+                        else painterResource(OpenedChavron),
                         contentDescription = "",
                         modifier = Modifier
-                            .padding(end = 7.dp)
-                            .align(Alignment.Top)
-                            .size(20.dp)
+                            .size(17.dp)
                             .clickable(true) { chavronState = !chavronState }
-                            .weight(1.0F)
-                    )
-                }
-            } else {
-                Row(modifier = Modifier.fillMaxSize()) {
-                    Text(
-                        article.description.split(" ")
-                            .take(7)
-                            .joinToString(" ") + "...",
-                        modifier = Modifier.weight(2.0F)
-                    )
-                    Icon(
-                        painterResource(OpenedChavron),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .padding(end = 7.dp)
-                            .align(Alignment.Top)
-                            .size(20.dp)
-                            .clickable(true) { chavronState = !chavronState }
-                            .weight(1.0F)
                     )
                 }
             }
