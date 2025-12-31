@@ -41,6 +41,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mahshad.ui.components.ModifiedButton
 import com.mahshad.ui.components.ModifiedTextFiled
+import com.mahshad.ui.icons.TneIcons.AuthenticationBackground
 import com.mahshad.welcome.R
 import com.mahshad.welcome.login.LoginScreenViewModel
 import kotlinx.serialization.Serializable
@@ -62,7 +63,7 @@ fun LoginScreen(
     val context = LocalContext.current
     Column(modifier = Modifier.fillMaxSize()) {
         Image(
-            painter = painterResource(id = R.drawable.mobile_login_rafiki),
+            painter = painterResource(id = AuthenticationBackground),
             contentDescription = null,
             modifier = Modifier
                 .fillMaxWidth()

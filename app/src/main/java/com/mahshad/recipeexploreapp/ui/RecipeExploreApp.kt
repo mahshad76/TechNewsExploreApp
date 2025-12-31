@@ -61,17 +61,17 @@ fun RecipeExploreApp() {
         }
     ) {
         Scaffold(topBar = {
-            TopAppBar(
-                title = { Text("") },
-                modifier = Modifier.alpha(if (hideAppShell) 0f else 1f),
-                navigationIcon = {
-                    if (!hideAppShell) {
+            if (!hideAppShell) {
+                TopAppBar(
+                    title = { Text("") },
+                    modifier = Modifier.alpha(if (hideAppShell) 0f else 1f),
+                    navigationIcon = {
                         IconButton(onClick = { closeDrawer() }) {
                             Icon(Menu, contentDescription = "Menu")
                         }
                     }
-                }
-            )
+                )
+            }
         }) { innerPadding ->
             NavHost(
                 navController = navController,
