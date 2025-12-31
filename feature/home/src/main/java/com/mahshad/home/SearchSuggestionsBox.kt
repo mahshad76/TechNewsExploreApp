@@ -3,6 +3,7 @@ package com.mahshad.home
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,6 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -46,20 +48,27 @@ fun SearchSuggestionsBox(
     onSuggestionClick: (String) -> Unit,
     onIconClicked: (Article) -> Unit
 ) {
-    if (suggestions.isNotEmpty()) {
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(top = 11.73.dp)
-            //.background(Color.LightGray)
-        ) {
-            items(suggestions.size) { index ->
-                val article =
-                    ArticleCard(
-                        article = suggestions[index],
-                        onClick = {},
-                        onIconClicked = onIconClicked
-                    )
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .clip(RoundedCornerShape(18.dp))
+            .background(MaterialTheme.colorScheme.primaryContainer)
+    ) {
+        if (suggestions.isNotEmpty()) {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 11.73.dp)
+                //.background(Color.LightGray)
+            ) {
+                items(suggestions.size) { index ->
+                    val article =
+                        ArticleCard(
+                            article = suggestions[index],
+                            onClick = {},
+                            onIconClicked = onIconClicked
+                        )
+                }
             }
         }
     }
@@ -84,7 +93,7 @@ fun ArticleCard(
                 )
             ),
         shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+        colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
         Column(horizontalAlignment = Alignment.Start, modifier = Modifier.fillMaxSize()) {
             AsyncImage(

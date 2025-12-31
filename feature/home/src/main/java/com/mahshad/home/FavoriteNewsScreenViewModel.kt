@@ -58,7 +58,10 @@ class FavoriteNewsScreenViewModel @Inject constructor(
             ) { a, b, query ->
                 if (a.isSuccess) {
                     val res = a.getOrNull()
-                        ?.filter { query in it.content || query in it.title || query.isEmpty() }
+                        ?.filter {
+                            query.lowercase() in it.content.lowercase() ||
+                                    query in it.title.lowercase() || query.isEmpty()
+                        }
                         ?.map {
                             if (it.title in b.map { it.title }) it.copy(isLiked = true) else it
                         }
