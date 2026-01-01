@@ -1,5 +1,6 @@
 package com.mahshad.welcome.signup
 
+import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -24,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -37,6 +40,8 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mahshad.ui.components.ModifiedButton
 import com.mahshad.ui.components.ModifiedTextFiled
+import com.mahshad.ui.components.OverlappingViews
+import com.mahshad.ui.icons.TneIcons.AuthenticationBackground
 import com.mahshad.welcome.R
 import kotlinx.serialization.Serializable
 
@@ -57,6 +62,52 @@ fun SignUpScreen(
     val signUpStatus = viewModel.signUpStatusFlow.collectAsStateWithLifecycle()
     val context = LocalContext.current
 
+    val background: @Composable () -> Unit = {
+        Image(
+            painter = painterResource(id = AuthenticationBackground),
+            contentDescription = null,
+            contentScale = ContentScale.Crop
+        )
+    }
+    val content: @Composable () -> Unit = {
+        SignUpScreenForm(
+            onNavigateToLogin = onNavigateToLogin,
+            updateFlow = { update: String, type: Int -> viewModel.updateFlow(update, type) },
+            signUp = { username: String, password: String -> viewModel.signUp(username, password) },
+            usernameState = usernameState.value,
+            passwordState = passwordState.value,
+            passwordConfirmationState = passwordConfirmationState.value,
+            isEnabled = isEnabled.value,
+            signUpStatus = signUpStatus.value,
+            context = context,
+            modifier = Modifier
+        )
+    }
+    OverlappingViews(
+        backgroundModifier = Modifier.fillMaxWidth(),
+        contentModifier = Modifier
+            .fillMaxWidth()
+            .offset(y = -100.dp),
+        backgroundShape = RoundedCornerShape(0.dp),
+        contentShape = RoundedCornerShape(24.dp),
+        background = background,
+        content = content
+    )
+}
+
+@Composable
+private fun SignUpScreenForm(
+    onNavigateToLogin: () -> Unit,
+    updateFlow: (String, Int) -> Unit,
+    signUp: (String, String) -> Unit,
+    usernameState: String,
+    passwordState: String,
+    passwordConfirmationState: String,
+    isEnabled: Boolean,
+    signUpStatus: Boolean,
+    context: Context,
+    modifier: Modifier = Modifier
+) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -64,22 +115,6 @@ fun SignUpScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-//        Box(
-//            modifier = Modifier
-//                .size(225.dp),
-//            contentAlignment = Alignment.Center
-//        ) {
-//            Image(
-//                painter = painterResource(R.drawable.signup_2),
-//                contentDescription = "signup photo",
-//                modifier = Modifier
-//                    .fillMaxSize()
-//                    .padding(top = 0.dp)
-//            )
-//        }
-
-        //Spacer(Modifier.height(16.dp))
-
         Text(
             text = "Register",
             fontFamily = FontFamily(Font(R.font.poppins_bold)),
@@ -91,8 +126,8 @@ fun SignUpScreen(
         )
 
         ModifiedTextFiled(
-            value = usernameState.value,
-            onValueChanged = { viewModel.updateFlow(it, 1) },
+            value = usernameState,
+            onValueChanged = { updateFlow(it, 1) },
             placeHolder = { Text("Email", color = Color.Gray) },
             cornerRadius = 0,
             color = TextFieldDefaults.colors(
@@ -117,8 +152,8 @@ fun SignUpScreen(
         Spacer(Modifier.height(20.dp))
 
         ModifiedTextFiled(
-            value = passwordState.value,
-            onValueChanged = { viewModel.updateFlow(it, 2) },
+            value = passwordState,
+            onValueChanged = { updateFlow(it, 2) },
             placeHolder = { Text("Password", color = Color.Gray) },
             cornerRadius = 0,
             color = TextFieldDefaults.colors(
@@ -143,8 +178,8 @@ fun SignUpScreen(
         Spacer(Modifier.height(20.dp))
 
         ModifiedTextFiled(
-            value = passwordConfirmationState.value,
-            onValueChanged = { viewModel.updateFlow(it, 3) },
+            value = passwordConfirmationState,
+            onValueChanged = { updateFlow(it, 3) },
             placeHolder = { Text("Confirm password", color = Color.Gray) },
             cornerRadius = 0,
             color = TextFieldDefaults.colors(
@@ -181,8 +216,8 @@ fun SignUpScreen(
                 Text("Register", fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
             },
             onClick = {
-                viewModel.signUp(usernameState.value, passwordState.value)
-                if (signUpStatus.value) Toast.makeText(
+                signUp(usernameState, passwordState)
+                if (signUpStatus) Toast.makeText(
                     context,
                     "Successful registration",
                     Toast.LENGTH_SHORT
@@ -200,7 +235,7 @@ fun SignUpScreen(
                 .fillMaxWidth()
                 .height(55.dp),
             borderStroke = BorderStroke(0.5.dp, Color.LightGray),
-            enabled = isEnabled.value
+            enabled = isEnabled
         )
 
         Text(
