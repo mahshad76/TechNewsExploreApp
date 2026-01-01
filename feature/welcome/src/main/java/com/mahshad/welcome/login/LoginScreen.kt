@@ -23,7 +23,6 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
@@ -62,22 +61,27 @@ fun LoginScreen(
     val loginStatusState = viewModel.loginStatusFlow.collectAsStateWithLifecycle()
     val context = LocalContext.current
     Column(modifier = Modifier.fillMaxSize()) {
-        Image(
-            painter = painterResource(id = AuthenticationBackground),
-            contentDescription = null,
+        Card(
+            shape = RoundedCornerShape(0.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(30.0F),
-            contentScale = ContentScale.Crop
-        )
+        ) {
+            Image(
+                painter = painterResource(id = AuthenticationBackground),
+                contentDescription = null,
+                contentScale = ContentScale.Crop
+            )
+        }
+
         Card(
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+            shape = RoundedCornerShape(24.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(70.0F)
                 .offset(y = -100.dp)
-                .clip(RoundedCornerShape(24.dp))
         ) {
             Column(
                 modifier = modifier
