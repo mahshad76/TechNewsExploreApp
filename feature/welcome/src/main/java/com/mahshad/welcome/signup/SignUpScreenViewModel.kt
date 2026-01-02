@@ -24,7 +24,8 @@ class SignUpScreenViewModel @Inject constructor(private val authRepository: Auth
     private val _passwordConfirmationStateFlow: MutableStateFlow<String> = MutableStateFlow("")
     val passwordConfirmationStateFlow = _passwordConfirmationStateFlow.asStateFlow()
 
-    private val _signUpStatusFlow: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    private val _signUpStatusFlow: MutableStateFlow<SignUpStatus> =
+        MutableStateFlow(SignUpStatus.Idle)
     val signUpStatusFlow = _signUpStatusFlow.asStateFlow()
 
     val isEnabled: StateFlow<Boolean> =
@@ -55,8 +56,14 @@ class SignUpScreenViewModel @Inject constructor(private val authRepository: Auth
 
     fun signUp(username: String, password: String) {
         authRepository.signUp(username, password, {
-            if (it) _signUpStatusFlow.value = true
-            else _signUpStatusFlow.value = false
+            if (it) _signUpStatusFlow.value = SignUpStatus.Success
+            else _signUpStatusFlow.value = SignUpStatus.Failure
         })
     }
+}
+
+sealed interface SignUpStatus {
+    data object Success : SignUpStatus
+    data object Failure : SignUpStatus
+    data object Idle : SignUpStatus
 }

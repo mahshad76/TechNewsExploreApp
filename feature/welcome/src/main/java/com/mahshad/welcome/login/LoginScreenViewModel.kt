@@ -23,7 +23,7 @@ class LoginScreenViewModel @Inject constructor(private val authRepository: AuthR
     val passwordStateFlow = _passwordStateFlow.asStateFlow()
 
     private val _loginStatusFlow: MutableStateFlow<LoginState> =
-        MutableStateFlow(LoginState.Waiting)
+        MutableStateFlow(LoginState.Idle)
     val loginStatusFlow = _loginStatusFlow.asStateFlow()
 
     val isEnabled: StateFlow<Boolean> =
@@ -58,5 +58,5 @@ class LoginScreenViewModel @Inject constructor(private val authRepository: AuthR
 sealed interface LoginState {
     data object Success : LoginState
     data object Failure : LoginState
-    data object Waiting : LoginState
+    data object Idle : LoginState
 }

@@ -21,6 +21,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -104,7 +105,7 @@ private fun SignUpScreenForm(
     passwordState: String,
     passwordConfirmationState: String,
     isEnabled: Boolean,
-    signUpStatus: Boolean,
+    signUpStatus: SignUpStatus,
     context: Context,
     modifier: Modifier = Modifier
 ) {
@@ -115,6 +116,25 @@ private fun SignUpScreenForm(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        LaunchedEffect(signUpStatus) {
+            when (signUpStatus) {
+                is SignUpStatus.Idle -> {}
+                is SignUpStatus.Success -> {
+                    Toast.makeText(
+                        context,
+                        "Successful registration",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
+
+                is SignUpStatus.Failure -> {
+                    Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
+
         Text(
             text = "Register",
             fontFamily = FontFamily(Font(R.font.poppins_bold)),
@@ -215,14 +235,6 @@ private fun SignUpScreenForm(
             },
             onClick = {
                 signUp(usernameState, passwordState)
-                if (signUpStatus) Toast.makeText(
-                    context,
-                    "Successful registration",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
-                else Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT)
-                    .show()
             },
             shape = RoundedCornerShape(10.dp),
             buttonColors = ButtonDefaults.buttonColors(
