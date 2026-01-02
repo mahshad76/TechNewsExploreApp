@@ -15,12 +15,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.mahshad.model.Article
 import com.mahshad.ui.NewsFeed
 import com.mahshad.ui.components.TneLoadingWheel
 
 @Composable
 fun NewsScreen(
-    //navigateFromHomeToDetail: (String) -> Unit,
+    navigateToDetail: (Article)->Unit,
     newsScreenViewModel: NewsScreenViewModel = hiltViewModel()
 ) {
 //    val newsFeed = newsScreenViewModel.mergedFlow.collectAsStateWithLifecycle()

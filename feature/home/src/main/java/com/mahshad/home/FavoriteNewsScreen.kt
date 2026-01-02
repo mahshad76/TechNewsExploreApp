@@ -15,11 +15,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.mahshad.model.Article
 import com.mahshad.ui.NewsFeed
 import com.mahshad.ui.components.TneLoadingWheel
 
 @Composable
-fun FavoriteNewsScreen(viewModel: FavoriteNewsScreenViewModel = hiltViewModel()) {
+fun FavoriteNewsScreen(
+    navigateToDetail: (Article) -> Unit,
+    viewModel: FavoriteNewsScreenViewModel = hiltViewModel()
+) {
     val searchSuggestionState = viewModel.searchSuggestions.collectAsStateWithLifecycle()
     val searchQuery = viewModel.searchQueryStateFlow.collectAsStateWithLifecycle()
     val context = LocalContext.current
@@ -47,7 +51,10 @@ fun FavoriteNewsScreen(viewModel: FavoriteNewsScreenViewModel = hiltViewModel())
             is NewsFeed.Successful -> {
                 SearchSuggestionsBox(
                     (searchSuggestionState.value as NewsFeed.Successful).news,
-                    { viewModel.updateSearchStateFlow(it) },
+                    {
+                        ///viewModel.updateSearchStateFlow(it)
+
+                    },
                     { viewModel.bookmarkClicked(it) }
                 )
             }

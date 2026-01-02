@@ -1,3 +1,4 @@
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import com.mahshad.model.Article
 import kotlinx.serialization.Serializable
@@ -34,7 +35,7 @@ data class DetailScreenRoute(val article: Article)
 
 @Composable
 fun DetailScreen(article: Article) {
-
+    Text(article.toString())
 }
 //
 //@Composable
