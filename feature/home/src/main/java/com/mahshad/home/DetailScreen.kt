@@ -33,7 +33,7 @@ import kotlinx.serialization.Serializable
 data class DetailScreenRoute(val article: Article)
 
 @Composable
-fun DetailScreen() {
+fun DetailScreen(article: Article) {
 
 }
 //

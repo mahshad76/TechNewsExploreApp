@@ -1,7 +1,8 @@
 package com.mahshad.home.navigation
 
-import DetailScreen
+import DetailScreenRoute
 import androidx.navigation.NavController
+import com.mahshad.model.Article
 
 fun NavController.navigateFromHomeToDetail(article: Article) =
-    this.navigate(DetailScreen(subject = subject))
+    this.navigate(DetailScreenRoute(article = article))

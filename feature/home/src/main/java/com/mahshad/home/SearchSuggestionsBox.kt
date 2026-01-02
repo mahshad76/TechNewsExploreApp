@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -48,6 +49,7 @@ fun SearchSuggestionsBox(
     onSuggestionClick: (String) -> Unit,
     onIconClicked: (Article) -> Unit
 ) {
+    val listState = rememberLazyListState()
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -56,10 +58,10 @@ fun SearchSuggestionsBox(
     ) {
         if (suggestions.isNotEmpty()) {
             LazyColumn(
+                state = listState,
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(top = 11.73.dp)
-                //.background(Color.LightGray)
             ) {
                 items(suggestions.size) { index ->
                     val article =
