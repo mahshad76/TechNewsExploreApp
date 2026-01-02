@@ -1,7 +1,9 @@
 package com.mahshad.model
 
 import com.mahshad.database.FavoriteArticleEntity
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Article(
     val author: String,
     val content: String,
