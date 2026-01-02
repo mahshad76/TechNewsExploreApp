@@ -31,7 +31,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RecipeExploreApp() {
+fun TechNewsExploreApp() {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val coroutineScope = rememberCoroutineScope()
     val navController = rememberNavController()
@@ -76,7 +76,7 @@ fun RecipeExploreApp() {
             NavHost(
                 navController = navController,
                 startDestination = currentRoute,
-                modifier = Modifier.padding(innerPadding)
+                modifier = Modifier.padding(top = innerPadding.calculateTopPadding())
             ) {
                 welcomeNavigationGraph(navController, { navController.navigate(HomeGraphRoute) })
                 homeNavigationGraph(navController)

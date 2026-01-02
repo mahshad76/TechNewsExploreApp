@@ -25,7 +25,7 @@ fun OverlappingViews(
         Card(
             shape = contentShape,
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-            modifier = contentModifier.weight(70.0F)
+            modifier = contentModifier.weight(70.0F, fill = true)
         ) {
             content()
         }

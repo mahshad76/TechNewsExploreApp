@@ -124,7 +124,7 @@ private fun LoginFormContent(
     }
     Column(
         modifier = modifier
-            .padding(24.dp),
+            .padding(start = 24.dp, end = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -135,7 +135,7 @@ private fun LoginFormContent(
             fontSize = 40.sp,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 20.dp)
+                .padding(bottom = 7.dp)
         )
 
         ModifiedTextFiled(
@@ -161,8 +161,6 @@ private fun LoginFormContent(
                     )
                 }
         )
-
-        Spacer(Modifier.height(20.dp))
 
         ModifiedTextFiled(
             value = passwordState,
@@ -198,6 +196,8 @@ private fun LoginFormContent(
                 .clickable { /* action */ }
         )
 
+        Spacer(modifier = Modifier.weight(0.5F))
+
         ModifiedButton(
             content = {
                 Text("Login", fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
@@ -217,11 +217,13 @@ private fun LoginFormContent(
                 .height(55.dp)
         )
 
+        Spacer(modifier = Modifier.weight(1.0F))
+
         Text(
             "Or login with",
             fontSize = 14.sp,
             color = Color.Gray,
-            modifier = Modifier.padding(vertical = 25.dp)
+            modifier = Modifier.padding(top = 25.dp)
         )
 
         ModifiedButton(
@@ -249,7 +251,7 @@ private fun LoginFormContent(
                 .height(50.dp)
         )
 
-        Spacer(Modifier.weight(1f))
+        Spacer(modifier = Modifier.weight(1.0F))
 
         Row(
             verticalAlignment = Alignment.CenterVertically,

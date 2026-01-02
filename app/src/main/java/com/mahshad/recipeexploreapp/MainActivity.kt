@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.mahshad.recipeexploreapp.ui.RecipeExploreApp
+import com.mahshad.recipeexploreapp.ui.TechNewsExploreApp
 import com.mahshad.recipeexploreapp.ui.theme.RecipeExploreAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             RecipeExploreAppTheme {
-                RecipeExploreApp()
+                TechNewsExploreApp()
             }
         }
     }

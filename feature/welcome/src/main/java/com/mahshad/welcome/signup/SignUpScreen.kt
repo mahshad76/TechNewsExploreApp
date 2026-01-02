@@ -111,7 +111,7 @@ private fun SignUpScreenForm(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(horizontal = 30.dp, vertical = 0.dp),
+            .padding(start = 24.dp, end = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -122,7 +122,7 @@ private fun SignUpScreenForm(
             fontSize = 40.sp,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 20.dp)
+                .padding(bottom = 7.dp)
         )
 
         ModifiedTextFiled(
@@ -149,8 +149,6 @@ private fun SignUpScreenForm(
                 }
         )
 
-        Spacer(Modifier.height(20.dp))
-
         ModifiedTextFiled(
             value = passwordState,
             onValueChanged = { updateFlow(it, 2) },
@@ -174,8 +172,6 @@ private fun SignUpScreenForm(
                     )
                 }
         )
-
-        Spacer(Modifier.height(20.dp))
 
         ModifiedTextFiled(
             value = passwordConfirmationState,
@@ -211,6 +207,8 @@ private fun SignUpScreenForm(
                 .clickable { /* action */ }
         )
 
+        Spacer(modifier = Modifier.weight(0.5F))
+
         ModifiedButton(
             content = {
                 Text("Register", fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
@@ -238,11 +236,13 @@ private fun SignUpScreenForm(
             enabled = isEnabled
         )
 
+        Spacer(modifier = Modifier.weight(1.0F))
+
         Text(
             "Or register with",
             fontSize = 14.sp,
             color = Color.Gray,
-            modifier = Modifier.padding(vertical = 25.dp)
+            modifier = Modifier.padding(top = 25.dp)
         )
 
         ModifiedButton(
@@ -266,11 +266,11 @@ private fun SignUpScreenForm(
             borderStroke = BorderStroke(0.5.dp, Color.LightGray),
             enabled = true,
             modifier = Modifier
-                .width(180.dp) // Slightly wider for better text fit
+                .width(180.dp)
                 .height(50.dp)
         )
 
-        Spacer(Modifier.weight(1f))
+        Spacer(modifier = Modifier.weight(1.0F))
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
