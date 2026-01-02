@@ -1,5 +1,7 @@
 package com.mahshad.home.navigation
 
+import DetailScreen
+import DetailScreenRoute
 import androidx.compose.runtime.remember
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -19,20 +21,10 @@ fun NavGraphBuilder.homeNavigationGraph(navController: NavController) {
             val homeGraphEntry = remember(navController.currentBackStackEntry) {
                 navController.getBackStackEntry<HomeGraphRoute>()
             }
-            //val sharedViewModel: HomeScreenViewModel = hiltViewModel(homeGraphEntry)
-            HomeScreen(
-//            { subject: String ->
-//                navController.navigateFromHomeToDetail(subject = subject)
-//            }, sharedViewModel
-            )
+            HomeScreen()
         }
-//        composable<DetailScreenRoute> { backStackEntry ->
-//            val homeGraphEntry = remember(navController.currentBackStackEntry) {
-//                navController.getBackStackEntry<HomeGraphRoute>()
-//            }
-//            val sharedViewModel: HomeScreenViewModel = hiltViewModel(homeGraphEntry)
-//            val detailRoute = backStackEntry.toRoute<DetailScreenRoute>()
-//            DetailScreen(detailRoute.subject, sharedViewModel)
-//        }
+        composable<DetailScreenRoute> {
+            DetailScreen()
+        }
     }
 }

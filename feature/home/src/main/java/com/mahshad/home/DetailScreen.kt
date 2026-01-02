@@ -1,3 +1,6 @@
+import androidx.compose.runtime.Composable
+import kotlinx.serialization.Serializable
+
 //package com.mahshad.home
 //
 //import androidx.compose.foundation.Image
@@ -25,8 +28,12 @@
 //import com.mahshad.model.Article
 //import kotlinx.serialization.Serializable
 //
-//@Serializable
-//data class DetailScreenRoute(val subject: String)
+@Serializable
+data class DetailScreenRoute(val subject: String)
+
+@Composable
+fun DetailScreen() {
+}
 //
 //@Composable
 //fun DetailScreen(subject: String, viewModel: HomeScreenViewModel) {
