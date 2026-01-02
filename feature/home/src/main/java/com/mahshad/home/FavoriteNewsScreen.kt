@@ -51,9 +51,8 @@ fun FavoriteNewsScreen(
             is NewsFeed.Successful -> {
                 SearchSuggestionsBox(
                     (searchSuggestionState.value as NewsFeed.Successful).news,
-                    {
-                        ///viewModel.updateSearchStateFlow(it)
-
+                    { article: Article ->
+                        navigateToDetail(article)
                     },
                     { viewModel.bookmarkClicked(it) }
                 )

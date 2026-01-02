@@ -21,7 +21,7 @@ import com.mahshad.ui.components.TneLoadingWheel
 
 @Composable
 fun NewsScreen(
-    navigateToDetail: (Article)->Unit,
+    navigateToDetail: (Article) -> Unit,
     newsScreenViewModel: NewsScreenViewModel = hiltViewModel()
 ) {
 //    val newsFeed = newsScreenViewModel.mergedFlow.collectAsStateWithLifecycle()
@@ -47,7 +47,9 @@ fun NewsScreen(
             is NewsFeed.Successful -> {
                 SearchSuggestionsBox(
                     searchSuggestionValue.news,
-                    { newsScreenViewModel.updateSearchQueryFlow(it) },
+                    { article: Article ->
+                        navigateToDetail(article)
+                    },
                     { newsScreenViewModel.bookmarkClicked(it) }
                 )
             }

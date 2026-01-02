@@ -46,7 +46,7 @@ import com.mahshad.ui.icons.TneIcons.OpenedChavron
 @Composable
 fun SearchSuggestionsBox(
     suggestions: List<Article>,
-    onSuggestionClick: (String) -> Unit,
+    onSuggestionClick: (Article) -> Unit,
     onIconClicked: (Article) -> Unit
 ) {
     val listState = rememberLazyListState()
@@ -67,7 +67,9 @@ fun SearchSuggestionsBox(
                     val article =
                         ArticleCard(
                             article = suggestions[index],
-                            onClick = {},
+                            onClick = { article: Article ->
+                                onSuggestionClick(article)
+                            },
                             onIconClicked = onIconClicked
                         )
                 }
@@ -79,7 +81,7 @@ fun SearchSuggestionsBox(
 @Composable
 fun ArticleCard(
     article: Article,
-    onClick: () -> Unit,
+    onClick: (Article) -> Unit,
     onIconClicked: (Article) -> Unit
 ) {
     var chavronState by rememberSaveable { mutableStateOf(false) }
@@ -87,7 +89,7 @@ fun ArticleCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 11.73.dp)
-            .clickable(onClick = onClick)
+            .clickable(true) { onClick(article) }
             .animateContentSize(
                 animationSpec = spring(
                     dampingRatio = Spring.DampingRatioLowBouncy,

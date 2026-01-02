@@ -54,6 +54,9 @@ dependencies {
     ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 
+    // Serialization
+    implementation(libs.kotlinx.serialization.json)
+
     // Viewmodel lifecycle
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
