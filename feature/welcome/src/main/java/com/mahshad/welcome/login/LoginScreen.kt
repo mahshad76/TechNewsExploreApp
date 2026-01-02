@@ -18,6 +18,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -41,6 +42,7 @@ import com.mahshad.ui.components.OverlappingViews
 import com.mahshad.ui.icons.TneIcons.AuthenticationBackground
 import com.mahshad.welcome.R
 import com.mahshad.welcome.login.LoginScreenViewModel
+import com.mahshad.welcome.login.LoginState
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -100,10 +102,26 @@ private fun LoginFormContent(
     usernameState: String,
     passwordState: String,
     isEnabledState: Boolean,
-    loginStatusState: Boolean,
+    loginStatusState: LoginState,
     context: Context,
     modifier: Modifier = Modifier
 ) {
+    LaunchedEffect(loginStatusState) {
+        when (loginStatusState) {
+            is LoginState.Success -> {
+                onNavigateToHome(usernameState)
+            }
+
+            is LoginState.Failure -> {
+                Toast.makeText(
+                    context, "Wrong username or password",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            else -> {}
+        }
+    }
     Column(
         modifier = modifier
             .padding(24.dp),
@@ -186,16 +204,6 @@ private fun LoginFormContent(
             },
             onClick = {
                 login(usernameState, passwordState)
-                if (loginStatusState) {
-                    onNavigateToHome(usernameState)
-                } else {
-                    Toast.makeText(
-                        context,
-                        "Wrong username or password",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                }
             },
             shape = RoundedCornerShape(10.dp),
             buttonColors = ButtonDefaults.buttonColors(

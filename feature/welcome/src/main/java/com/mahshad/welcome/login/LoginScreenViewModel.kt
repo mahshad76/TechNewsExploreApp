@@ -22,7 +22,8 @@ class LoginScreenViewModel @Inject constructor(private val authRepository: AuthR
     private val _passwordStateFlow: MutableStateFlow<String> = MutableStateFlow("")
     val passwordStateFlow = _passwordStateFlow.asStateFlow()
 
-    private val _loginStatusFlow: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    private val _loginStatusFlow: MutableStateFlow<LoginState> =
+        MutableStateFlow(LoginState.Waiting)
     val loginStatusFlow = _loginStatusFlow.asStateFlow()
 
     val isEnabled: StateFlow<Boolean> =
@@ -48,8 +49,14 @@ class LoginScreenViewModel @Inject constructor(private val authRepository: AuthR
 
     fun login(username: String, password: String) {
         authRepository.login(username, password, {
-            if (it) _loginStatusFlow.value = true
-            else _loginStatusFlow.value = false
+            if (it) _loginStatusFlow.value = LoginState.Success
+            else _loginStatusFlow.value = LoginState.Failure
         })
     }
+}
+
+sealed interface LoginState {
+    data object Success : LoginState
+    data object Failure : LoginState
+    data object Waiting : LoginState
 }
