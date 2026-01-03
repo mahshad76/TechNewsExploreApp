@@ -19,15 +19,15 @@ fun NavGraphBuilder.welcomeNavigationGraph(
 ) {
     navigation<WelcomeGraphRoute>(LoginScreenRoute::class) {
         composable<SignUpScreenRoute> {
-            SignUpScreen(onNavigateToLogin = { navController.navigate(LoginScreenRoute) })
+            SignUpScreen(onNavigateToLogin = {
+                navController.popBackStack()
+            })
         }
         composable<LoginScreenRoute> {
             LoginScreen(
                 onNavigateToHome = { navigateToHome(it) },
                 onNavigateToSignUp = {
-                    navController.navigate(
-                        SignUpScreenRoute
-                    )
+                    navController.navigate(SignUpScreenRoute)
                 })
         }
     }

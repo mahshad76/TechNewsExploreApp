@@ -3,7 +3,7 @@ package com.mahshad.home
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
-import androidx.compose.foundation.background
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -54,7 +54,7 @@ fun SearchSuggestionsBox(
         modifier = Modifier
             .fillMaxSize()
             .clip(RoundedCornerShape(18.dp))
-            .background(MaterialTheme.colorScheme.primaryContainer)
+        //.background(MaterialTheme.colorScheme.primaryContainer)
     ) {
         if (suggestions.isNotEmpty()) {
             LazyColumn(
@@ -64,14 +64,13 @@ fun SearchSuggestionsBox(
                     .padding(top = 11.73.dp)
             ) {
                 items(suggestions.size) { index ->
-                    val article =
-                        ArticleCard(
-                            article = suggestions[index],
-                            onClick = { article: Article ->
-                                onSuggestionClick(article)
-                            },
-                            onIconClicked = onIconClicked
-                        )
+                    ArticleCard(
+                        article = suggestions[index],
+                        onClick = { article: Article ->
+                            onSuggestionClick(article)
+                        },
+                        onIconClicked = onIconClicked
+                    )
                 }
             }
         }
@@ -79,13 +78,17 @@ fun SearchSuggestionsBox(
 }
 
 @Composable
-fun ArticleCard(
+private fun ArticleCard(
     article: Article,
     onClick: (Article) -> Unit,
     onIconClicked: (Article) -> Unit
 ) {
     var chavronState by rememberSaveable { mutableStateOf(false) }
     Card(
+        //elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        shape = RoundedCornerShape(8.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.Transparent),
+        border = BorderStroke(3.dp, Color.LightGray.copy(alpha = 0.5f)),
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 11.73.dp)
@@ -95,9 +98,7 @@ fun ArticleCard(
                     dampingRatio = Spring.DampingRatioLowBouncy,
                     stiffness = Spring.StiffnessLow
                 )
-            ),
-        shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White)
+            )
     ) {
         Column(horizontalAlignment = Alignment.Start, modifier = Modifier.fillMaxSize()) {
             AsyncImage(
@@ -116,7 +117,11 @@ fun ArticleCard(
                         )
                     )
             )
-            Row(modifier = Modifier.fillMaxSize()) {
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(start = 10.dp, end = 3.dp)
+            ) {
                 Text(
                     text = article.title.split(" ")
                         .take(10)
@@ -145,7 +150,11 @@ fun ArticleCard(
                 }
             }
             Spacer(modifier = Modifier.height(8.dp))
-            Row(modifier = Modifier.fillMaxSize()) {
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(start = 10.dp, end = 3.dp)
+            ) {
                 val text = if (chavronState) article.description
                 else article.description.split(" ")
                     .take(7)
