@@ -40,3 +40,11 @@ fun NavGraphBuilder.homeNavigationGraph(navController: NavController) {
         }
     }
 }
+
+//@Composable
+//inline fun <reified VM : ViewModel> sharedHiltViewModel(
+//    crossinline parentEntryProvider: () -> NavBackStackEntry
+//): VM {
+//    val parentEntry = remember { parentEntryProvider() }
+//    return hiltViewModel(parentEntry)
+//}

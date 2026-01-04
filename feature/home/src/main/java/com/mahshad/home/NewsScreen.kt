@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -23,9 +24,10 @@ import com.mahshad.ui.components.TneLoadingWheel
 @Composable
 fun NewsScreen(
     navigateToDetail: (Article) -> Unit,
-    ParentEntryProvider: () -> NavBackStackEntry,
-    newsScreenViewModel: NewsScreenViewModel = hiltViewModel(ParentEntryProvider())
+    parentEntryProvider: () -> NavBackStackEntry
 ) {
+    val parentEntry = remember { parentEntryProvider() }
+    val newsScreenViewModel: NewsScreenViewModel = hiltViewModel(parentEntry)
 //    val newsFeed = newsScreenViewModel.mergedFlow.collectAsStateWithLifecycle()
     val searchQuery = newsScreenViewModel._searchQueryStateFlow.collectAsStateWithLifecycle()
     val searchSuggestion = newsScreenViewModel.searchSuggestions.collectAsStateWithLifecycle()

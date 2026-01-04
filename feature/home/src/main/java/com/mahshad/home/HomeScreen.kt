@@ -19,7 +19,7 @@ data object HomeScreenRoute
 @Composable
 fun HomeScreen(
     navigateToDetail: (Article) -> Unit,
-    ParentEntryProvider: () -> NavBackStackEntry
+    parentEntryProvider: () -> NavBackStackEntry
 ) {
     SwipeableTabScreen(
         listOf(
@@ -37,9 +37,9 @@ fun HomeScreen(
             )
         ), { index: Int ->
             when (index) {
-                0 -> NewsScreen(navigateToDetail, ParentEntryProvider)
+                0 -> NewsScreen(navigateToDetail, parentEntryProvider)
                 1 -> FavoriteNewsScreen(navigateToDetail)
-                else -> BookMarksScreen(ParentEntryProvider)
+                else -> BookMarksScreen(parentEntryProvider)
             }
         })
 }
