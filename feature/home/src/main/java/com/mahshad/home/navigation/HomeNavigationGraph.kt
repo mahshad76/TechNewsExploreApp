@@ -23,12 +23,12 @@ fun NavGraphBuilder.homeNavigationGraph(navController: NavController) {
         composable<HomeScreenRoute> {
             HomeScreen({ article: Article ->
                 navController.navigateFromHomeToDetail(article)
-            })
+            }) { navController.getBackStackEntry("bookmarks_graph") }
         }
         composable<DetailScreenRoute>(
             typeMap = mapOf(typeOf<Article>() to ArticleNavType)
             //deepLinks = listOf(navDeepLink { uriPattern = "recipeapp://explore/.*" }
-            )
+        )
         { backStackEntry ->
             val detailScreenRoute = backStackEntry.toRoute<DetailScreenRoute>()
             DetailScreen(

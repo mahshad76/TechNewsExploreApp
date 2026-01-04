@@ -2,6 +2,7 @@ package com.mahshad.home
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
+import androidx.navigation.NavBackStackEntry
 import com.mahshad.model.Article
 import com.mahshad.ui.components.SwipeableTabScreen
 import com.mahshad.ui.icons.TneIcons.Favorite
@@ -16,7 +17,10 @@ import kotlinx.serialization.Serializable
 data object HomeScreenRoute
 
 @Composable
-fun HomeScreen(navigateToDetail: (Article) -> Unit) {
+fun HomeScreen(
+    navigateToDetail: (Article) -> Unit,
+    ParentEntryProvider: () -> NavBackStackEntry
+) {
     SwipeableTabScreen(
         listOf(
             Triple(
