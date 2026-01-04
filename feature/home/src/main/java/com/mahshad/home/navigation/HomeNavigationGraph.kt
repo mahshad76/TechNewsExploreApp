@@ -2,10 +2,12 @@ package com.mahshad.home.navigation
 
 import DetailScreen
 import DetailScreenRoute
+import androidx.core.net.toUri
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import androidx.navigation.navDeepLink
 import androidx.navigation.toRoute
 import com.mahshad.home.HomeScreen
 import com.mahshad.home.HomeScreenRoute
@@ -17,6 +19,7 @@ import kotlin.reflect.typeOf
 @Serializable
 data object HomeGraphRoute
 
+const val uri = "https://biztoc.com"
 fun NavGraphBuilder.homeNavigationGraph(navController: NavController) {
     navigation<HomeGraphRoute>(startDestination = HomeScreenRoute::class) {
         composable<HomeScreenRoute> {
@@ -24,10 +27,19 @@ fun NavGraphBuilder.homeNavigationGraph(navController: NavController) {
                 navController.navigateFromHomeToDetail(article)
             })
         }
-        composable<DetailScreenRoute>(typeMap = mapOf(typeOf<Article>() to ArticleNavType))
+        composable<DetailScreenRoute>(
+            typeMap = mapOf(typeOf<Article>() to ArticleNavType),
+            deepLinks = listOf(navDeepLink {
+                uriPattern = "$uri/x/{itemId}"
+            })
+        )
         { backStackEntry ->
             val detailScreenRoute = backStackEntry.toRoute<DetailScreenRoute>()
-            DetailScreen(detailScreenRoute.article)
+            DetailScreen(
+                detailScreenRoute.article,
+                { inputUrl: String ->
+                    navController.navigate(inputUrl.toUri())
+                })
         }
     }
 }
