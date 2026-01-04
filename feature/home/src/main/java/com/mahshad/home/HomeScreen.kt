@@ -24,7 +24,8 @@ fun HomeScreen(navigateToDetail: (Article) -> Unit) {
             Triple(
                 "Favorite", painterResource(Favorite),
                 painterResource(FilledFavorite)
-            )
+            ),
+            Triple("Bookmarks")
         ), { index: Int ->
             when (index) {
                 0 -> NewsScreen(navigateToDetail)
