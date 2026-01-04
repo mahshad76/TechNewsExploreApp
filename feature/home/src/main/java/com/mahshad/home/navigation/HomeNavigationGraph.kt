@@ -7,7 +7,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import androidx.navigation.navDeepLink
 import androidx.navigation.toRoute
 import com.mahshad.home.HomeScreen
 import com.mahshad.home.HomeScreenRoute
@@ -28,10 +27,7 @@ fun NavGraphBuilder.homeNavigationGraph(navController: NavController) {
             })
         }
         composable<DetailScreenRoute>(
-            typeMap = mapOf(typeOf<Article>() to ArticleNavType),
-            deepLinks = listOf(navDeepLink {
-                uriPattern = "$uri/x/{itemId}"
-            })
+            typeMap = mapOf(typeOf<Article>() to ArticleNavType)
         )
         { backStackEntry ->
             val detailScreenRoute = backStackEntry.toRoute<DetailScreenRoute>()

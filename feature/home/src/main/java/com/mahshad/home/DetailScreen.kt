@@ -105,5 +105,5 @@ fun DetailScreen(article: Article, navigateToMoreDetails: (String) -> Unit) {
                 .padding(start = 16.dp, end = 16.dp, top = 8.55.dp),
         )
     }
-    Text(article.url, modifier = Modifier.clickable(true) { article.url.match })
+    Text(article.url, modifier = Modifier.clickable(true) { navigateToMoreDetails(article.url) })
 }
