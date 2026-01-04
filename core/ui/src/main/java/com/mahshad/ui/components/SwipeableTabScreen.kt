@@ -44,7 +44,7 @@ fun SwipeableTabScreen(
                     textColor = if (isSelected) MaterialTheme.colorScheme.primary
                     else Color.DarkGray,
                     icon = if (!isSelected) triple.second else triple.third,
-                    spacer = 4,
+                    spacer = 0,
                     modifier = Modifier
                         .clip(RoundedCornerShape(20.dp))
                         .background(
@@ -52,7 +52,7 @@ fun SwipeableTabScreen(
 //                            else Color.Transparent
                             color = Color.Transparent
                         )
-                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                        .padding(horizontal = 0.dp, vertical = 8.dp)
                         .weight(1.0F)
                 )
             }

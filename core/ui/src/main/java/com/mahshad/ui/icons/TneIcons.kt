@@ -31,4 +31,6 @@ object TneIcons {
     val OpenedChavron = R.drawable.chevron_down_svgrepo_com
     val ClosedChavron = R.drawable.chevron_up_svgrepo_com
     val AuthenticationBackground = R.drawable._d_background_with_globe_programming_code
+    val FilledBookMark = R.drawable.bookmark_filled
+    val UnFilledBookMark = R.drawable.bookmark_unfilled
 }
