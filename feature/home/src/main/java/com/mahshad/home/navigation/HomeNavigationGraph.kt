@@ -23,7 +23,7 @@ fun NavGraphBuilder.homeNavigationGraph(navController: NavController) {
         composable<HomeScreenRoute> {
             HomeScreen({ article: Article ->
                 navController.navigateFromHomeToDetail(article)
-            }) { navController.getBackStackEntry("bookmarks_graph") }
+            }) { navController.getBackStackEntry(HomeScreenRoute) }
         }
         composable<DetailScreenRoute>(
             typeMap = mapOf(typeOf<Article>() to ArticleNavType)

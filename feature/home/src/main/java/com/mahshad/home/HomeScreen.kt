@@ -37,9 +37,9 @@ fun HomeScreen(
             )
         ), { index: Int ->
             when (index) {
-                0 -> NewsScreen(navigateToDetail)
+                0 -> NewsScreen(navigateToDetail, ParentEntryProvider)
                 1 -> FavoriteNewsScreen(navigateToDetail)
-                else -> {}
+                else -> BookMarksScreen(ParentEntryProvider)
             }
         })
 }

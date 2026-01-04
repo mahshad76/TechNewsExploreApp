@@ -15,6 +15,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavBackStackEntry
 import com.mahshad.model.Article
 import com.mahshad.ui.NewsFeed
 import com.mahshad.ui.components.TneLoadingWheel
@@ -22,7 +23,8 @@ import com.mahshad.ui.components.TneLoadingWheel
 @Composable
 fun NewsScreen(
     navigateToDetail: (Article) -> Unit,
-    newsScreenViewModel: NewsScreenViewModel = hiltViewModel()
+    ParentEntryProvider: () -> NavBackStackEntry,
+    newsScreenViewModel: NewsScreenViewModel = hiltViewModel(ParentEntryProvider())
 ) {
 //    val newsFeed = newsScreenViewModel.mergedFlow.collectAsStateWithLifecycle()
     val searchQuery = newsScreenViewModel._searchQueryStateFlow.collectAsStateWithLifecycle()

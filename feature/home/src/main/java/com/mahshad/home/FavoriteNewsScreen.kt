@@ -20,10 +20,8 @@ import com.mahshad.ui.NewsFeed
 import com.mahshad.ui.components.TneLoadingWheel
 
 @Composable
-fun FavoriteNewsScreen(
-    navigateToDetail: (Article) -> Unit,
-    viewModel: FavoriteNewsScreenViewModel = hiltViewModel()
-) {
+fun FavoriteNewsScreen(navigateToDetail: (Article) -> Unit) {
+    val viewModel: FavoriteNewsScreenViewModel = hiltViewModel()
     val searchSuggestionState = viewModel.searchSuggestions.collectAsStateWithLifecycle()
     val searchQuery = viewModel.searchQueryStateFlow.collectAsStateWithLifecycle()
     val context = LocalContext.current
