@@ -1,4 +1,4 @@
-package com.mahshad.home
+package com.mahshad.home.news
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
@@ -17,6 +17,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavBackStackEntry
+import com.mahshad.home.HomeSearchBar
+import com.mahshad.home.SearchSuggestionsBox
 import com.mahshad.model.Article
 import com.mahshad.ui.NewsFeed
 import com.mahshad.ui.components.TneLoadingWheel

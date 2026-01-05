@@ -1,4 +1,4 @@
-package com.mahshad.home
+package com.mahshad.home.favorites
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
@@ -15,6 +15,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.mahshad.home.favorites.FavoriteNewsScreenViewModel
+import com.mahshad.home.HomeSearchBar
+import com.mahshad.home.SearchSuggestionsBox
 import com.mahshad.model.Article
 import com.mahshad.ui.NewsFeed
 import com.mahshad.ui.components.TneLoadingWheel

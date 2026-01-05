@@ -1,4 +1,4 @@
-package com.mahshad.home
+package com.mahshad.home.news
 
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle

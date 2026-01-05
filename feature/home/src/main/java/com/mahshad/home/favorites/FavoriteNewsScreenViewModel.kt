@@ -1,4 +1,4 @@
-package com.mahshad.home
+package com.mahshad.home.favorites
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -75,7 +75,7 @@ class FavoriteNewsScreenViewModel @Inject constructor(
             }
         }.stateIn(
             viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
+            started = SharingStarted.Companion.WhileSubscribed(5_000),
             NewsFeed.Loading
         )
 

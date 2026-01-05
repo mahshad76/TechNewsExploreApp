@@ -3,6 +3,9 @@ package com.mahshad.home
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavBackStackEntry
+import com.mahshad.home.bookmarks.BookMarksScreen
+import com.mahshad.home.favorites.FavoriteNewsScreen
+import com.mahshad.home.news.NewsScreen
 import com.mahshad.model.Article
 import com.mahshad.ui.components.SwipeableTabScreen
 import com.mahshad.ui.icons.TneIcons.Favorite
