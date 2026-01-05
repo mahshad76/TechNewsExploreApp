@@ -2,10 +2,7 @@ package com.mahshad.domain
 
 import com.mahshad.data.repository.ArticleRepository
 import com.mahshad.model.Article
-import com.mahshad.threading.common.DefaultDispatcher
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +12,7 @@ import javax.inject.Inject
 
 class GetAllTheNewsUseCaseImpl @Inject constructor(
     private val articleRepository: ArticleRepository,
-    @ApplicationScope private val scope: CoroutineScope
+    private val scope: CoroutineScope
 ) :
     GetAllTheNewsUseCase {
 
