@@ -40,9 +40,10 @@ fun HomeScreen(
             )
         ), { index: Int ->
             when (index) {
+                // it seems like the first time that i see the tabs they are correct but for the second visit, there is somethin wrong
                 0 -> NewsScreen(navigateToDetail, parentEntryProvider)
                 1 -> FavoriteNewsScreen(navigateToDetail)
-                else -> BookMarksScreen(parentEntryProvider)
+                else -> BookMarksScreen(navigateToDetail, parentEntryProvider)
             }
         })
 }
