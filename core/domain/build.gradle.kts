@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.lyft.domain"
+    namespace = "com.mahshad.domain"
     compileSdk {
         version = release(36)
     }

@@ -1,4 +1,4 @@
-package com.lyft.domain
+package com.mahshad.domain
 
 import org.junit.Test
 

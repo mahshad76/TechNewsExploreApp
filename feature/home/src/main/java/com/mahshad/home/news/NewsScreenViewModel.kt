@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahshad.data.repository.ArticleRepository
 import com.mahshad.data.repository.FavoriteArticleRepository
+import com.mahshad.home.NewsFeedUiState
 import com.mahshad.model.Article
 import com.mahshad.model.FavoriteArticle
-import com.mahshad.ui.NewsFeed
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
@@ -42,33 +42,33 @@ class NewsScreenViewModel @Inject constructor(
             started = SharingStarted.WhileSubscribed(5_000),
             emptyList<FavoriteArticle>()
         )
-    val appleNewsFlow: Flow<NewsFeed<List<Article>>> =
+    val appleNewsFlow: Flow<NewsFeedUiState<List<Article>>> =
         articleRepository.getAppleOrTeslaNews("apple")
             .mapToNewsFeed()
-    val teslaNewsFlow: Flow<NewsFeed<List<Article>>> =
+    val teslaNewsFlow: Flow<NewsFeedUiState<List<Article>>> =
         articleRepository.getAppleOrTeslaNews("tesla")
             .mapToNewsFeed()
-    val worldNewsFlow: Flow<NewsFeed<List<Article>>> = articleRepository.getWorldNews("us")
+    val worldNewsFlow: Flow<NewsFeedUiState<List<Article>>> = articleRepository.getWorldNews("us")
         .mapToNewsFeed()
-    val techCrunchFlow: Flow<NewsFeed<List<Article>>> =
+    val techCrunchFlow: Flow<NewsFeedUiState<List<Article>>> =
         articleRepository.getTechCrunchNews("techcrunch")
             .mapToNewsFeed()
-    val wsjFlow: Flow<NewsFeed<List<Article>>> = articleRepository.getWsjNews("wsj.com")
+    val wsjFlow: Flow<NewsFeedUiState<List<Article>>> = articleRepository.getWsjNews("wsj.com")
         .mapToNewsFeed()
 
-    val mergedFlow: StateFlow<NewsFeed<List<Article>>> =
+    val mergedFlow: StateFlow<NewsFeedUiState<List<Article>>> =
         merge(appleNewsFlow, teslaNewsFlow, worldNewsFlow, techCrunchFlow, wsjFlow)
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000),
-                initialValue = NewsFeed.Loading
+                initialValue = NewsFeedUiState.Loading
             )
 
-    val searchSuggestions: StateFlow<NewsFeed<List<Article>>> =
+    val searchSuggestions: StateFlow<NewsFeedUiState<List<Article>>> =
         combine(mergedFlow, _searchQueryStateFlow, _favoriteArticlesStateFlow)
         { newsFeed, query, favoriteArticles ->
             Log.d("TAG", "okay")
-            if (newsFeed is NewsFeed.Successful) {
+            if (newsFeed is NewsFeedUiState.Successful) {
                 val articleList = newsFeed.news
                     .filter {
                         query.lowercase() in it.content.lowercase() ||
@@ -78,7 +78,7 @@ class NewsScreenViewModel @Inject constructor(
                         if (it.title in favoriteArticles.map { it.title })
                             it.copy(isLiked = true) else it
                     }
-                return@combine NewsFeed.Successful(articleList)
+                return@combine NewsFeedUiState.Successful(articleList)
             } else {
                 Log.d("TAG", "problem")
                 return@combine newsFeed
@@ -89,7 +89,7 @@ class NewsScreenViewModel @Inject constructor(
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000),
-                initialValue = NewsFeed.Loading
+                initialValue = NewsFeedUiState.Loading
             )
 
     fun updateSearchQueryFlow(query: String) {
@@ -113,11 +113,11 @@ fun Flow<Result<List<Article>>>.mapToNewsFeed() =
         result.fold(
             onSuccess = {
                 Log.d("TAG", "network call")
-                NewsFeed.Successful(it)
+                NewsFeedUiState.Successful(it)
             },
             onFailure = {
                 Log.d("TAG", "network call")
-                NewsFeed.Error(it)
+                NewsFeedUiState.Error(it)
             }
         )
     }

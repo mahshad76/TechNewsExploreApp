@@ -30,7 +30,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.mahshad.ui.UserDataState
 import com.mahshad.ui.components.ModifiedToggleButton
 import com.mahshad.ui.components.TneLoadingWheel
 import com.mahshad.ui.icons.TneIcons.Add

@@ -17,10 +17,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavBackStackEntry
-import com.mahshad.home.HomeSearchBar
-import com.mahshad.home.SearchSuggestionsBox
+import com.mahshad.home.NewsFeedUiState
+import com.mahshad.home.ui.HomeSearchBar
+import com.mahshad.home.ui.SearchSuggestionsBox
 import com.mahshad.model.Article
-import com.mahshad.ui.NewsFeed
 import com.mahshad.ui.components.TneLoadingWheel
 
 @Composable
@@ -50,7 +50,7 @@ fun NewsScreen(
             })
         val searchSuggestionValue = searchSuggestion.value
         when (searchSuggestionValue) {
-            is NewsFeed.Successful -> {
+            is NewsFeedUiState.Successful -> {
                 SearchSuggestionsBox(
                     searchSuggestionValue.news,
                     { article: Article ->
@@ -60,12 +60,12 @@ fun NewsScreen(
                 )
             }
 
-            is NewsFeed.Error -> Toast.makeText(
+            is NewsFeedUiState.Error -> Toast.makeText(
                 context, "Something went wrong",
                 Toast.LENGTH_SHORT
             ).show()
 
-            is NewsFeed.Loading -> TneLoadingWheel()
+            is NewsFeedUiState.Loading -> TneLoadingWheel()
         }
         Spacer(Modifier.windowInsetsBottomHeight(WindowInsets.safeDrawing))
     }

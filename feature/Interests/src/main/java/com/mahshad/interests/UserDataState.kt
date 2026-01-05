@@ -1,4 +1,4 @@
-package com.mahshad.ui
+package com.mahshad.interests
 
 sealed interface UserDataState<out T> {
     data class Success(val favoriteTopics: Set<String>) : UserDataState<Set<String>>

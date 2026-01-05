@@ -7,8 +7,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.toRoute
-import com.mahshad.home.HomeScreen
-import com.mahshad.home.HomeScreenRoute
+import com.mahshad.home.ui.HomeScreen
+import com.mahshad.home.ui.HomeScreenRoute
 import com.mahshad.model.Article
 import com.mahshad.model.Article.Companion.ArticleNavType
 import kotlinx.serialization.Serializable

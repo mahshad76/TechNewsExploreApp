@@ -1,4 +1,4 @@
-package com.mahshad.home
+package com.mahshad.home.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource

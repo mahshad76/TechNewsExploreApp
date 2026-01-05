@@ -1,4 +1,4 @@
-package com.mahshad.home
+package com.mahshad.home.ui
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring

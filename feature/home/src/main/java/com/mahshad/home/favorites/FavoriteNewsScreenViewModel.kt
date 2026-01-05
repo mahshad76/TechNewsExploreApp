@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.mahshad.data.repository.ArticleRepository
 import com.mahshad.data.repository.FavoriteArticleRepository
 import com.mahshad.data.repository.UserDataRepository
+import com.mahshad.home.NewsFeedUiState
 import com.mahshad.model.Article
-import com.mahshad.ui.NewsFeed
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -39,7 +39,7 @@ class FavoriteNewsScreenViewModel @Inject constructor(
     val searchQueryStateFlow = _searchQueryStateFlow.asStateFlow()
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val searchSuggestions: StateFlow<NewsFeed<List<Article>>> =
+    val searchSuggestions: StateFlow<NewsFeedUiState<List<Article>>> =
         userDataRepository.getUserData().flatMapLatest { favoriteTopics: Set<String> ->
             val flowOfTopics: Flow<String> = favoriteTopics.asFlow()
             val allFavoriteNewsFlow = flowOfTopics.flatMapMerge { topic: String ->
@@ -65,10 +65,10 @@ class FavoriteNewsScreenViewModel @Inject constructor(
                         ?.map {
                             if (it.title in b.map { it.title }) it.copy(isLiked = true) else it
                         }
-                    if (res != null) NewsFeed.Successful(res) else NewsFeed.Successful(emptyList())
+                    if (res != null) NewsFeedUiState.Successful(res) else NewsFeedUiState.Successful(emptyList())
                 } else {
                     val exception = a.exceptionOrNull()
-                    if (exception != null) NewsFeed.Error(a.exceptionOrNull()!!) else NewsFeed.Error(
+                    if (exception != null) NewsFeedUiState.Error(a.exceptionOrNull()!!) else NewsFeedUiState.Error(
                         Throwable("unknown error on the server side")
                     )
                 }
@@ -76,7 +76,7 @@ class FavoriteNewsScreenViewModel @Inject constructor(
         }.stateIn(
             viewModelScope,
             started = SharingStarted.Companion.WhileSubscribed(5_000),
-            NewsFeed.Loading
+            NewsFeedUiState.Loading
         )
 
     fun updateSearchStateFlow(update: String) {
