@@ -4,8 +4,9 @@ import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mahshad.data.repository.ArticleRepository
 import com.mahshad.data.repository.FavoriteArticleRepository
+import com.mahshad.domain.ArticleFeedState
+import com.mahshad.domain.GetAllTheNewsUseCase
 import com.mahshad.home.NewsFeedUiState
 import com.mahshad.model.Article
 import com.mahshad.model.FavoriteArticle
@@ -27,7 +28,7 @@ import javax.inject.Inject
 @HiltViewModel
 class NewsScreenViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
-    private val articleRepository: ArticleRepository,
+    private val getAllTheNewsUseCase: GetAllTheNewsUseCase,
     private val favoriteArticleRepository: FavoriteArticleRepository
 ) : ViewModel() {
     private val searchQueryStateFlow = savedStateHandle.getMutableStateFlow(
@@ -42,22 +43,16 @@ class NewsScreenViewModel @Inject constructor(
             started = SharingStarted.WhileSubscribed(5_000),
             emptyList<FavoriteArticle>()
         )
-    val appleNewsFlow: Flow<NewsFeedUiState<List<Article>>> =
-        articleRepository.getAppleOrTeslaNews("apple")
-            .mapToNewsFeed()
-    val teslaNewsFlow: Flow<NewsFeedUiState<List<Article>>> =
-        articleRepository.getAppleOrTeslaNews("tesla")
-            .mapToNewsFeed()
-    val worldNewsFlow: Flow<NewsFeedUiState<List<Article>>> = articleRepository.getWorldNews("us")
-        .mapToNewsFeed()
-    val techCrunchFlow: Flow<NewsFeedUiState<List<Article>>> =
-        articleRepository.getTechCrunchNews("techcrunch")
-            .mapToNewsFeed()
-    val wsjFlow: Flow<NewsFeedUiState<List<Article>>> = articleRepository.getWsjNews("wsj.com")
-        .mapToNewsFeed()
 
-    val mergedFlow: StateFlow<NewsFeedUiState<List<Article>>> =
-        merge(appleNewsFlow, teslaNewsFlow, worldNewsFlow, techCrunchFlow, wsjFlow)
+    val mergedFlow =
+        merge(
+            getAllTheNewsUseCase.appleNews,
+            getAllTheNewsUseCase.teslaNews,
+            getAllTheNewsUseCase.worldNews,
+            getAllTheNewsUseCase.techCrunchNews,
+            getAllTheNewsUseCase.wsjNews
+        )
+            .mapToNewsFeed()
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000),
@@ -108,16 +103,11 @@ class NewsScreenViewModel @Inject constructor(
     }
 }
 
-fun Flow<Result<List<Article>>>.mapToNewsFeed() =
-    this.map { result ->
-        result.fold(
-            onSuccess = {
-                Log.d("TAG", "network call")
-                NewsFeedUiState.Successful(it)
-            },
-            onFailure = {
-                Log.d("TAG", "network call")
-                NewsFeedUiState.Error(it)
-            }
-        )
+fun Flow<ArticleFeedState<List<Article>>>.mapToNewsFeed() =
+    this.map { articleFeedState ->
+        when (articleFeedState) {
+            is ArticleFeedState.Success -> NewsFeedUiState.Successful(articleFeedState.articles)
+            is ArticleFeedState.Error -> NewsFeedUiState.Error(articleFeedState.cause)
+            is ArticleFeedState.Loading -> NewsFeedUiState.Loading
+        }
     }
