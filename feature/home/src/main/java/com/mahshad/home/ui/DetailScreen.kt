@@ -1,6 +1,4 @@
-
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.compose.foundation.Image
@@ -15,10 +13,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -50,6 +52,13 @@ fun DetailScreen(article: Article) {
             .background(Color.White)
             .verticalScroll(scrollState)
     ) {
+        Icon(
+            Icons.AutoMirrored.Filled.ArrowBack,
+            contentDescription = "return back",
+            modifier = Modifier
+                .wrapContentSize()
+                .align(Alignment.Start),
+        )
         AsyncImage(
             article.urlToImage,
             contentDescription = "new's image",
@@ -112,7 +121,9 @@ fun DetailScreen(article: Article) {
                 .padding(start = 16.dp, end = 16.dp, top = 8.55.dp),
         )
         Text(
-            text = article.url, color = Color.Blue, modifier = Modifier
+            text = article.url,
+            color = Color.Blue,
+            modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp, top = 8.55.dp)
                 .clickable(true) {
@@ -121,22 +132,9 @@ fun DetailScreen(article: Article) {
     }
 }
 
-fun openExternalLink(context: Context, articleUrl: String) {
-    //val encodedUrl = Uri.encode(articleUrl)
-    val deepLinkUrl = articleUrl
-
-    val intent = Intent(
-        Intent.ACTION_VIEW,
-        Uri.parse(deepLinkUrl)
-    )
-
-    context.startActivity(intent)
-}
-
 fun openInCustomTab(context: Context, url: String) {
     val builder = CustomTabsIntent.Builder()
     builder.setShowTitle(true)
-    //builder.setToolbarColor(ContextCompat.getColor(context, R.color))
     val customTabsIntent = builder.build()
     customTabsIntent.launchUrl(context, Uri.parse(url))
 }
