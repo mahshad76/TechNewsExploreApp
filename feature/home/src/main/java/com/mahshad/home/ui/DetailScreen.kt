@@ -1,5 +1,11 @@
+
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -21,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -34,10 +41,8 @@ import kotlinx.serialization.Serializable
 data class DetailScreenRoute(val article: Article)
 
 @Composable
-fun DetailScreen(
-    article: Article,
-    //navigateToMoreDetails: (String) -> Unit
-) {
+fun DetailScreen(article: Article) {
+    val context = LocalContext.current
     val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
@@ -106,6 +111,33 @@ fun DetailScreen(
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp, top = 8.55.dp),
         )
+        Text(
+            text = article.url, color = Color.Blue, modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp, top = 8.55.dp)
+                .clickable(true) {
+                    openInCustomTab(context, article.url)
+                })
     }
-    //Text(article.url, modifier = Modifier.clickable(true) { navigateToMoreDetails(article.url) })
 }
+
+fun openExternalLink(context: Context, articleUrl: String) {
+    //val encodedUrl = Uri.encode(articleUrl)
+    val deepLinkUrl = articleUrl
+
+    val intent = Intent(
+        Intent.ACTION_VIEW,
+        Uri.parse(deepLinkUrl)
+    )
+
+    context.startActivity(intent)
+}
+
+fun openInCustomTab(context: Context, url: String) {
+    val builder = CustomTabsIntent.Builder()
+    builder.setShowTitle(true)
+    //builder.setToolbarColor(ContextCompat.getColor(context, R.color))
+    val customTabsIntent = builder.build()
+    customTabsIntent.launchUrl(context, Uri.parse(url))
+}
+

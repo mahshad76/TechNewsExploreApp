@@ -11,14 +11,12 @@ import com.mahshad.home.NewsFeedUiState
 import com.mahshad.model.Article
 import com.mahshad.model.FavoriteArticle
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -121,11 +119,11 @@ class NewsScreenViewModel @Inject constructor(
     }
 }
 
-fun Flow<ArticleFeedState<List<Article>>>.mapToNewsFeed() =
-    this.map { articleFeedState ->
-        when (articleFeedState) {
-            is ArticleFeedState.Success -> NewsFeedUiState.Successful(articleFeedState.articles)
-            is ArticleFeedState.Error -> NewsFeedUiState.Error(articleFeedState.cause)
-            is ArticleFeedState.Loading -> NewsFeedUiState.Loading
-        }
-    }
+//fun Flow<ArticleFeedState<List<Article>>>.mapToNewsFeed() =
+//    this.map { articleFeedState ->
+//        when (articleFeedState) {
+//            is ArticleFeedState.Success -> NewsFeedUiState.Successful(articleFeedState.articles)
+//            is ArticleFeedState.Error -> NewsFeedUiState.Error(articleFeedState.cause)
+//            is ArticleFeedState.Loading -> NewsFeedUiState.Loading
+//        }
+//    }
