@@ -2,11 +2,15 @@ package com.mahshad.home.navigation
 
 import DetailScreen
 import DetailScreenRoute
+import android.net.Uri
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import androidx.navigation.navDeepLink
 import androidx.navigation.toRoute
+import com.mahshad.home.ui.ExternalArticleScreen
+import com.mahshad.home.ui.ExternalArticleScreenRoute
 import com.mahshad.home.ui.HomeScreen
 import com.mahshad.home.ui.HomeScreenRoute
 import com.mahshad.model.Article
@@ -17,7 +21,6 @@ import kotlin.reflect.typeOf
 @Serializable
 data object HomeGraphRoute
 
-const val uri = "https://biztoc.com"
 fun NavGraphBuilder.homeNavigationGraph(navController: NavController) {
     navigation<HomeGraphRoute>(startDestination = HomeScreenRoute::class) {
         composable<HomeScreenRoute> {
@@ -27,16 +30,23 @@ fun NavGraphBuilder.homeNavigationGraph(navController: NavController) {
         }
         composable<DetailScreenRoute>(
             typeMap = mapOf(typeOf<Article>() to ArticleNavType)
-            //deepLinks = listOf(navDeepLink { uriPattern = "recipeapp://explore/.*" }
         )
         { backStackEntry ->
             val detailScreenRoute = backStackEntry.toRoute<DetailScreenRoute>()
-            DetailScreen(
-                detailScreenRoute.article,
-//                { inputUrl: String ->
-//                    navController.navigate(inputUrl.toUri())
-//                }
+            DetailScreen(detailScreenRoute.article)
+        }
+        composable<ExternalArticleScreenRoute>(
+            deepLinks = listOf(
+                navDeepLink {
+                    uriPattern = "https://mahshad.app/open?url={url}"
+                }
             )
+        ) { backStackEntry ->
+
+            val route = backStackEntry.toRoute<ExternalArticleScreenRoute>()
+            val decodedUrl = Uri.decode(route.url)
+
+            ExternalArticleScreen(url = decodedUrl)
         }
     }
 }
