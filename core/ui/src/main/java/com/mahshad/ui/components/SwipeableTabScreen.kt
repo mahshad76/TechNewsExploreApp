@@ -59,6 +59,7 @@ fun SwipeableTabScreen(
         }
         HorizontalPager(
             state = pagerState,
+            //beyondViewportPageCount = 2,
             modifier = Modifier.fillMaxSize()
         ) { page ->
             pageNavigator(page)

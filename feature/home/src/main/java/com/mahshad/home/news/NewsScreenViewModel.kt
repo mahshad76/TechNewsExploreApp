@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -45,14 +44,33 @@ class NewsScreenViewModel @Inject constructor(
         )
 
     val mergedFlow =
-        merge(
+        combine(
             getAllTheNewsUseCase.appleNews,
             getAllTheNewsUseCase.teslaNews,
             getAllTheNewsUseCase.worldNews,
             getAllTheNewsUseCase.techCrunchNews,
             getAllTheNewsUseCase.wsjNews
-        )
-            .mapToNewsFeed()
+        ) { appleNews, teslaNews, worldNews, techCrunchNews, wsjNews ->
+            if (appleNews is ArticleFeedState.Success && teslaNews is ArticleFeedState.Success &&
+                worldNews is ArticleFeedState.Success && techCrunchNews is ArticleFeedState.Success
+                && wsjNews is ArticleFeedState.Success
+            ) {
+                NewsFeedUiState.Successful(
+                    appleNews.articles
+                            + teslaNews.articles
+                            + worldNews.articles
+                            + techCrunchNews.articles
+                            + wsjNews.articles
+                )
+            } else {
+                NewsFeedUiState.Error(
+                    Throwable(
+                        "Error in loading the news form " +
+                                "the server"
+                    )
+                )
+            }
+        }
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000),
