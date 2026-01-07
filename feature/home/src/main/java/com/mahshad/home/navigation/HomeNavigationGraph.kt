@@ -29,7 +29,9 @@ fun NavGraphBuilder.homeNavigationGraph(navController: NavController) {
         )
         { backStackEntry ->
             val detailScreenRoute = backStackEntry.toRoute<DetailScreenRoute>()
-            DetailScreen(detailScreenRoute.article)
+            DetailScreen(
+                detailScreenRoute.article,
+                { navController.popBackStack() })
         }
     }
 }

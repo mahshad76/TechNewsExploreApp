@@ -43,7 +43,7 @@ import kotlinx.serialization.Serializable
 data class DetailScreenRoute(val article: Article)
 
 @Composable
-fun DetailScreen(article: Article) {
+fun DetailScreen(article: Article, navigateBackToHome: () -> Unit) {
     val context = LocalContext.current
     val scrollState = rememberScrollState()
     Column(
@@ -57,7 +57,8 @@ fun DetailScreen(article: Article) {
             contentDescription = "return back",
             modifier = Modifier
                 .wrapContentSize()
-                .align(Alignment.Start),
+                .align(Alignment.Start)
+                .clickable(true) { navigateBackToHome() },
         )
         AsyncImage(
             article.urlToImage,
