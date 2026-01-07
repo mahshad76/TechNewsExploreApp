@@ -1,5 +1,6 @@
 package com.mahshad.home.news
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -60,10 +61,13 @@ fun NewsScreen(
                 )
             }
 
-            is NewsFeedUiState.Error -> Toast.makeText(
-                context, "Something went wrong",
+            is NewsFeedUiState.Error ->
+            {
+                Log.e("TAG", "NewsScreen: Something went wrong ${searchSuggestionValue.e}", )
+                Toast.makeText(
+                context, "Something went wrong ${searchSuggestionValue.e}",
                 Toast.LENGTH_SHORT
-            ).show()
+            ).show()}
 
             is NewsFeedUiState.Loading -> TneLoadingWheel()
         }

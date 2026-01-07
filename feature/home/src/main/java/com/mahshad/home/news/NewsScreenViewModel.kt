@@ -48,25 +48,19 @@ class NewsScreenViewModel @Inject constructor(
             getAllTheNewsUseCase.worldNews,
             getAllTheNewsUseCase.techCrunchNews,
             getAllTheNewsUseCase.wsjNews
-        ) { appleNews, teslaNews, worldNews, techCrunchNews, wsjNews ->
-            if (appleNews is ArticleFeedState.Success && teslaNews is ArticleFeedState.Success &&
-                worldNews is ArticleFeedState.Success && techCrunchNews is ArticleFeedState.Success
-                && wsjNews is ArticleFeedState.Success
-            ) {
-                NewsFeedUiState.Successful(
-                    appleNews.articles
-                            + teslaNews.articles
-                            + worldNews.articles
-                            + techCrunchNews.articles
-                            + wsjNews.articles
-                )
-            } else {
-                NewsFeedUiState.Error(
-                    Throwable(
-                        "Error in loading the news form " +
-                                "the server"
-                    )
-                )
+        ) { flows ->
+            val allNews = flows.filterIsInstance<ArticleFeedState.Success>()
+            val anyLoading = flows.any { it is ArticleFeedState.Loading }
+            val anyError = flows.any { it is ArticleFeedState.Error }
+
+            when {
+                allNews.size == 5 -> {
+                    NewsFeedUiState.Successful(allNews.flatMap { it.articles })
+                }
+
+                anyLoading -> NewsFeedUiState.Loading
+                anyError -> NewsFeedUiState.Error(Throwable("Error loading news"))
+                else -> NewsFeedUiState.Loading
             }
         }
             .stateIn(
@@ -78,7 +72,6 @@ class NewsScreenViewModel @Inject constructor(
     val searchSuggestions: StateFlow<NewsFeedUiState<List<Article>>> =
         combine(mergedFlow, _searchQueryStateFlow, _favoriteArticlesStateFlow)
         { newsFeed, query, favoriteArticles ->
-            Log.d("TAG", "okay")
             if (newsFeed is NewsFeedUiState.Successful) {
                 val articleList = newsFeed.news
                     .filter {
@@ -91,7 +84,9 @@ class NewsScreenViewModel @Inject constructor(
                     }
                 return@combine NewsFeedUiState.Successful(articleList)
             } else {
-                Log.d("TAG", "problem")
+                if (newsFeed is NewsFeedUiState.Error) Log.d("TAG", "problem ${newsFeed.e}")
+                else Log.d("TAG", "Loading")
+
                 return@combine newsFeed
             }
         }

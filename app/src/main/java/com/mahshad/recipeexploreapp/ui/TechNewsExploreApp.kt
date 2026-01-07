@@ -36,7 +36,7 @@ fun TechNewsExploreApp() {
     val coroutineScope = rememberCoroutineScope()
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = WelcomeGraphRoute::class
+    val currentRoute = HomeGraphRoute::class
     val currentGraphRouteString = navBackStackEntry?.destination?.parent?.route
     val hideAppShell = currentGraphRouteString == WelcomeGraphRoute::class.qualifiedName
     val navigationActions = remember(navController) {
