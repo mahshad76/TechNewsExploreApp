@@ -181,6 +181,7 @@ private fun SignUpScreenForm(
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent
             ),
+            isPassword = true,
             modifier = Modifier
                 .fillMaxWidth()
                 .drawBehind {
@@ -205,6 +206,7 @@ private fun SignUpScreenForm(
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent
             ),
+            isPassword = true,
             modifier = Modifier
                 .fillMaxWidth()
                 .drawBehind {

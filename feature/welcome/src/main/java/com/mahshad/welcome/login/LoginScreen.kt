@@ -1,3 +1,4 @@
+
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
@@ -174,6 +175,7 @@ private fun LoginFormContent(
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent
             ),
+            isPassword = true,
             modifier = Modifier
                 .fillMaxWidth()
                 .drawBehind {

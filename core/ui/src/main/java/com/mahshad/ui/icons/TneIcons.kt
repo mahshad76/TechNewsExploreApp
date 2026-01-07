@@ -8,6 +8,8 @@ import androidx.compose.material.icons.filled.Interests
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Interests
+import androidx.compose.material.icons.outlined.Visibility
+import androidx.compose.material.icons.outlined.VisibilityOff
 import com.mahshad.ui.R
 
 object TneIcons {
@@ -18,6 +20,8 @@ object TneIcons {
     val UnFilledInterests = Icons.Outlined.Interests
     val Settings = Icons.Filled.Settings
     val Menu = Icons.Filled.Menu
+    val Visibility = Icons.Outlined.Visibility
+    val VisibilityOff = Icons.Outlined.VisibilityOff
     val Rocket = R.drawable.rocket_svgrepo_com
     val Apple = R.drawable.apple_logo_svgrepo_com
     val CNN = R.drawable.cnn_logo
