@@ -14,6 +14,7 @@ fun ModifiedTextFiled(
     placeHolder: @Composable () -> Unit,
     cornerRadius: Int,
     color: TextFieldColors,
+    isPassword: Boolean = false,
     modifier: Modifier
 ) {
     TextField(
