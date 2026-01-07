@@ -11,6 +11,7 @@ import com.mahshad.home.NewsFeedUiState
 import com.mahshad.model.Article
 import com.mahshad.model.FavoriteArticle
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -28,10 +29,11 @@ class NewsScreenViewModel @Inject constructor(
     private val getAllTheNewsUseCase: GetAllTheNewsUseCase,
     private val favoriteArticleRepository: FavoriteArticleRepository
 ) : ViewModel() {
-    private val searchQueryStateFlow = savedStateHandle.getMutableStateFlow(
-        "search_query_key",
-        ""
-    )
+    //    private val searchQueryStateFlow = savedStateHandle.getMutableStateFlow(
+//        "search_query_key",
+//        ""
+//    )
+    private val searchQueryStateFlow = MutableStateFlow("")
     val _searchQueryStateFlow = searchQueryStateFlow.asStateFlow()
 
     private val _favoriteArticlesStateFlow: StateFlow<List<FavoriteArticle>> =
