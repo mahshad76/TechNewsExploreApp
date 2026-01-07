@@ -1,6 +1,7 @@
 package com.mahshad.home.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavBackStackEntry
 import com.mahshad.home.bookmarks.BookMarksScreen
@@ -8,12 +9,12 @@ import com.mahshad.home.favorites.FavoriteNewsScreen
 import com.mahshad.home.news.NewsScreen
 import com.mahshad.model.Article
 import com.mahshad.ui.components.SwipeableTabScreen
-import com.mahshad.ui.icons.TneIcons.Favorite
 import com.mahshad.ui.icons.TneIcons.FilledBookMark
-import com.mahshad.ui.icons.TneIcons.FilledFavorite
 import com.mahshad.ui.icons.TneIcons.FilledNews
+import com.mahshad.ui.icons.TneIcons.Interests
 import com.mahshad.ui.icons.TneIcons.News
 import com.mahshad.ui.icons.TneIcons.UnFilledBookMark
+import com.mahshad.ui.icons.TneIcons.UnFilledInterests
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -31,8 +32,8 @@ fun HomeScreen(
                 painterResource(FilledNews)
             ),
             Triple(
-                "Favorite", painterResource(Favorite),
-                painterResource(FilledFavorite)
+                "Interests", rememberVectorPainter(UnFilledInterests),
+                rememberVectorPainter(Interests)
             ),
             Triple(
                 "Bookmarks", painterResource(UnFilledBookMark),

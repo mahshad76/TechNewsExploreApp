@@ -7,6 +7,7 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Interests
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.Interests
 import com.mahshad.ui.R
 
 object TneIcons {
@@ -14,6 +15,7 @@ object TneIcons {
     val Check = Icons.Default.Check
     val Home = Icons.Filled.Home
     val Interests = Icons.Filled.Interests
+    val UnFilledInterests = Icons.Outlined.Interests
     val Settings = Icons.Filled.Settings
     val Menu = Icons.Filled.Menu
     val Rocket = R.drawable.rocket_svgrepo_com
