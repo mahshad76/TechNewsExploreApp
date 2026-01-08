@@ -7,7 +7,7 @@ import com.mahshad.domain.GetAllTheNewsUseCase
 import com.mahshad.model.Article
 import com.mahshad.model.FavoriteArticle
 import io.mockk.MockKAnnotations
-import io.mockk.coEvery
+import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -29,39 +29,39 @@ class NewsScreenViewModelTest {
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
-        coEvery {
+        every {
             getAllTheNewsUseCase.wsjNews
         } returns MutableStateFlow(
             ArticleFeedState
                 .Success(listOf(Article.DEFAULT))
         )
             .asStateFlow()
-        coEvery {
+        every {
             getAllTheNewsUseCase.teslaNews
         } returns MutableStateFlow(
             ArticleFeedState
                 .Success(listOf(Article.DEFAULT))
         )
             .asStateFlow()
-        coEvery {
+        every {
             getAllTheNewsUseCase.appleNews
         } returns MutableStateFlow(
             ArticleFeedState
                 .Success(listOf(Article.DEFAULT))
         )
             .asStateFlow()
-        coEvery {
+        every {
             getAllTheNewsUseCase.worldNews
         } returns MutableStateFlow(
             ArticleFeedState
                 .Success(listOf(Article.DEFAULT))
         )
             .asStateFlow()
-        coEvery {
+        every {
             getAllTheNewsUseCase.techCrunchNews
         } returns MutableStateFlow(ArticleFeedState.Success(listOf(Article.DEFAULT)))
             .asStateFlow()
-        coEvery { favoriteArticleRepository.getArticles() } returns flowOf(listOf(FavoriteArticle.DEFAULT))
+        every { favoriteArticleRepository.getArticles() } returns flowOf(listOf(FavoriteArticle.DEFAULT))
         newsScreenViewModel = NewsScreenViewModel(getAllTheNewsUseCase, favoriteArticleRepository)
     }
 
