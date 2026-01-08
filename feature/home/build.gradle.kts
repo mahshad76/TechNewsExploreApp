@@ -77,6 +77,12 @@ dependencies {
     // Mockk
     testImplementation(libs.mockk)
 
+    // Turbine
+    testImplementation(libs.turbine)
+
+    // runTest
+    testImplementation(libs.kotlinx.coroutines.test)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
