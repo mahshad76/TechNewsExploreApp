@@ -5,13 +5,11 @@ import com.mahshad.data.repository.FavoriteArticleRepository
 import com.mahshad.domain.ArticleFeedState
 import com.mahshad.domain.GetAllTheNewsUseCase
 import com.mahshad.model.Article
-import com.mahshad.model.FavoriteArticle
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -29,40 +27,20 @@ class NewsScreenViewModelTest {
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
-        every {
-            getAllTheNewsUseCase.wsjNews
-        } returns MutableStateFlow(
-            ArticleFeedState
-                .Success(listOf(Article.DEFAULT))
-        )
-            .asStateFlow()
-        every {
-            getAllTheNewsUseCase.teslaNews
-        } returns MutableStateFlow(
-            ArticleFeedState
-                .Success(listOf(Article.DEFAULT))
-        )
-            .asStateFlow()
-        every {
-            getAllTheNewsUseCase.appleNews
-        } returns MutableStateFlow(
-            ArticleFeedState
-                .Success(listOf(Article.DEFAULT))
-        )
-            .asStateFlow()
-        every {
-            getAllTheNewsUseCase.worldNews
-        } returns MutableStateFlow(
-            ArticleFeedState
-                .Success(listOf(Article.DEFAULT))
-        )
-            .asStateFlow()
-        every {
+        listOf(
+            getAllTheNewsUseCase.wsjNews,
+            getAllTheNewsUseCase.teslaNews,
+            getAllTheNewsUseCase.appleNews,
+            getAllTheNewsUseCase.worldNews,
             getAllTheNewsUseCase.techCrunchNews
-        } returns MutableStateFlow(ArticleFeedState.Success(listOf(Article.DEFAULT)))
-            .asStateFlow()
-        every { favoriteArticleRepository.getArticles() } returns flowOf(listOf(FavoriteArticle.DEFAULT))
-        newsScreenViewModel = NewsScreenViewModel(getAllTheNewsUseCase, favoriteArticleRepository)
+        ).forEach { newsFlow ->
+            every { newsFlow } returns
+                    MutableStateFlow(
+                        ArticleFeedState.Success(
+                            listOf(Article.DEFAULT)
+                        )
+                    ).asStateFlow()
+        }
     }
 
     @Test
@@ -75,6 +53,15 @@ class NewsScreenViewModelTest {
             // Then
             assertEquals("apple watch", awaitItem())
             cancelAndIgnoreRemainingEvents()
+        }
+    }
+
+    @Test
+    fun `searchSuggestions_withFavorites_emitsSuccessWithFavoriteMarkers`() = runTest {
+        // Given
+        newsScreenViewModel.updateSearchQueryFlow("apple watch")
+        newsScreenViewModel.searchSuggestions.test {
+
         }
     }
 
