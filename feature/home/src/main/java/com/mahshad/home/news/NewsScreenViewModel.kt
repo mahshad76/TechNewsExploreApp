@@ -1,7 +1,6 @@
 package com.mahshad.home.news
 
 import android.util.Log
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahshad.data.repository.FavoriteArticleRepository
@@ -25,14 +24,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NewsScreenViewModel @Inject constructor(
-    private val savedStateHandle: SavedStateHandle,
     private val getAllTheNewsUseCase: GetAllTheNewsUseCase,
     private val favoriteArticleRepository: FavoriteArticleRepository
 ) : ViewModel() {
-    //    private val searchQueryStateFlow = savedStateHandle.getMutableStateFlow(
-//        "search_query_key",
-//        ""
-//    )
     private val searchQueryStateFlow = MutableStateFlow("")
     val _searchQueryStateFlow = searchQueryStateFlow.asStateFlow()
 

@@ -78,7 +78,9 @@ fun TechNewsExploreApp() {
                 startDestination = currentRoute,
                 modifier = Modifier.padding(top = innerPadding.calculateTopPadding())
             ) {
-                welcomeNavigationGraph(navController, { navController.navigate(HomeGraphRoute) })
+                welcomeNavigationGraph(
+                    navController,
+                    { navController.navigate(HomeGraphRoute) })
                 homeNavigationGraph(navController)
                 interestsNavigationGraph(navController)
             }

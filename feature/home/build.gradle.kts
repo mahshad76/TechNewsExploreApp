@@ -71,8 +71,11 @@ dependencies {
     implementation(libs.firebase.auth)
 
     // Coil
-    implementation("io.coil-kt.coil3:coil-compose:3.3.0")
-    implementation("io.coil-kt.coil3:coil-network-okhttp:3.0.4")
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+
+    // Mockk
+    testImplementation(libs.mockk)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -30,6 +30,7 @@ fun ModifiedTextFiled(
     modifier: Modifier
 ) {
     var passwordVisible by remember { mutableStateOf(false) }
+
     TextField(
         value = value,
         onValueChange = { onValueChanged(it) },
