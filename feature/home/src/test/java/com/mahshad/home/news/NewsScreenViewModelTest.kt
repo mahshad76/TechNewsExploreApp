@@ -31,19 +31,31 @@ class NewsScreenViewModelTest {
         MockKAnnotations.init(this)
         coEvery {
             getAllTheNewsUseCase.wsjNews
-        } returns MutableStateFlow(ArticleFeedState.Success(listOf(Article.DEFAULT)))
+        } returns MutableStateFlow(
+            ArticleFeedState
+                .Success(listOf(Article.DEFAULT))
+        )
             .asStateFlow()
         coEvery {
             getAllTheNewsUseCase.teslaNews
-        } returns MutableStateFlow(ArticleFeedState.Success(listOf(Article.DEFAULT)))
+        } returns MutableStateFlow(
+            ArticleFeedState
+                .Success(listOf(Article.DEFAULT))
+        )
             .asStateFlow()
         coEvery {
             getAllTheNewsUseCase.appleNews
-        } returns MutableStateFlow(ArticleFeedState.Success(listOf(Article.DEFAULT)))
+        } returns MutableStateFlow(
+            ArticleFeedState
+                .Success(listOf(Article.DEFAULT))
+        )
             .asStateFlow()
         coEvery {
             getAllTheNewsUseCase.worldNews
-        } returns MutableStateFlow(ArticleFeedState.Success(listOf(Article.DEFAULT)))
+        } returns MutableStateFlow(
+            ArticleFeedState
+                .Success(listOf(Article.DEFAULT))
+        )
             .asStateFlow()
         coEvery {
             getAllTheNewsUseCase.techCrunchNews
@@ -55,8 +67,8 @@ class NewsScreenViewModelTest {
 
     @Test
     fun `updateSearchQueryFlow_queryChanges_emitsUpdatedQuery`() = runTest {
-        // Then
         newsScreenViewModel._searchQueryStateFlow.test {
+            // Then
             assertEquals("", awaitItem())
             // When
             newsScreenViewModel.updateSearchQueryFlow("apple watch")
@@ -69,6 +81,4 @@ class NewsScreenViewModelTest {
     @After
     fun tearDown() {
     }
-
-
 }

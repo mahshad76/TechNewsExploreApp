@@ -33,9 +33,9 @@ class DefaultTneNetworkDataSourceTest {
     @Test
     fun `getNews_whenResponseIsSuccessful_emittingApiResponse`() = runTest(testDispatcher) {
         // Given
-        coEvery { apiService.getNews() } returns retrofit2.Response.success(NewsApiResponse.DEFAULT)
+        coEvery { apiService.getWorldNews("us") } returns retrofit2.Response.success(NewsApiResponse.DEFAULT)
         // When
-        val response = tneNetworkDataSource.getNews()
+        val response = tneNetworkDataSource.getWorldNews("us")
         // Then
         assertTrue(response.isSuccessful)
         assertEquals(response.body(), NewsApiResponse.DEFAULT)
@@ -44,14 +44,14 @@ class DefaultTneNetworkDataSourceTest {
     @Test
     fun `getNews_whenResponseIsServerError_emittinFailureResponse`() = runTest(testDispatcher) {
         // Given
-        coEvery { apiService.getNews() } returns retrofit2.Response.error(
+        coEvery { apiService.getWorldNews("us") } returns retrofit2.Response.error(
             404,
             "{\"error\":\"Internal Server Error\"}".toResponseBody(
                 "application/json".toMediaTypeOrNull()
             )
         )
         // When
-        val response = tneNetworkDataSource.getNews()
+        val response = tneNetworkDataSource.getWorldNews("us")
         // Then
         assertTrue(!response.isSuccessful)
     }

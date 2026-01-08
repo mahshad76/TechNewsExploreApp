@@ -33,11 +33,11 @@ class DefaultArticleRepositoryTest {
     @Test
     fun `getNews_whenResponseIsSuccessful_emittingSuccessfulConvertedResult`() = runTest {
         // Given
-        coEvery { tneNetworkDataSource.getNews() } returns Response.success(
+        coEvery { tneNetworkDataSource.getWorldNews("us") } returns Response.success(
             NewsApiResponse.DEFAULT
         )
         // When
-        val news = articleRepository.getNews()
+        val news = articleRepository.getWorldNews("us")
         // Then
         news.test {
             assertEquals(Result.success(listOf(Article.DEFAULT)), awaitItem())
@@ -48,14 +48,14 @@ class DefaultArticleRepositoryTest {
     @Test
     fun `getNews_whenResponseIsFailure_emittingUnSuccessResult`() = runTest {
         // Given
-        coEvery { tneNetworkDataSource.getNews() } returns retrofit2.Response.error(
+        coEvery { tneNetworkDataSource.getWorldNews("us") } returns retrofit2.Response.error(
             404,
             "{\"error\":\"Internal Server Error\"}".toResponseBody(
                 "application/json".toMediaTypeOrNull()
             )
         )
         // When
-        val news = articleRepository.getNews()
+        val news = articleRepository.getWorldNews("us")
         // Then
         news.test {
             assertTrue(awaitItem().isFailure)
@@ -66,13 +66,13 @@ class DefaultArticleRepositoryTest {
     @Test
     fun `getNews_whenResponseDataIsInvalid_emitsFailureResult`() = runTest {
         // Given
-        coEvery { tneNetworkDataSource.getNews() } returns Response.success(
+        coEvery { tneNetworkDataSource.getWorldNews("us") } returns Response.success(
             NewsApiResponse.DEFAULT.copy(
                 articles = listOf(NetworkArticle.DEFAULT2)
             )
         )
         // When
-        val result = articleRepository.getNews()
+        val result = articleRepository.getWorldNews("us")
         // Then
         result.test {
             val res = awaitItem()
