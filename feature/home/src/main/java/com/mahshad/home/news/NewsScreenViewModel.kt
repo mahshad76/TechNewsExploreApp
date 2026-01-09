@@ -1,6 +1,5 @@
 package com.mahshad.home.news
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahshad.data.repository.FavoriteArticleRepository
@@ -80,8 +79,8 @@ class NewsScreenViewModel @Inject constructor(
                     }
                 return@combine NewsFeedUiState.Successful(articleList)
             } else {
-                if (newsFeed is NewsFeedUiState.Error) Log.d("TAG", "problem ${newsFeed.e}")
-                else Log.d("TAG", "Loading")
+//                if (newsFeed is NewsFeedUiState.Error) Log.d("TAG", "problem ${newsFeed.e}")
+//                else Log.d("TAG", "Loading")
 
                 return@combine newsFeed
             }

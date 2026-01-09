@@ -7,5 +7,10 @@ data class FavoriteArticle(
 ) {
     companion object {
         val DEFAULT = FavoriteArticle("1", "2", "3")
+        val DEFAULT2 = FavoriteArticle(
+            author = "unknown",
+            publishedAt = "unknown",
+            title = "unknown",
+        )
     }
 }
