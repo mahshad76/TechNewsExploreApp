@@ -8,6 +8,7 @@ import com.mahshad.home.NewsFeedUiState
 import com.mahshad.model.Article
 import com.mahshad.model.FavoriteArticle
 import io.mockk.MockKAnnotations
+import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -111,6 +112,15 @@ class NewsScreenViewModelTest {
                 )
             }
         }
+
+    @Test
+    fun `bookmarkClicked_articleNotLiked_callsInsert`() {
+        // Given
+        // When
+        newsScreenViewModel.bookmarkClicked(Article.DEFAULT)
+        // Then
+        coVerify { favoriteArticleRepository.insert(Article.DEFAULT) }
+    }
 
     @After
     fun tearDown() {
