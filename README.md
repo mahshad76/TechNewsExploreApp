@@ -5,7 +5,7 @@ This is a full-stack news discovery platform that leverages external News APIs t
 [NewsApi](https://newsapi.org/) is used in this app.
 
 ## 🏗️ Architecture
-
+The project implements the MVVM (Model-View-ViewModel) pattern to achieve a strict separation of concerns. The View (Jetpack Compose) observes state changes via StateFlow and remains entirely agnostic of business logic. The ViewModel acts as the state holder, transforming data from the data layer into a consumable UI state, while surviving configuration changes. This setup, combined with a Multi-Module approach, ensures the codebase remains modular, highly testable, and scalable.
 
 ## 💻 Core Technologies
 * **[Kotlin](https://kotlinlang.org/)** - First-class language for Android development.
