@@ -4,12 +4,12 @@
 This is a full-stack news discovery platform that leverages external News APIs to provide real-time global coverage. The application focuses on user-centric customization, featuring a robust filtering system for category-based browsing and a persistent bookmarking engine. Built with a focus on clean UI and efficient data fetching, it provides a streamlined reading experience without the clutter of traditional news sites.
 [NewsApi](https://newsapi.org/) is used in this app.
 
-### 🏗️ Architecture
+## 🏗️ Architecture
 * **[MVVM Pattern](https://developer.android.com/topic/libraries/architecture/viewmodel)** - Separation of UI logic and business logic.
 * **[Multi-Module](https://developer.android.com/topic/modularization)** - Clean architecture approach for better build times and code organization.
 * **[Hilt-Dagger](https://developer.android.com/training/dependency-injection/hilt-android)** - Standard library for Dependency Injection.
 
-### 💻 Core Technologies
+## 💻 Core Technologies
 * **[Kotlin](https://kotlinlang.org/)** - First-class language for Android development.
 * **[Jetpack Compose](https://developer.android.com/jetpack/compose)** - Modern toolkit for building native UI.
 * **[Coroutines & Flow](https://developer.android.com/kotlin/coroutines)** - For asynchronous programming and reactive data streams.
