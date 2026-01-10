@@ -5,9 +5,7 @@ This is a full-stack news discovery platform that leverages external News APIs t
 [NewsApi](https://newsapi.org/) is used in this app.
 
 ## 🏗️ Architecture
-* **[MVVM Pattern](https://developer.android.com/topic/libraries/architecture/viewmodel)** - Separation of UI logic and business logic.
-* **[Multi-Module](https://developer.android.com/topic/modularization)** - Clean architecture approach for better build times and code organization.
-* **[Hilt-Dagger](https://developer.android.com/training/dependency-injection/hilt-android)** - Standard library for Dependency Injection.
+
 
 ## 💻 Core Technologies
 * **[Kotlin](https://kotlinlang.org/)** - First-class language for Android development.
@@ -19,6 +17,9 @@ This is a full-stack news discovery platform that leverages external News APIs t
 * **[Firebase](https://firebase.google.com/)** - Backend integration for analytics/crash reporting.
 * **[Navigation Component](https://developer.android.com/guide/navigation)** - Centralized navigation for Compose.
 * **[Deep Linking](https://developer.android.com/training/app-links/deep-linking)** - Direct navigation support to specific articles from external sources.
+* * **[MVVM Pattern](https://developer.android.com/topic/libraries/architecture/viewmodel)** - Separation of UI logic and business logic.
+* **[Multi-Module](https://developer.android.com/topic/modularization)** - Clean architecture approach for better build times and code organization.
+* **[Hilt-Dagger](https://developer.android.com/training/dependency-injection/hilt-android)** - Standard library for Dependency Injection.
 * **[MockK](https://mockk.io/)** - A powerful mocking library built for Kotlin, used to isolate dependencies and verify interactions.
 * **[Turbine](https://github.com/cashapp/turbine)** - A specialized testing library for Kotlin Flows to handle asynchronous stream assertions cleanly.
 * **[JUnit 4](https://junit.org/junit4/)** - Standard framework for writing repeatable unit tests and managing the test lifecycle.
